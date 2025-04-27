@@ -1,0 +1,642 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Syllabus &#8212; Scientific Python QuickStart</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=ac02cc09edc035673794" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=ac02cc09edc035673794" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=ac02cc09edc035673794" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=ac02cc09edc035673794" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=ac02cc09edc035673794" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=ac02cc09edc035673794" />
+  <script src="../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=ac02cc09edc035673794"></script>
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'docs/syllabus_new';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="index.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/qe-logo-large.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../_static/qe-logo-large.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="syllabus.html">Syllabus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="overview_arctic.html">Overview of Arctic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="snow.html">Snow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="permafrost.html">Permafrost</a></li>
+<li class="toctree-l1"><a class="reference internal" href="glaciers.html">Glaciers</a></li>
+
+
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="sea_ice.html">Sea Ice</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cause_aa.html">Cause of Arctic Amplification</a></li>
+
+
+
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="effect_aa.html">Arctic-Midlatitude Linkage</a></li>
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="pv_ssw.html">Polar Stratospheric Circulation</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/docs/syllabus_new.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Syllabus</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#instructor">Instructor</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#teaching-assistants">Teaching Assistants</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#office-hours">Office Hours</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#location-and-time">Location and Time</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#course-website">Course website</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#grading">Grading</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#course-description">Course Description</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#course-objectives">Course Objectives</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#course-requirements">Course Requirements</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tentative-topics">Tentative Topics</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tentative-schedule">Tentative Schedule</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#relevant-texts-and-references">Relevant Texts and References</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="syllabus">
+<span id="id1"></span><h1>Syllabus<a class="headerlink" href="#syllabus" title="Permalink to this heading">#</a></h1>
+<p>2021/22 Semester; Credit: 3; Class Number: AtmSci7098</p>
+<section id="instructor">
+<h2>Instructor<a class="headerlink" href="#instructor" title="Permalink to this heading">#</a></h2>
+<p>Professor Yu-Chiao Liang (梁禹喬)<br>
+Contacting email: <a class="reference external" href="mailto:yuchiaoliang&#37;&#52;&#48;ntu&#46;edu&#46;tw">yuchiaoliang<span>&#64;</span>ntu<span>&#46;</span>edu<span>&#46;</span>tw</a><br>
+Office phone: 02-3366-3907<br></p>
+<section id="teaching-assistants">
+<h3>Teaching Assistants<a class="headerlink" href="#teaching-assistants" title="Permalink to this heading">#</a></h3>
+</section>
+<section id="office-hours">
+<h3>Office Hours<a class="headerlink" href="#office-hours" title="Permalink to this heading">#</a></h3>
+<p>xxx and xxx, by appointment</p>
+</section>
+<section id="location-and-time">
+<h3>Location and Time<a class="headerlink" href="#location-and-time" title="Permalink to this heading">#</a></h3>
+<p>Monday 1:20-3:10 pm and Thursday 10:20 am-12:10</p>
+</section>
+<section id="course-website">
+<h3>Course website<a class="headerlink" href="#course-website" title="Permalink to this heading">#</a></h3>
+<p><a class="reference external" href="https://yuchiaol.github.io/polar_climate_change_final/docs/index.html">https://yuchiaol.github.io/polar_climate_change_final/docs/index.html</a></p>
+</section>
+<section id="grading">
+<h3>Grading<a class="headerlink" href="#grading" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Leading discussion:</p>
+<ul>
+<li><p>IPCC AR6 WGI Report (group presentation 15%)</p></li>
+<li><p>Assigned literature (group presentation 15%))</p></li>
+</ul>
+</li>
+<li><p>Individual homework assignment (5% x 10)</p></li>
+<li><p>Final project (group presentation 15%)</p></li>
+<li><p>Additional credit (5%)</p></li>
+</ul>
+</section>
+<section id="course-description">
+<h3>Course Description<a class="headerlink" href="#course-description" title="Permalink to this heading">#</a></h3>
+<p>(in Chinese) 本課程探討極區的氣候變化。我們不僅介紹極區冰圈以及大氣圈過去幾十年的快速變化，包括海冰，永凍土，降雪，冰河，極地渦旋，也會介紹北極暖
+化增強現象的成因與影響，以及探討高緯度氣候變化與中低緯度大氣海洋環流的交互作用。我們會閱讀IPCC最新關於冰圈的特別報告以及最新的研究文獻，來幫助我&gt;們掌握極區最新的研究成果與發展趨勢，同時也會使用不同複雜度的大氣模式，來加深了解極區與中低緯度大氣環流交互作用背後的物理動力機制。</p>
+<p>Rapid polar climate change in the past decades was the dominant signature of anthropogenic global warming. This course aims to understand the polar climate change and its interaction with regional and global atmospheric circulations. The first part gives an overview of the fast-changing polar cryosphere and atmosphere, including sea ice, permafrost, snow, glaciers, and stratospheric polar vortex. Students will read IPCC’s AR6 WG1 and Special Report on the Ocean and Cryosphere in a Changing Climate and present main conclusions. The second part discusses the two-way interactions of the polar climate change and lower-latitude (including mid-latitude and tropical) atmospheric and oceanic circulations at various spatial and temporal scales, with an emphasis on the cause and effect of Arctic Amplification. We will use a hierarchical modelling approach with different complexity in attempt to understand the potential atmospheric circulation changes in response to polar warming. The anticipated results will be compared to the observations and the state-of-the-art global climate model simulations, for example CMIP5/6 and Polar Amplification Model Intercomparison Project.</p>
+</section>
+<section id="course-objectives">
+<h3>Course Objectives<a class="headerlink" href="#course-objectives" title="Permalink to this heading">#</a></h3>
+<p>This course aims to 1) understand the polar climate change and its interaction with regional and global atmospheric circulations, 2) cover some materials of Chapter 12 - Middle Atmosphere Dynamics - in Holton’s “An Introduction to Dynamic Meteorology” (I will try!), and 3) train students to use simple atmospheric models to investigate Arctic-midlatitude connections.</p>
+</section>
+<section id="course-requirements">
+<h3>Course Requirements<a class="headerlink" href="#course-requirements" title="Permalink to this heading">#</a></h3>
+<p>Willingness to lead discussion for reading materials and participate in group cooperation, and basic FORTRAN programing and plotting skills (Python preferred because we will use a machine learning package written in Python!).</p>
+</section>
+<section id="tentative-topics">
+<h3>Tentative Topics<a class="headerlink" href="#tentative-topics" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Overview of Arctic</p>
+<ul>
+<li><p>Geography, climatology and meteorology</p></li>
+<li><p>A case study for Siberian record-breaking warming</p></li>
+<li><p>Explorations</p></li>
+</ul>
+</li>
+<li><p>Snow and Permafrost</p></li>
+<li><p>Glacier and Sea-level Rise</p></li>
+<li><p>Sea Ice</p>
+<ul>
+<li><p>Dynamics and thermodynamics</p></li>
+<li><p>Modelling and prediction</p></li>
+<li><p>Past, recent, and future changes</p></li>
+</ul>
+</li>
+<li><p>Cause and Effect of Arctic Amplification</p>
+<ul>
+<li><p>Local vs remote impacts</p></li>
+<li><p>Mechanisms: climate forcings, climate feedbacks, and poleward energy transport</p></li>
+<li><p>Debates on Arctic-midlatitude linkages</p></li>
+</ul>
+</li>
+<li><p>Polar Stratospheric circulation</p>
+<ul>
+<li><p>Polar vortex and stratospheric sudden warming</p></li>
+<li><p>Stratosphere-troposphere coupling</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="tentative-schedule">
+<h3>Tentative Schedule<a class="headerlink" href="#tentative-schedule" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Week1, 9/23 (四4): Introduction</p></li>
+<li><p>Week1, 9/27 (一67): Overview of Arctic</p></li>
+<li><p>Week2, 9/30 (四4): LBM introduction; machine location and account</p></li>
+<li><p>Week2, 10/4 (一67): Permafrost + IPCC</p></li>
+<li><p>Week3, 10/7 (四4): IPCC; LBM paper review</p></li>
+<li><p>Week3, 10/11 (一67): 國慶日/雙十節彈性放假</p></li>
+<li><p>Week4, 10/14 (四4): LBM paper review</p></li>
+<li><p>Week4, 10/18 (一67): Snow + IPCC</p></li>
+<li><p>Week5, 10/21 (四4): IPCC; LBM paper review</p></li>
+<li><p>Week5, 10/25 (一67): Glacier + IPCC</p></li>
+<li><p>Week6, 10/28 (四4): IPCC; LBM paper review</p></li>
+<li><p>Week6, 11/1 (一67): Sea ice + IPCC</p></li>
+<li><p>Week7, 11/4 (四4): IPCC; LBM paper review</p></li>
+<li><p>Week7, 11/8 (一67): Sea ice + IPCC</p></li>
+<li><p>Week8, 11/11 (四4): IPCC; LBM paper review</p></li>
+<li><p>Week8, 11/15 (一67): LBM technical (校慶停課不停班)</p></li>
+<li><p>Week9, 11/18 (四4): LBM technical; group discussion</p></li>
+<li><p>Week9, 11/22 (一67): Cause of Arctic amplification + IPCC</p></li>
+<li><p>Week10,11/25 (四4): Cause of Arctic amplification + IPCC</p></li>
+<li><p>Week10,11/29 (一67): Cause of Arctic amplification + paper discussion</p></li>
+<li><p>Week11,12/2 (四4): Cause of Arctic amplification + paper discussion</p></li>
+<li><p>Week11,12/6 (一67): Cause of Arctic amplification + paper discussion</p></li>
+<li><p>Week12,12/9 (四4): Cause of Arctic amplification + paper discussion</p></li>
+<li><p>Week12,12/13 (一67): Effect of Arctic amplification + paper discussion</p></li>
+<li><p>Week13,12/16 (四4): Effect of Arctic amplification + paper discussion</p></li>
+<li><p>Week13,12/20 (一67): Effect of Arctic amplification + paper discussion</p></li>
+<li><p>Week14,12/23 (四4): Effect of Arctic amplification + paper discussion</p></li>
+<li><p>Week14,12/27 (一67): Final project presentation</p></li>
+<li><p>Week15,12/30 (四4): Final project presentation</p></li>
+<li><p>Week15,1/3 (一67): Final project presentation</p></li>
+<li><p>Week16,1/6 (四4): Wrap-up</p></li>
+</ul>
+</section>
+<section id="relevant-texts-and-references">
+<h3>Relevant Texts and References<a class="headerlink" href="#relevant-texts-and-references" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p><a class="reference external" href="https://www.ipcc.ch/report/ar6/wg1/#FullReport">IPCC AR6 WG1 Report</a></p></li>
+<li><p><a class="reference external" href="https://www.ipcc.ch/srocc">IPCC Special Report on the Ocean and Cryosphere in a Changing Climate</a></p>
+<ul>
+<li><p><a class="reference external" href="https://www.ipcc.ch/srocc/chapter/chapter-3-2/">Chapter 3 Polar Regions</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference external" href="https://www.amazon.com/Introduction-Dynamic-Meteorology-International-Geophysics/dp/0123848660/ref=asc_df_0123848660/?tag=hyprod-20&amp;linkCode=df0&amp;hvadid=312091458201&amp;hvpos=&amp;hvnetw=g&amp;hvrand=14614331955549249595&amp;hvpone=&amp;hvptwo=&amp;hvqmt=&amp;hvdev=c&amp;hvdvcmdl=&amp;hvlocint=&amp;hvlocphy=9003483&amp;hvtargid=pla-465623449605&amp;psc=1&amp;tag=&amp;ref=&amp;adgrpid=63669393113&amp;hvpone=&amp;hvptwo=&amp;hvadid=312091458201&amp;hvpos=&amp;hvnetw=g&amp;hvrand=14614331955549249595&amp;hvqmt=&amp;hvdev=c&amp;hvdvcmdl=&amp;hvlocint=&amp;hvlocphy=9003483&amp;hvtargid=pla-465623449605">An Introduction to Dynamic Meteorology (2012), J. R. Holton and G. J. Hakim</a></p></li>
+<li><p>Arctic Amplification and Feedbacks</p>
+<ul>
+<li><p>Review article: <a class="reference external" href="https://www.nature.com/articles/s41467-018-04173-0">Goosse et al. (2018)</a></p></li>
+<li><p>Review article: <a class="reference external" href="https://iopscience.iop.org/article/10.1088/1748-9326/ac1c29">Previdi et al. (2021)</a></p></li>
+<li><p>Review article: <a class="reference external" href="https://www.frontiersin.org/journals/earth-science/articles/10.3389/feart.2021.758361/full">Taylor et al. (2022)</a></p></li>
+<li><p>Temperature feedback: <a class="reference external" href="https://www.nature.com/articles/ngeo2071">Pithan and Mauritsen (2014)</a></p></li>
+<li><p>Forcing latitudes: <a class="reference external" href="https://www.nature.com/articles/s41558-018-0339-y">Stuecker et al. (2018)</a></p></li>
+</ul>
+</li>
+<li><p>Arctic Amplification and Midlatitude Weather and Climate</p>
+<ul>
+<li><p>Review article: <a class="reference external" href="https://www.nature.com/articles/ngeo2234">Cohen et al. (2014)</a></p></li>
+<li><p>Key paper: <a class="reference external" href="https://agupubs.onlinelibrary.wiley.com/doi/full/10.1029/2012gl051000">Francis and Vavrus 2012</a></p></li>
+<li><p>Weakened evidence: <a class="reference external" href="https://www.nature.com/articles/s41558-020-00954-y">Blackport and Screen (2020)</a></p></li>
+<li><p>Model consistency and discrepancy: <a class="reference external" href="https://www.nature.com/articles/s41561-018-0059-y">Screen et al. (2018)</a></p></li>
+<li><p>Divergent consensus <a class="reference external" href="https://www.nature.com/articles/s41558-019-0662-y">Cohen et al. (2019)</a></p></li>
+<li><p>Robust but weak response: <a class="reference external" href="https://www.nature.com/articles/s41467-022-28283-y">Smith et al. (2022)</a></p></li>
+</ul>
+</li>
+<li><p>Debates on <a class="reference external" href="https://www.nature.com/articles/s41558-018-0379-3">Mori et al. (2019)</a></p>
+<ul>
+<li><p>First debate: <a class="reference external" href="https://www.nature.com/articles/s41558-019-0635-1">Screen and Blackport (2019)</a> and <a class="reference external" href="https://www.nature.com/articles/s41558-019-0636-0">Mori et al. (2019)</a></p></li>
+<li><p>Second debate: <a class="reference external" href="https://www.nature.com/articles/s41558-020-00982-8">Zappa et al. (2021)</a> and <a class="reference external" href="https://www.nature.com/articles/s41558-020-00983-7">Mori et al. (2021)</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference external" href="https://brian-rose.github.io/ClimateLaboratoryBook/home.html">The Climate Laboratory</a></p></li>
+<li><p>Idealized models</p></li>
+</ul>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./docs"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  <!-- Previous / next buttons -->
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#instructor">Instructor</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#teaching-assistants">Teaching Assistants</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#office-hours">Office Hours</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#location-and-time">Location and Time</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#course-website">Course website</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#grading">Grading</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#course-description">Course Description</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#course-objectives">Course Objectives</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#course-requirements">Course Requirements</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tentative-topics">Tentative Topics</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tentative-schedule">Tentative Schedule</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#relevant-texts-and-references">Relevant Texts and References</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Thomas J. Sargent and John Stachurski
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=ac02cc09edc035673794"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=ac02cc09edc035673794"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
