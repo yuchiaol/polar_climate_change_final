@@ -1,7 +1,17 @@
 format: jb-article
 root: docs/index
 sections:
-- file: docs/about_py
-- file: docs/getting_started
-- file: docs/python_by_example
-- file: docs/learn_more
+- file: docs/syllabus
+- file: docs/overview_arctic
+- file: docs/snow
+- file: docs/permafrost
+- file: docs/glaciers
+- file: docs/sea_ice
+- file: docs/pv_ssw
+- file: docs/cause_aa
+- file: docs/zero_dim_model
+- file: docs/layer_model
+- file: docs/rce_model
+- file: docs/climate_sensitivity
+- file: docs/rae_model
+- file: docs/effect_aa

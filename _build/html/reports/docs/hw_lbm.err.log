@@ -1,0 +1,51 @@
+Traceback (most recent call last):
+  File "/Users/yuchiaol_ntuas/miniconda3/lib/python3.11/site-packages/jupyter_cache/executors/utils.py", line 58, in single_nb_execution
+    executenb(
+  File "/Users/yuchiaol_ntuas/miniconda3/lib/python3.11/site-packages/nbclient/client.py", line 1305, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/yuchiaol_ntuas/miniconda3/lib/python3.11/site-packages/jupyter_core/utils/__init__.py", line 166, in wrapped
+    return loop.run_until_complete(inner)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/yuchiaol_ntuas/miniconda3/lib/python3.11/asyncio/base_events.py", line 653, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/Users/yuchiaol_ntuas/miniconda3/lib/python3.11/site-packages/nbclient/client.py", line 705, in async_execute
+    await self.async_execute_cell(
+  File "/Users/yuchiaol_ntuas/miniconda3/lib/python3.11/site-packages/nbclient/client.py", line 1058, in async_execute_cell
+    await self._check_raise_for_error(cell, cell_index, exec_reply)
+  File "/Users/yuchiaol_ntuas/miniconda3/lib/python3.11/site-packages/nbclient/client.py", line 914, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+* sample file fot products of a linear integration
+DSET ^linear.test.grd
+OPTIONS SEQUENTIAL YREV BIG_ENDIAN
+TITLE time-integration
+UNDEF -999.
+XDEF 64 LINEAR 0. 5.625
+YDEF 32 LEVELS -85.761 -80.269 -74.745 -69.213 -63.679 -58.143 -52.607
+-47.070 -41.532 -35.995 -30.458 -24.920 -19.382 -13.844 -8.3067 -2.7689
+2.7689 8.3067 13.844 19.382 24.920 30.458 35.995 41.532 47.070 52.607
+58.143 63.679 69.213 74.745 80.269 85.761
+ZDEF 11  LEVELS 1000 950 900 850 700 500 300 200 100 30 10
+TDEF 60 LINEAR 01jan0000 1dy
+VARS 8
+psi    11 99 stream function     [m**2/s]
+chi    11 99 velocity potential  [m**2/s]
+u      11 99 zonal wind          [m/s]
+v      11 99 meridional wind     [m/s]
+w      11 99 p-vertical velocity [hPa/s]
+t      11 99 temperature         [K]
+z      11 99 geopotential height [m]
+p       1 99 surface pressure    [hPa]
+ENDVARS
+------------------
+
+
+[0;36m  Cell [0;32mIn[1], line 12[0;36m[0m
+[0;31m    TDEF 60 LINEAR 01jan0000 1dy[0m
+[0m                     ^[0m
+[0;31mSyntaxError[0m[0;31m:[0m invalid imaginary literal
+
+

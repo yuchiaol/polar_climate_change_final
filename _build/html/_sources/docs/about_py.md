@@ -9,9 +9,17 @@ kernelspec:
   name: python3
 ---
 
-(about_py)=
+(syllabus)=
 
-# About Python
+# Syllabus
+
+2021/22 Semester; Credit: 3; Class Number: AtmSci7098
+
+### Instructor
+Professor Yu-Chiao Liang (梁禹喬)
+Contacting email: yuchiaoliang@ntu.edu.tw
+Office phone: 02-3366-3907
+
 
 > \"Python has gotten sufficiently weapons grade that we don't descend
 > into R anymore. Sorry, R people. I used to be one of you but we no

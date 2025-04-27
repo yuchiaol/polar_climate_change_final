@@ -1,10 +1,10 @@
-title : Scientific Python QuickStart
-author: Thomas J. Sargent and John Stachurski
-logo: 'qe-logo-large.png'
+title : Polar Climate Change Home
+author: Yu-Chiao Liang
+logo: 'front_page_image.jpg'
 
 # Short description about the book
 description: >-
-  A brief introduction to Python programming for scientific applications.
+  A brief introduction to Polar Climate Change.
 
 execute:
   execute_notebooks           : cache
