@@ -57,20 +57,25 @@ kernelspec:
 - Turbulent transfer
 
 ### Snow and Rain Temperature
-
-### Snow and Water Flow
+```{figure} /_static/lecture_specific/lecture1_figures/snow_rain_1.webp
+:scale: 55%
+```
 
 ### Lake Effect Snow
+```{figure} /_static/lecture_specific/lecture1_figures/snow_lake_effect1.jpg
+:scale: 30%
+```
 
 ### Snow and Climate Change
 
 - Snow trend and variability
 - Snow as a forcing to affect atmospheric circulation?
 
-```{figure} /_static/lecture_specific/figures/snow_trend.png
+```{figure} /_static/lecture_specific/lecture1_figures/snow_trend.png
 :scale: 55%
 March snow water equivalent and its trend (per decade). Source: [Pullianinen et al. (2020)](https://www.nature.com/articles/s41586-020-2258-0?WT.ec_id=NATURE-20200521&utm_source=nature_etoc&utm_medium=email&utm_campaign=20200521&sap-outbound-id=D5CFB82319EA9147647EAB1590572376176446DE)
 ```
+
 ### Sources
 
 - [Snowmelt Processes](http://ftp.comet.ucar.edu/memory-stick/hydro/basic_int/snowmelt/index.htm)
