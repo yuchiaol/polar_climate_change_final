@@ -72,8 +72,10 @@ NSIDC researcher Tim Schaefer stands behind an exposed ice layer at a subsidence
 - Carbon dioxide
 - Methane
 
-### Sources
+### Literature review
+[Sasgen et al. (2024)](https://www.nature.com/articles/s43247-024-01548-8)
 
+### Sources
 - [NSIDC All About Frozen Ground](https://nsidc.org/cryosphere/frozenground/index.html)
 
 
