@@ -34,8 +34,9 @@ Monday 1:20-3:10 pm and Thursday 10:20 am-12:10
 
 ### Grading
 - Leading discussion:
-  - IPCC AR6 WGI Report (group presentation 15%)
-  - Assigned literature (group presentation 15%))
+  - IPCC AR6 WGI Report (group presentation 0%)
+  - Literature review 1 (group presentation 15%)
+  - Literature review 2 (group presentation 15%)
 - Individual homework assignment (5% x 10)
 - Final project (group presentation 15%)
 - Additional credit (5%)
