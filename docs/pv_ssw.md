@@ -13,15 +13,23 @@ kernelspec:
 
 # Polar Stratospheric Circulation
 
-> Polar Vortex & Machine Learning: individual homework assignment 10%. See more details [here](https://yuchiaol.github.io/polar_climate_change_2021_2022/docs/hw_polar_vortex.html).
+```{note}
+[StratObserve](https://stratobserve.com/) by Dr. Zachary D. Lawrence is very useful to monitor stratospheric conditions.
+```
 
-### Stratospheric Polar Vortex
+### Stratospheric polar vortex
 
 - Displacement
 - Splitting 
 - 2020-2021 polar vortex evolution
 
-### Sudden Stratospheric Warming (SSW)
+```{figure} /_static/lecture_specific/lecture1_figures/atm_structure_tmp1.png
+---
+scale: 45%
+---
+```
+
+### Sudden stratospheric warming (SSW)
 
 - SSW and polar vortex breakdown
 - Days 0-30 T anomalies following SSW
@@ -37,7 +45,7 @@ The most widely used definition of SSW is following [Charlton and Polvani (2007)
 
 Temperature information can be dropped because of thermal wind balance!
 
-### SSW Dynamical Frameworks
+### SSW dynamical frameworks
 
 - Large-scale planetary wave propagating upward
   - Planetary wave propagating upward – Charney-Drazin criterion 
@@ -55,7 +63,7 @@ Temperature information can be dropped because of thermal wind balance!
   - Heat budget analysis
   - PV perspective
 
-### External Influences on SSWs
+### External influences on SSWs
 
 - QBO 
 - ENSO 
@@ -64,7 +72,7 @@ Temperature information can be dropped because of thermal wind balance!
 - snow cover
 - sea ice
 
-### Dynamical Downward Propagation
+### Dynamical downward propagation
 
 Tropospheric anomalies should be proportional to stratospheric ones!
 
@@ -73,31 +81,67 @@ Tropospheric anomalies should be proportional to stratospheric ones!
 - Baroclinic eddies (v)
 - Stratospheric PV anomalies (v? too weak)
 
-### Surface Signature of SSW’s Downward Influences
+### Surface signature of SSW’s downward influences
 
 - Midlatitude surface impacts
 - Oceanic impacts
 - Tropical impacts
 
-### Two-way Coupling of Troposphere and Stratosphere
+### Two-way coupling of troposphere and stratosphere
 
-```{figure} /_static/lecture_specific/figures/strat_tropo_coupling.gif
+```{figure} /_static/lecture_specific/lecture1_figures/strat_tropo_coupling.gif
 ---
 scale: 75%
 ---
 Schematic illustration of the coupling events simulated in this study. (1) Forced pulse of planetary waves occurring over time Δt; (2) upward-propagating waves; (3) dissipation and breaking of waves; (4) induced downward-propagating anomalies; and (5) tropospheric response. Source: [Reichler et al. (2005)](https://journals.ametsoc.org/view/journals/atsc/62/9/jas3527.1.xml)
 ```
 
-### Polar Vortex and SSW in GCMs
+### Polar vortex and SSW in climate models
+```{figure} /_static/lecture_specific/lecture1_figures/cmip5_polar_vortex_tmp1.jpg
+---
+scale: 75%
+---
+This figure is from [Simpson et al. (2018)](https://journals.ametsoc.org/view/journals/clim/31/16/jcli-d-18-0041.1.xml)
+```
 
-### SSW Forecast
+```{figure} /_static/lecture_specific/lecture1_figures/cmip5_cmip6_ssw_tmp1.jpg
+---
+scale: 45%
+---
+Seasonal distribution of SSWs from November to March in the MME of the historical simulation (gray bars), the RCP45/SSP245 simulation (blue bars), and the RCP85/SSP585 simulation (light blue bars) from (a) CMIP5 and (b) CMIP6. The reanalysis is shown with red bars. The differences between historical simulations and future scenarios projections are significant at the 95% confidence level for a few months, marked with a pentagram over the corresponding scenarios. Source: [Rao and Garfinkel (2021)](https://iopscience.iop.org/article/10.1088/1748-9326/abd4fe).
+```
+
+### SSW forecast
+```{figure} /_static/lecture_specific/lecture1_figures/ssw_forecast_tmp1.png
+---
+scale: 25%
+---
+Zonal-mean zonal wind at 10 hPa and 60° N (m s−1). (a) Ensemble forecast initialized on 29 January; (b) ensemble forecast initialized on 1 February (orange lines denote ensemble members that predict wind reversal with max 1 d delay, red line – control forecast, black dashed line – ensemble mean) and the ERA-I reanalysis (black solid line); (c) forecast initialized on 5 February. Vertical line denotes the SSW2018 central date. Source: [Erner et al. (2020)](https://wcd.copernicus.org/articles/1/657/2020/).
+```
+
+### SSW forecast
+```{figure} /_static/lecture_specific/lecture1_figures/ssw_forecast_tmp2.png
+---
+scale: 55%
+---
+Satellite impact on forecasts of SSW onset in an extreme case. JRA‐55 (red line) and JRA‐55C (blue line) ensemble forecasts starting from D−10 are shownfor an SSW that occurred on 1 January 1985. Time series of (a) 30‐hPa temperature averaged northward of 70°N and (b) vertical component of 50‐hPa E‐P fluxthat averaged over 45–75°N. Thick lines and shades indicate the ensemble mean values and 0.5 standard deviations among ensemble members. JRA‐55 andJRA‐55C are also shown by dotted lines. (c) Three‐dimensional distributions of the vortex edges (isolines of the vertically weighted potential vorticity), of thestratospheric polar vortex, for a 7‐day forecast field (validated at 3 days before D0). As a vortex edge, 38 PVU contours of Lait's PV at isothermal surfaces are plottedfor each ensemble forecasts (cf. Matthewman et al. 2009). Thick lines indicate the ensemble means. Source: [Noguchi et al. (2020)](https://agupubs.onlinelibrary.wiley.com/doi/10.1029/2019GL086233).
+
+```
+
 
 ### SSW impacts on the atmosphere above stratosphere
+```{figure} /_static/lecture_specific/lecture1_figures/ssw_upward_tmp1.jpg
+---
+scale: 20%
+---
+Zonal average ACE-FTS NOx (color) in the NH from 1 January through 31 March of 2004–2009. The white contour indicates CO = 2.0 ppmv. Source: [Baldwin et al. (2020)](https://agupubs.onlinelibrary.wiley.com/doi/full/10.1029/2020RG000708).
+```
 
-### SSW Variability
+### Literature review
+- [Zhang et al. (2018)](https://www.science.org/doi/full/10.1126/sciadv.aat6025)
 
-### References
 
+### Sources and references
 - [Baldwin et al. 2021](https://agupubs.onlinelibrary.wiley.com/doi/10.1029/2020RG000708)
 
 

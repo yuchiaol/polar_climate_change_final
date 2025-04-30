@@ -84,7 +84,7 @@ Wavy red arrows indicate interaction between surface snow cover and regional enh
 ```
 
 ### Literature review
-[Henderson et al. (2018)](https://www.nature.com/articles/s41558-018-0295-6)
+- [Henderson et al. (2018)](https://www.nature.com/articles/s41558-018-0295-6)
 
 ### Sources
 - [Snowmelt Processes](http://ftp.comet.ucar.edu/memory-stick/hydro/basic_int/snowmelt/index.htm)

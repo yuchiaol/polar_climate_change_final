@@ -62,6 +62,8 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'docs/sea_ice';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -166,11 +168,11 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="glaciers.html">Glaciers</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Sea ice</a></li>
 <li class="toctree-l1"><a class="reference internal" href="pv_ssw.html">Polar Stratospheric Circulation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="cause_aa.html">Cause of Arctic Amplification</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cause_aa.html">Causes of Polar Amplification</a></li>
 <li class="toctree-l1"><a class="reference internal" href="zero_dim_model.html">Zero-dimensional Energy Balance Model</a></li>
 <li class="toctree-l1"><a class="reference internal" href="layer_model.html">Layered Energy Balance Model</a></li>
 <li class="toctree-l1"><a class="reference internal" href="rce_model.html">Radiative Convective Equilibrium (RCE)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="climate_sensitivity.html">Climate sensitivity and feedback</a></li>
+<li class="toctree-l1"><a class="reference internal" href="climate_sensitivity.html">Climate Sensitivity and Feedback</a></li>
 <li class="toctree-l1"><a class="reference internal" href="rae_model.html">Radiative Advective Equilibrium (RAE)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="effect_aa.html">Arctic-Midlatitude Linkage</a></li>
 </ul>
@@ -334,6 +336,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sea-ice-prediction">Sea-ice prediction</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#changing-sea-ice-in-arctic-and-antarctica">Changing sea ice in Arctic and Antarctica</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sea-ice-geoengineering-and-management">Sea ice geoengineering and management</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#literature-review">Literature review</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sources">Sources</a></li>
 </ul>
             </nav>
@@ -351,6 +354,10 @@ document.write(`
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>This is a cool interactive webiste to illustrate sea-ice conditions: <a class="reference external" href="https://nsidc.org/sea-ice-today/sea-ice-tools/charctic-interactive-sea-ice-graph">Charctic Interactive Sea Ice Graph</a>. Please around with it!!!</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><a class="reference external" href="https://nsidc.org/cryosphere/seaice/index.html">NSIDC All About Sea Ice</a> offers daily updates on sea ice conditions in the Arctic and Antarctic</p>
 </div>
 <section id="what-is-sea-ice">
 <h2>What is sea ice?<a class="headerlink" href="#what-is-sea-ice" title="Permalink to this heading">#</a></h2>
@@ -413,7 +420,7 @@ document.write(`
 <h2>Sea ice thermodynamics<a class="headerlink" href="#sea-ice-thermodynamics" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
 <li><p>Freezing degree days (FDD in deg C).</p></li>
-<li><p>Thickness (cm) = 1.33xFDD^0.58 (Lebedev 1938).</p></li>
+<li><p>Thickness (cm) = 1.33xFDD<span class="math notranslate nohighlight">\(^0.58\)</span> (Lebedev 1938).</p></li>
 <li><p>Snow cover slows the growth of ice.</p></li>
 <li><p>Albedo effect (melting pond -&gt; 0.4-0.5 and surface 0.75).</p></li>
 <li><p>Thermodynamic equilibrium thickness (no heat transfer): 3 meters in Arctic; 1-2 meters in Antarctica.</p></li>
@@ -464,7 +471,7 @@ document.write(`
 <li><p>Sea-ice area (SIA):</p>
 <ul>
 <li><p>total area covered by sea ice -&gt; area size times sea-ice concentration</p></li>
-<li><p>unit in km^2 or mile^2</p></li>
+<li><p>unit in km<span class="math notranslate nohighlight">\(^2\)</span> or mile<span class="math notranslate nohighlight">\(^2\)</span></p></li>
 </ul>
 </li>
 <li><p>Sea-ice extent (SIE):</p>
@@ -472,7 +479,7 @@ document.write(`
 <li><p>having sea ice or no sea ice in one grid -&gt; 0 or 1</p></li>
 <li><p>threshold: sea-ice concentration 15%</p></li>
 <li><p>always larger than sea-ice area</p></li>
-<li><p>unitless or unit in km^2 or mile^2</p></li>
+<li><p>unitless or unit in km<span class="math notranslate nohighlight">\(^2\)</span> or mile<span class="math notranslate nohighlight">\(^2\)</span></p></li>
 </ul>
 </li>
 <li><p>Sea-ice thickness (SIT):</p>
@@ -541,21 +548,40 @@ document.write(`
 </li>
 <li><p>February Antarctica Sea Ice</p>
 <ul>
-<li><p>Increase rather than decrease under global warming</p></li>
+<li><p>Increase rather than decrease under global warming before around 2016</p></li>
+<li><p>abrupt decrease after 2016</p></li>
 </ul>
 </li>
 <li><p>Sea Ice in the future</p></li>
 <li><p><a class="reference external" href="https://nasaviz.gsfc.nasa.gov/cgi-bin/details.cgi?aid=12734">NASA Visualization Explorer</a></p></li>
 </ul>
+<figure class="align-left" id="id2">
+<a class="reference internal image-reference" href="../_images/ESOTC_2023_INDICATOR_SEA_ICE_FIGURE_1.png"><img alt="../_images/ESOTC_2023_INDICATOR_SEA_ICE_FIGURE_1.png" src="../_images/ESOTC_2023_INDICATOR_SEA_ICE_FIGURE_1.png" style="width: 944.9999999999999px; height: 525.0px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 17 </span><span class="caption-text">(Left) Daily Arctic sea ice extent (million km2) from 1979 to 2023, showing 2012 (blue line), 2022 (orange line), 2023 (black line), all other years since 1979 (thin grey lines), and the median for the 1991–2020 reference period (dashed grey line). (Right) Monthly anomalies (%) in Arctic sea ice extent for March (Top) and September (Bottom) from 1979 to 2023. The anomalies are relative to the respective monthly averages for the 1991–2020 reference period and expressed as a percentage of these averages. Note the different ranges of the vertical axes. Data source: OSI SAF Sea Ice Index v2.2. Credit: C3S/ECMWF/EUMETSAT and <a class="reference external" href="https://climate.copernicus.eu/climate-indicators/sea-ice">ECMWF</a>.</span><a class="headerlink" href="#id2" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<figure class="align-left" id="id3">
+<a class="reference internal image-reference" href="../_images/antarctic_sea_ice_tmp1.jpg"><img alt="../_images/antarctic_sea_ice_tmp1.jpg" src="../_images/antarctic_sea_ice_tmp1.jpg" style="width: 654.15px; height: 665.7px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 18 </span><span class="caption-text">The annual, summer, and winter SIE anomalies from 1979 to 2023 are shown in (a) using green, red, and blue, respectively. Corresponding trend lines are indicated as dotted lines. The maximum February SIE is represented as a shaded blue area in (b), while the lowest SIE is shown in red, the second lowest in green, and the median extent as a dotted black line. Monthly mean variations in maximum SIE and SIE after 2020 with a climatological period of 1979–2021 are displayed in (c). (For interpretation of the references to colour in this figure legend, the reader is referred to the web version of this article.) Source: <a class="reference external" href="https://www.sciencedirect.com/science/article/abs/pii/S0921818125001675?via%3Dihub">Swathi et al. (2025)</a></span><a class="headerlink" href="#id3" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
 </section>
 <section id="sea-ice-geoengineering-and-management">
 <h2>Sea ice geoengineering and management<a class="headerlink" href="#sea-ice-geoengineering-and-management" title="Permalink to this heading">#</a></h2>
-<figure class="align-left" id="id2">
+<figure class="align-left" id="id4">
 <a class="reference internal image-reference" href="../_images/si_geoengineering_tmp1.jpg"><img alt="../_images/si_geoengineering_tmp1.jpg" src="../_images/si_geoengineering_tmp1.jpg" style="width: 744.8px; height: 718.55px;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 17 </span><span class="caption-text">Idealized representation of the 21st century sea ice system with and without Arctic Ice Management (AIM). In unperturbed winter conditions (top left) the sea ice and snow act as insulator reducing the heat flux from the warmer ocean to the much colder atmosphere. The sea ice growth takes place mostly at the ice-ocean interface and is relatively slow (dark blue fraction of the ice floes). By summer (bottom left) most of the ice has melted, leading to an ice-free Arctic Ocean in the second half of the century and amplifying the warming through the ice-albedo feedback (yellow fraction of ocean). In AIM conditions (top right) ocean water is pumped onto the ice, leading to larger heat flux and rapid ice growth at the surface. More ice withstands the summer melt (bottom right) and increases the surface albedo. Source: <a class="reference external" href="https://agupubs.onlinelibrary.wiley.com/doi/10.1029/2019EF001230">Zampieri and  Goessling (2019)</a>.</span><a class="headerlink" href="#id2" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 19 </span><span class="caption-text">Idealized representation of the 21st century sea ice system with and without Arctic Ice Management (AIM). In unperturbed winter conditions (top left) the sea ice and snow act as insulator reducing the heat flux from the warmer ocean to the much colder atmosphere. The sea ice growth takes place mostly at the ice-ocean interface and is relatively slow (dark blue fraction of the ice floes). By summer (bottom left) most of the ice has melted, leading to an ice-free Arctic Ocean in the second half of the century and amplifying the warming through the ice-albedo feedback (yellow fraction of ocean). In AIM conditions (top right) ocean water is pumped onto the ice, leading to larger heat flux and rapid ice growth at the surface. More ice withstands the summer melt (bottom right) and increases the surface albedo. Source: <a class="reference external" href="https://agupubs.onlinelibrary.wiley.com/doi/10.1029/2019EF001230">Zampieri and  Goessling (2019)</a>.</span><a class="headerlink" href="#id4" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
+</section>
+<section id="literature-review">
+<h2>Literature review<a class="headerlink" href="#literature-review" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://agupubs.onlinelibrary.wiley.com/doi/full/10.1029/2024GL109608">Duspayev et al. (2024)</a></p></li>
+</ul>
 </section>
 <section id="sources">
 <h2>Sources<a class="headerlink" href="#sources" title="Permalink to this heading">#</a></h2>
@@ -647,6 +673,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sea-ice-prediction">Sea-ice prediction</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#changing-sea-ice-in-arctic-and-antarctica">Changing sea ice in Arctic and Antarctica</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sea-ice-geoengineering-and-management">Sea ice geoengineering and management</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#literature-review">Literature review</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sources">Sources</a></li>
 </ul>
   </nav></div>

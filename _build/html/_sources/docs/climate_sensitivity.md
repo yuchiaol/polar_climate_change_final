@@ -11,7 +11,7 @@ kernelspec:
 
 (ecs_feedback)=
 
-# Climate sensitivity and feedback
+# Climate Sensitivity and Feedback
 
 ## Radiative forcing
 We start with the radiative forcing in a RCE model. Recall that the instantaneous radiative forcing is the quick change in the TOA energy budget before the climate system begins to adjust. 
@@ -138,7 +138,7 @@ print(rcm_2xCO2.subprocess['Radiation'].absorber_vmr['CO2'])
 
 ```
 
-Let's quickly chech the instantaneous radiative forcing:
+Let's quickly check the instantaneous radiative forcing:
 ```{code-cell} ipython3
 rcm_2xCO2.compute_diagnostics()
 
@@ -300,7 +300,7 @@ f\lambda_{0}\Delta T_{0}
 \mbox{why  } -\infty < f \le 1 \mbox{ ???}
 ```
 
-With infinity loops, we take the sume of each feedback effect:
+With infinity loops, we take the sum of each feedback effect:
 ```{math}
 :label: my_label71
 f\lambda_{0}\Delta T_{0} + f^{2}\lambda_{0}\Delta T_{0} + \cdots = (f+f^{2}+\cdots)\lambda_{0}\Delta T_{0} = \lambda_{0}\Delta T_{0}\sum_{n=1}^{\infty}f^{n}
@@ -460,6 +460,11 @@ print(lambda_h2o)
 :scale: 40%
 ```
 
+[Zelinka et a. (2020)](https://agupubs.onlinelibrary.wiley.com/doi/full/10.1029/2019GL085782) highlighted the uncertainty of ECS comes from the uncertainty of cloud feedback:
+```{figure} /_static/lecture_specific/lecture1_figures/cloud_feedback_ecs_tmp1.jpg
+:scale: 40%
+``` 
+
 ## The physical model - putting together
 
 We review Section 2.2 of [Sherwood et al. (2020)](https://agupubs.onlinelibrary.wiley.com/doi/full/10.1029/2019RG000678) to put everything together. This is the conventional model for feedback-forcing theory.
@@ -518,7 +523,44 @@ where
 How to calculate $\Delta \lambda_{state}$ and $\Delta \lambda_{pattern}$ is another long story.
 
 ## Radiative kernel analysis
+The feedback may/should have spatial structure, right? For example, sea-ice albedo feedback should be strongest in polar regions, but very week or no effect in the tropics, right?
 
+To the end of complex climate model similations, climate scientists have developed a method to compute the feedback with spatial structure. 
+This is called the radiative kernel method. 
+
+```{figure} /_static/lecture_specific/lecture1_figures/radiative_kernel_tmp4.jpg
+---
+scale: 85%
+---
+Multimodel ensemble-mean maps of the temperature, water vapor, albedo, and cloud feedback computed using climate response patterns from the IPCC AR4 models and the GFDL radiative kernels. Source: [Soden et al. (2008)](https://journals.ametsoc.org/view/journals/clim/21/14/2007jcli2110.1.xml)
+```
+
+We use CESM1-CAM5 kernel for demonstration: see [Pendergrass et al. (2018)](https://essd.copernicus.org/articles/10/317/2018/).
+
+```{note}
+CESM1-CAM5 kernel can be found on Professor Angeline G. Pendergrass' [GitHub](https://github.com/apendergrass/cam5-kernels)
+```
+
+```{figure} /_static/lecture_specific/lecture1_figures/radiative_kernel_tmp1.png
+---
+scale: 35%
+---
+Top-of-atmosphere kernels from CESM1(CAM5). Zonal, annual-mean temperature, longwave moisture, and shortwave moisture kernels for all-sky and clear-sky. In panels (e) and (g) all-sky kernels are shown in solid lines and clear-sky kernels in dashed lines. The sign convention is positive downward. Source: [Pendergrass et al. (2018)](https://essd.copernicus.org/articles/10/317/2018/).
+```
+
+```{figure} /_static/lecture_specific/lecture1_figures/radiative_kernel_tmp2.png
+---
+scale: 55%
+---
+CESM large-ensemble kernels. Feedback calculation for the CESM 40-member large ensemble using the TOA kernels. Source: [Pendergrass et al. (2018)](https://essd.copernicus.org/articles/10/317/2018/).
+```
+
+```{figure} /_static/lecture_specific/lecture1_figures/radiative_kernel_tmp3.png
+---
+scale: 35%
+---
+Comparison of TOA radiative feedbacks. TOA radiative feedbacks (Wm$^{-2}$ K$^{-1}$) averaged over 40 CESM large-ensemble simulations diagnosed with CAM5 radiative kernels, compared against those from CMIP3 model simulations diagnosed with three different kernels as reported by [Soden et al. (2008)](https://journals.ametsoc.org/view/journals/clim/21/14/2007jcli2110.1.xml), and MPI-ESM-LR control state kernels and years 21–150 of abrupt carbon dioxide quadrupling simulations from the same model (Block and Mauritsen, 2013). Table from [Pendergrass et al. (2018)](https://essd.copernicus.org/articles/10/317/2018/).
+```
 
 ## Homework assignment X (due xxx)
 1. Please change adj_lapse_rate = 9.8. This is the dry adiabatic lapse rate. Calculate the water feedback parameter in this scenario.

@@ -281,8 +281,11 @@ For feedback parameter:
 ```
 
 ## Polar amplification factor
-We can calculate the polar amplification factor.
-
+We can calculate the polar amplification factor:
+```{math}
+:label: my_label121
+\frac{\delta T_{s}(RAE)}{\delta T_{s}(RCE)} = \frac{\frac{T_{s}(RAE)}{4(2-\epsilon)}\delta \epsilon}{\frac{T_{s}(RCE)^{4}-(T_{s}(RCE)-\Delta_{T}^{4})}{4(1-\epsilon)T_{s}(RCE)^{3}+4\epsilon(1-\gamma)(T_{s}(RCE)-\Delta_T)^{3}}\delta \epsilon} \approx \frac{(1-\epsilon\gamma)T_{s}(RAE)}{4(2-\epsilon)\Delta_T}
+```
 
 ## Homework assignment X (due xxx)
 1. Based on Equations (96) and (97), can you make a plot for $T_s$ and $T_a$ as a function of emissivity $\epsilon$?
