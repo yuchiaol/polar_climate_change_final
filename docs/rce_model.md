@@ -501,7 +501,6 @@ skew2.ax.set_title('Radiative-convective equilibrium', fontsize=18);
 
 There are a lot to discuss. We could start with 1) the vertical structure, and 2) tropopause height.
 
-
 ## Homework assignment 3 (due xxx)
 1. In the pure radiative model, can you remove the effect of ozone?
 2. In the pure radiative model, can you remove the effects of ozone and water vapor?
@@ -514,7 +513,10 @@ The key parameter 'adj_lapse_rate' determines the RCE equilibrium, but setting i
 - adj_lapse_rate = 'pseudoadiabat'. This follows the blue moist adiabats on the skew-T diagrams.
 - more realistic lapse-rate from observations? For example from sounding?
 
-
+```{figure} /_static/lecture_specific/lecture1_figures/ncu_hw6.png
+:scale: 30%
+Credit to 中央大氣何文樸同學
+```
 
 
 

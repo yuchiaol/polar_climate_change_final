@@ -1,0 +1,62 @@
+Traceback (most recent call last):
+  File "/Users/yuchiaol_ntuas/miniconda3/lib/python3.11/site-packages/jupyter_cache/executors/utils.py", line 58, in single_nb_execution
+    executenb(
+  File "/Users/yuchiaol_ntuas/miniconda3/lib/python3.11/site-packages/nbclient/client.py", line 1305, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/yuchiaol_ntuas/miniconda3/lib/python3.11/site-packages/jupyter_core/utils/__init__.py", line 166, in wrapped
+    return loop.run_until_complete(inner)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/yuchiaol_ntuas/miniconda3/lib/python3.11/asyncio/base_events.py", line 653, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/Users/yuchiaol_ntuas/miniconda3/lib/python3.11/site-packages/nbclient/client.py", line 705, in async_execute
+    await self.async_execute_cell(
+  File "/Users/yuchiaol_ntuas/miniconda3/lib/python3.11/site-packages/nbclient/client.py", line 1058, in async_execute_cell
+    await self._check_raise_for_error(cell, cell_index, exec_reply)
+  File "/Users/yuchiaol_ntuas/miniconda3/lib/python3.11/site-packages/nbclient/client.py", line 914, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+# ================================================================
+# Yu-Chiao @ WHOI Feb 22, 2019
+# Heirarchical cluster deomstration
+# ================================================================
+
+# ================================================================
+# Import functions
+# ================================================================
+import argparse
+from netCDF4 import Dataset
+import numpy as np
+import matplotlib.pyplot as plt
+from matplotlib import mlab
+import sys, os, ast
+import matplotlib.path as mpath
+import matplotlib as mpl
+from pylab import setp
+
+import cartopy.crs as ccrs
+import cartopy.feature as cfeature
+from cartopy.mpl.ticker import LongitudeFormatter, LatitudeFormatter
+import cartopy.io.img_tiles as cimgt
+from cartopy.io.img_tiles import StamenTerrain
+
+from scipy.cluster.hierarchy import dendrogram, linkage
+from scipy.cluster.hierarchy import cophenet
+from scipy.spatial.distance import pdist
+from scipy.cluster.hierarchy import fcluster
+------------------
+
+
+[0;31m---------------------------------------------------------------------------[0m
+[0;31mImportError[0m                               Traceback (most recent call last)
+Cell [0;32mIn[1], line 23[0m
+[1;32m     21[0m [38;5;28;01mfrom[39;00m [38;5;21;01mcartopy[39;00m[38;5;21;01m.[39;00m[38;5;21;01mmpl[39;00m[38;5;21;01m.[39;00m[38;5;21;01mticker[39;00m [38;5;28;01mimport[39;00m LongitudeFormatter, LatitudeFormatter
+[1;32m     22[0m [38;5;28;01mimport[39;00m [38;5;21;01mcartopy[39;00m[38;5;21;01m.[39;00m[38;5;21;01mio[39;00m[38;5;21;01m.[39;00m[38;5;21;01mimg_tiles[39;00m [38;5;28;01mas[39;00m [38;5;21;01mcimgt[39;00m
+[0;32m---> 23[0m [38;5;28;01mfrom[39;00m [38;5;21;01mcartopy[39;00m[38;5;21;01m.[39;00m[38;5;21;01mio[39;00m[38;5;21;01m.[39;00m[38;5;21;01mimg_tiles[39;00m [38;5;28;01mimport[39;00m StamenTerrain
+[1;32m     25[0m [38;5;28;01mfrom[39;00m [38;5;21;01mscipy[39;00m[38;5;21;01m.[39;00m[38;5;21;01mcluster[39;00m[38;5;21;01m.[39;00m[38;5;21;01mhierarchy[39;00m [38;5;28;01mimport[39;00m dendrogram, linkage
+[1;32m     26[0m [38;5;28;01mfrom[39;00m [38;5;21;01mscipy[39;00m[38;5;21;01m.[39;00m[38;5;21;01mcluster[39;00m[38;5;21;01m.[39;00m[38;5;21;01mhierarchy[39;00m [38;5;28;01mimport[39;00m cophenet
+
+[0;31mImportError[0m: cannot import name 'StamenTerrain' from 'cartopy.io.img_tiles' (/Users/yuchiaol_ntuas/miniconda3/lib/python3.11/site-packages/cartopy/io/img_tiles.py)
+
