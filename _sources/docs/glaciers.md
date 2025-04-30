@@ -89,7 +89,7 @@ Global sea level rise. Source: [Björnsson et al. (2018)](https://www.vatnajokul
 ```
 
 ## Literature review
-[Park et al. (2023)](https://www.nature.com/articles/s41467-023-36051-9)
+- [Park et al. (2023)](https://www.nature.com/articles/s41467-023-36051-9)
 
 
 ## Sources
