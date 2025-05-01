@@ -513,6 +513,12 @@ The key parameter 'adj_lapse_rate' determines the RCE equilibrium, but setting i
 - adj_lapse_rate = 'pseudoadiabat'. This follows the blue moist adiabats on the skew-T diagrams.
 - more realistic lapse-rate from observations? For example from sounding?
 
+
+```{figure} /_static/lecture_specific/lecture1_figures/rcm_skewT_compare.gif
+:scale: 70%
+Credit to 中央大氣李恒安同學
+```
+
 ```{figure} /_static/lecture_specific/lecture1_figures/ncu_hw6.png
 :scale: 30%
 Credit to 中央大氣何文樸同學
