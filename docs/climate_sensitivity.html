@@ -174,6 +174,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="rce_model.html">Radiative Convective Equilibrium (RCE)</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Climate Sensitivity and Feedback</a></li>
 <li class="toctree-l1"><a class="reference internal" href="rae_model.html">Radiative Advective Equilibrium (RAE)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="one_dim_ebm.html">One-dimensional Energy Balance Model</a></li>
 <li class="toctree-l1"><a class="reference internal" href="effect_aa.html">Arctic-Midlatitude Linkage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="history_modelling.html">The History of Climate Modeling</a></li>
 </ul>
@@ -880,7 +881,7 @@ This is called the radiative kernel method.</p>
 <figure class="align-default" id="id1">
 <a class="reference internal image-reference" href="../_images/radiative_kernel_tmp4.jpg"><img alt="../_images/radiative_kernel_tmp4.jpg" src="../_images/radiative_kernel_tmp4.jpg" style="width: 552.5px; height: 357.0px;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 33 </span><span class="caption-text">Multimodel ensemble-mean maps of the temperature, water vapor, albedo, and cloud feedback computed using climate response patterns from the IPCC AR4 models and the GFDL radiative kernels. Source: <a class="reference external" href="https://journals.ametsoc.org/view/journals/clim/21/14/2007jcli2110.1.xml">Soden et al. (2008)</a></span><a class="headerlink" href="#id1" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 34 </span><span class="caption-text">Multimodel ensemble-mean maps of the temperature, water vapor, albedo, and cloud feedback computed using climate response patterns from the IPCC AR4 models and the GFDL radiative kernels. Source: <a class="reference external" href="https://journals.ametsoc.org/view/journals/clim/21/14/2007jcli2110.1.xml">Soden et al. (2008)</a></span><a class="headerlink" href="#id1" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>We use CESM1-CAM5 kernel for demonstration: see <a class="reference external" href="https://essd.copernicus.org/articles/10/317/2018/">Pendergrass et al. (2018)</a>.</p>
@@ -891,19 +892,19 @@ This is called the radiative kernel method.</p>
 <figure class="align-default" id="id2">
 <a class="reference internal image-reference" href="../_images/radiative_kernel_tmp1.png"><img alt="../_images/radiative_kernel_tmp1.png" src="../_images/radiative_kernel_tmp1.png" style="width: 687.4px; height: 862.05px;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 34 </span><span class="caption-text">Top-of-atmosphere kernels from CESM1(CAM5). Zonal, annual-mean temperature, longwave moisture, and shortwave moisture kernels for all-sky and clear-sky. In panels (e) and (g) all-sky kernels are shown in solid lines and clear-sky kernels in dashed lines. The sign convention is positive downward. Source: <a class="reference external" href="https://essd.copernicus.org/articles/10/317/2018/">Pendergrass et al. (2018)</a>.</span><a class="headerlink" href="#id2" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 35 </span><span class="caption-text">Top-of-atmosphere kernels from CESM1(CAM5). Zonal, annual-mean temperature, longwave moisture, and shortwave moisture kernels for all-sky and clear-sky. In panels (e) and (g) all-sky kernels are shown in solid lines and clear-sky kernels in dashed lines. The sign convention is positive downward. Source: <a class="reference external" href="https://essd.copernicus.org/articles/10/317/2018/">Pendergrass et al. (2018)</a>.</span><a class="headerlink" href="#id2" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <figure class="align-default" id="id3">
 <a class="reference internal image-reference" href="../_images/radiative_kernel_tmp2.png"><img alt="../_images/radiative_kernel_tmp2.png" src="../_images/radiative_kernel_tmp2.png" style="width: 584.1px; height: 320.1px;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 35 </span><span class="caption-text">CESM large-ensemble kernels. Feedback calculation for the CESM 40-member large ensemble using the TOA kernels. Source: <a class="reference external" href="https://essd.copernicus.org/articles/10/317/2018/">Pendergrass et al. (2018)</a>.</span><a class="headerlink" href="#id3" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 36 </span><span class="caption-text">CESM large-ensemble kernels. Feedback calculation for the CESM 40-member large ensemble using the TOA kernels. Source: <a class="reference external" href="https://essd.copernicus.org/articles/10/317/2018/">Pendergrass et al. (2018)</a>.</span><a class="headerlink" href="#id3" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <figure class="align-default" id="id4">
 <a class="reference internal image-reference" href="../_images/radiative_kernel_tmp3.png"><img alt="../_images/radiative_kernel_tmp3.png" src="../_images/radiative_kernel_tmp3.png" style="width: 723.0999999999999px; height: 292.59999999999997px;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 36 </span><span class="caption-text">Comparison of TOA radiative feedbacks. TOA radiative feedbacks (Wm<span class="math notranslate nohighlight">\(^{-2}\)</span> K<span class="math notranslate nohighlight">\(^{-1}\)</span>) averaged over 40 CESM large-ensemble simulations diagnosed with CAM5 radiative kernels, compared against those from CMIP3 model simulations diagnosed with three different kernels as reported by <a class="reference external" href="https://journals.ametsoc.org/view/journals/clim/21/14/2007jcli2110.1.xml">Soden et al. (2008)</a>, and MPI-ESM-LR control state kernels and years 21–150 of abrupt carbon dioxide quadrupling simulations from the same model (Block and Mauritsen, 2013). Table from <a class="reference external" href="https://essd.copernicus.org/articles/10/317/2018/">Pendergrass et al. (2018)</a>.</span><a class="headerlink" href="#id4" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 37 </span><span class="caption-text">Comparison of TOA radiative feedbacks. TOA radiative feedbacks (Wm<span class="math notranslate nohighlight">\(^{-2}\)</span> K<span class="math notranslate nohighlight">\(^{-1}\)</span>) averaged over 40 CESM large-ensemble simulations diagnosed with CAM5 radiative kernels, compared against those from CMIP3 model simulations diagnosed with three different kernels as reported by <a class="reference external" href="https://journals.ametsoc.org/view/journals/clim/21/14/2007jcli2110.1.xml">Soden et al. (2008)</a>, and MPI-ESM-LR control state kernels and years 21–150 of abrupt carbon dioxide quadrupling simulations from the same model (Block and Mauritsen, 2013). Table from <a class="reference external" href="https://essd.copernicus.org/articles/10/317/2018/">Pendergrass et al. (2018)</a>.</span><a class="headerlink" href="#id4" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 </section>
