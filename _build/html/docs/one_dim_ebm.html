@@ -326,6 +326,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#spatial-structure-of-insolation-and-surface-temperature">Spatial structure of insolation and surface temperature</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-rce-model-with-latitudinal-structure">A RCE model with latitudinal structure</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#zonal-mean-energy-budget-and-heat-transport">Zonal mean energy budget and heat transport</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#separate-energy-budget-for-the-atmosphere-and-ocean">Separate energy budget for the atmosphere and ocean</a></li>
 </ul>
             </nav>
         </div>
@@ -589,6 +590,44 @@ Integrating for 91 steps, 91.0 days, or 0.24914974228060174 years.
 <img alt="../_images/99e6d1169240f965312d491676d0f280d0526a7057ff7234948c0f49e51473d7.png" src="../_images/99e6d1169240f965312d491676d0f280d0526a7057ff7234948c0f49e51473d7.png" />
 </div>
 </div>
+<p>We now look at the reanalysis data:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get TOA radiative flux data from NCEP reanalysis</span>
+<span class="c1"># downwelling SW</span>
+<span class="n">ncep_url</span> <span class="o">=</span> <span class="s2">&quot;/Users/yuchiaol_ntuas/Desktop/ebooks/data/&quot;</span>
+<span class="n">dswrf</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_dataset</span><span class="p">(</span><span class="n">ncep_url</span> <span class="o">+</span> <span class="s1">&#39;dswrf.ntat.mon.1981-2010.ltm.nc&#39;</span><span class="p">,</span> <span class="n">decode_times</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="c1">#dswrf = xr.open_dataset(url + &#39;other_gauss/dswrf&#39;)</span>
+<span class="c1">#  upwelling SW</span>
+<span class="n">uswrf</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_dataset</span><span class="p">(</span><span class="n">ncep_url</span> <span class="o">+</span> <span class="s1">&#39;uswrf.ntat.mon.1981-2010.ltm.nc&#39;</span><span class="p">,</span> <span class="n">decode_times</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="c1">#uswrf = xr.open_dataset(url + &#39;other_gauss/uswrf&#39;)</span>
+<span class="c1">#  upwelling LW</span>
+<span class="n">ulwrf</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_dataset</span><span class="p">(</span><span class="n">ncep_url</span> <span class="o">+</span> <span class="s1">&#39;ulwrf.ntat.mon.1981-2010.ltm.nc&#39;</span><span class="p">,</span> <span class="n">decode_times</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="c1">#ulwrf = xr.open_dataset(url + &#39;other_gauss/ulwrf&#39;)</span>
+
+<span class="n">ASR</span> <span class="o">=</span> <span class="n">dswrf</span><span class="o">.</span><span class="n">dswrf</span> <span class="o">-</span> <span class="n">uswrf</span><span class="o">.</span><span class="n">uswrf</span>
+<span class="n">OLR</span> <span class="o">=</span> <span class="n">ulwrf</span><span class="o">.</span><span class="n">ulwrf</span>
+
+<span class="n">ASRzon</span> <span class="o">=</span> <span class="n">ASR</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;time&#39;</span><span class="p">,</span><span class="s1">&#39;lon&#39;</span><span class="p">))</span>
+<span class="n">OLRzon</span> <span class="o">=</span> <span class="n">OLR</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;time&#39;</span><span class="p">,</span><span class="s1">&#39;lon&#39;</span><span class="p">))</span>
+
+<span class="n">ticks</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mi">90</span><span class="p">,</span> <span class="o">-</span><span class="mi">60</span><span class="p">,</span> <span class="o">-</span><span class="mi">30</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">60</span><span class="p">,</span> <span class="mi">90</span><span class="p">]</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ASRzon</span><span class="o">.</span><span class="n">lat</span><span class="p">,</span> <span class="n">ASRzon</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;ASR&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">OLRzon</span><span class="o">.</span><span class="n">lat</span><span class="p">,</span> <span class="n">OLRzon</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;OLR&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;W m$^{-2}$&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Latitude&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="o">-</span><span class="mi">90</span><span class="p">,</span><span class="mi">90</span><span class="p">);</span> <span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span><span class="mi">310</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">(</span><span class="n">ticks</span><span class="p">);</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Observed annual mean radiation at TOA&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">();</span> <span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/6c3c185f9ed78540a33ed64aa25315e9c802e751b1f6d0716091d489a9ba0813.png" src="../_images/6c3c185f9ed78540a33ed64aa25315e9c802e751b1f6d0716091d489a9ba0813.png" />
+</div>
+</div>
 <p>We quickly look at the CESM simulations:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -646,9 +685,7 @@ Integrating for 91 steps, 91.0 days, or 0.24914974228060174 years.
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Attempting to open the dataset  /Users/yuchiaol_ntuas/Desktop/ebooks/data/cpl_1850_f19.cam.h0.nc
 Attempting to open the dataset  /Users/yuchiaol_ntuas/Desktop/ebooks/data/cpl_CO2ramp_f19.cam.h0.nc
 Attempting to open the dataset  /Users/yuchiaol_ntuas/Desktop/ebooks/data/som_1850_f19.cam.h0.nc
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Attempting to open the dataset  /Users/yuchiaol_ntuas/Desktop/ebooks/data/som_1850_2xCO2.cam.h0.nc
+Attempting to open the dataset  /Users/yuchiaol_ntuas/Desktop/ebooks/data/som_1850_2xCO2.cam.h0.nc
 </pre></div>
 </div>
 <img alt="../_images/50f3bcb321fe5f4a37b0a740bc899c1ec2eba39d069bd4c06705e3b5be845d41.png" src="../_images/50f3bcb321fe5f4a37b0a740bc899c1ec2eba39d069bd4c06705e3b5be845d41.png" />
@@ -666,9 +703,310 @@ Attempting to open the dataset  /Users/yuchiaol_ntuas/Desktop/ebooks/data/som_18
 </figure>
 <div class="math notranslate nohighlight" id="equation-my-label122">
 <span class="eqno">(121)<a class="headerlink" href="#equation-my-label122" title="Permalink to this equation">#</a></span>\[\begin{split}\begin{eqnarray}
-\frac{\partial E}{\partial t} &amp;=&amp; ASR - OLR + \frac{1}{2\pi a^{2}\delta \phi \cos(\theta)}(H(\phi)-H(\phi + \delta \phi)) \\
- &amp;=&amp; ASR - OLR - \frac{1}{2\pi a^{2}\cos(\theta)}(\frac{H(\phi + \delta \phi)-H(\phi)}{\delta \phi})
+\frac{\partial E}{\partial t} &amp;=&amp; ASR - OLR + \frac{1}{2\pi a^{2}\delta \phi \cos(\phi)}(H(\phi)-H(\phi + \delta \phi)) \\
+ &amp;=&amp; ASR - OLR - \frac{1}{2\pi a^{2}\cos(\phi)}(\frac{H(\phi + \delta \phi)-H(\phi)}{\delta \phi})
 \end{eqnarray}\end{split}\]</div>
+<p>if we take <span class="math notranslate nohighlight">\(\delta \phi \to 0\)</span>, we can get:</p>
+<div class="math notranslate nohighlight" id="equation-my-label123">
+<span class="eqno">(122)<a class="headerlink" href="#equation-my-label123" title="Permalink to this equation">#</a></span>\[\frac{\partial E}{\partial t} = ASR - OLR - \frac{1}{2\pi a^{2}\cos(\phi)}\frac{\partial H(\phi)}{\partial \phi}\]</div>
+<p>We can define the dynamical heating rate (the convergence of energy transport):</p>
+<div class="math notranslate nohighlight" id="equation-my-label124">
+<span class="eqno">(123)<a class="headerlink" href="#equation-my-label124" title="Permalink to this equation">#</a></span>\[h = - \frac{1}{2\pi a^{2}\cos(\phi)}\frac{\partial H(\phi)}{\partial \phi}\]</div>
+<p>If the climate system reaches an equilibrium state, that is <span class="math notranslate nohighlight">\(\frac{\partial E}{\partial t}=0\)</span>, then the divergence of heat transport must balance the net radiative heating/cooling at every latitude.</p>
+<div class="math notranslate nohighlight" id="equation-my-label125">
+<span class="eqno">(124)<a class="headerlink" href="#equation-my-label125" title="Permalink to this equation">#</a></span>\[R_{TOA} = ASR - OLR = \frac{1}{2\pi a^{2}\cos(\phi)}\frac{\partial H(\phi)}{\partial \phi}\]</div>
+<div class="math notranslate nohighlight" id="equation-my-label126">
+<span class="eqno">(125)<a class="headerlink" href="#equation-my-label126" title="Permalink to this equation">#</a></span>\[\frac{\partial H(\phi)}{\partial \phi} = 2\pi a^{2}\cos(\phi)R_{TOA}\]</div>
+<p>We can take integral along latitude from the South Pole:</p>
+<div class="math notranslate nohighlight" id="equation-my-label127">
+<span class="eqno">(126)<a class="headerlink" href="#equation-my-label127" title="Permalink to this equation">#</a></span>\[\begin{split}\begin{eqnarray}
+\int_{-\pi /2}^{\phi} \frac{\partial H(\phi)}{\partial \phi'} d\phi' = 2\pi a^{2}\int_{-\pi /2}^{\phi}\cos(\phi')R_{TOA}d\phi' \\
+\rightarrow H(\phi) - H(-\pi /2) = 2\pi a^{2}\int_{-\pi /2}^{\phi}\cos(\phi')R_{TOA}d\phi' \\
+\rightarrow H(\phi) = 2\pi a^{2}\int_{-\pi /2}^{\phi}\cos(\phi')R_{TOA}d\phi'
+\end{eqnarray}\end{split}\]</div>
+<p>We assume <span class="math notranslate nohighlight">\(H(-\pi /2) = 0\)</span> (make sense?) and integral all the way to the North Pole:</p>
+<div class="math notranslate nohighlight" id="equation-my-label128">
+<span class="eqno">(127)<a class="headerlink" href="#equation-my-label128" title="Permalink to this equation">#</a></span>\[H(\pi /2) = 2\pi a^{2}\int_{-\pi /2}^{\pi /2}\cos(\phi')R_{TOA}d\phi' = 0 (?)\]</div>
+<p>If <span class="math notranslate nohighlight">\(H(\pi /2) \ne 0\)</span>, what does this mean?</p>
+<p>Let’s look at the poleward heat transport in reanalysis data and CESM1 simulations.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">inferred_heat_transport</span><span class="p">(</span><span class="n">energy_in</span><span class="p">,</span> <span class="n">lat</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">latax</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;Compute heat transport as integral of local energy imbalance.</span>
+<span class="sd">    Required input:</span>
+<span class="sd">        energy_in: energy imbalance in W/m2, positive in to domain</span>
+<span class="sd">    As either numpy array or xarray.DataArray</span>
+<span class="sd">    If using plain numpy, need to supply these arguments:</span>
+<span class="sd">        lat: latitude in degrees</span>
+<span class="sd">        latax: axis number corresponding to latitude in the data</span>
+<span class="sd">            (axis over which to integrate)</span>
+<span class="sd">    returns the heat transport in PW.</span>
+<span class="sd">    Will attempt to return data in xarray.DataArray if possible.</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">integrate</span>
+    <span class="kn">from</span> <span class="nn">climlab</span> <span class="kn">import</span> <span class="n">constants</span> <span class="k">as</span> <span class="n">const</span>
+    <span class="k">if</span> <span class="n">lat</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">try</span><span class="p">:</span> <span class="n">lat</span> <span class="o">=</span> <span class="n">energy_in</span><span class="o">.</span><span class="n">lat</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">InputError</span><span class="p">(</span><span class="s1">&#39;Need to supply latitude array if input data is not self-describing.&#39;</span><span class="p">)</span>
+    <span class="n">lat_rad</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">deg2rad</span><span class="p">(</span><span class="n">lat</span><span class="p">)</span>
+    <span class="n">coslat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">lat_rad</span><span class="p">)</span>
+    <span class="n">field</span> <span class="o">=</span> <span class="n">coslat</span><span class="o">*</span><span class="n">energy_in</span>
+    <span class="k">if</span> <span class="n">latax</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">try</span><span class="p">:</span> <span class="n">latax</span> <span class="o">=</span> <span class="n">field</span><span class="o">.</span><span class="n">get_axis_num</span><span class="p">(</span><span class="s1">&#39;lat&#39;</span><span class="p">)</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Need to supply axis number for integral over latitude.&#39;</span><span class="p">)</span>
+    <span class="c1">#  result as plain numpy array</span>
+    <span class="n">integral</span> <span class="o">=</span> <span class="n">integrate</span><span class="o">.</span><span class="n">cumulative_trapezoid</span><span class="p">(</span><span class="n">field</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="n">lat_rad</span><span class="p">,</span> <span class="n">initial</span><span class="o">=</span><span class="mf">0.</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="n">latax</span><span class="p">)</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="p">(</span><span class="mf">1E-15</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">const</span><span class="o">.</span><span class="n">a</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">integral</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">field</span><span class="p">,</span> <span class="n">xr</span><span class="o">.</span><span class="n">DataArray</span><span class="p">):</span>
+        <span class="n">result_xarray</span> <span class="o">=</span> <span class="n">field</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="n">result_xarray</span><span class="o">.</span><span class="n">values</span> <span class="o">=</span> <span class="n">result</span>
+        <span class="k">return</span> <span class="n">result_xarray</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">result</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">lat_cesm</span><span class="p">,</span> <span class="n">inferred_heat_transport</span><span class="p">(</span><span class="n">ASR_cesm_zon</span> <span class="o">-</span> <span class="n">OLR_cesm_zon</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;PW&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Latitude&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">([</span><span class="o">-</span><span class="mi">90</span><span class="p">,</span> <span class="o">-</span><span class="mi">60</span><span class="p">,</span> <span class="o">-</span><span class="mi">30</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">60</span><span class="p">,</span> <span class="mi">90</span><span class="p">])</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Total northward heat transport inferred from CESM control simulation&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 1.0, &#39;Total northward heat transport inferred from CESM control simulation&#39;)
+</pre></div>
+</div>
+<img alt="../_images/71b294080c8927db62d118b8cb4bb2697450c58fe8329d229677898940482368.png" src="../_images/71b294080c8927db62d118b8cb4bb2697450c58fe8329d229677898940482368.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#  Need to flip the arrays because we want to start from the south pole</span>
+<span class="n">Rtoa_ncep</span> <span class="o">=</span> <span class="n">ASRzon</span><span class="o">-</span><span class="n">OLRzon</span>
+<span class="n">lat_ncep</span> <span class="o">=</span> <span class="n">ASRzon</span><span class="o">.</span><span class="n">lat</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">lat_ncep</span><span class="p">,</span> <span class="n">inferred_heat_transport</span><span class="p">(</span><span class="n">Rtoa_ncep</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;PW&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Latitude&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">([</span><span class="o">-</span><span class="mi">90</span><span class="p">,</span> <span class="o">-</span><span class="mi">60</span><span class="p">,</span> <span class="o">-</span><span class="mi">30</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">60</span><span class="p">,</span> <span class="mi">90</span><span class="p">])</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Total northward heat transport inferred from NCEP reanalysis&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 1.0, &#39;Total northward heat transport inferred from NCEP reanalysis&#39;)
+</pre></div>
+</div>
+<img alt="../_images/a30f684e147cca32f7b2b8ba666d89546b0807ce788f426772a4b37e061d6208.png" src="../_images/a30f684e147cca32f7b2b8ba666d89546b0807ce788f426772a4b37e061d6208.png" />
+</div>
+</div>
+<p>We need to make a correction to adjust.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#  global average of TOA radiation in reanalysis data</span>
+<span class="n">weight_ncep</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">deg2rad</span><span class="p">(</span><span class="n">lat_ncep</span><span class="p">))</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">deg2rad</span><span class="p">(</span><span class="n">lat_ncep</span><span class="p">))</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="s1">&#39;lat&#39;</span><span class="p">)</span>
+<span class="n">imbal_ncep</span> <span class="o">=</span> <span class="p">(</span><span class="n">Rtoa_ncep</span><span class="p">)</span><span class="o">.</span><span class="n">weighted</span><span class="p">(</span><span class="n">weight_ncep</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="s1">&#39;lat&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span> <span class="s1">&#39;The net downward TOA radiation flux in NCEP renalysis data is </span><span class="si">%0.1f</span><span class="s1"> W/m2.&#39;</span> <span class="o">%</span><span class="k">imbal_ncep</span>)
+
+<span class="n">Rtoa_ncep_balanced</span> <span class="o">=</span> <span class="n">Rtoa_ncep</span> <span class="o">-</span> <span class="n">imbal_ncep</span>
+<span class="n">newimbalance</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">Rtoa_ncep_balanced</span><span class="o">.</span><span class="n">weighted</span><span class="p">(</span><span class="n">weight_ncep</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="s1">&#39;lat&#39;</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span> <span class="s1">&#39;The net downward TOA radiation flux after balancing the data is </span><span class="si">%0.2e</span><span class="s1"> W/m2.&#39;</span> <span class="o">%</span><span class="k">newimbalance</span>)
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">lat_ncep</span><span class="p">,</span> <span class="n">inferred_heat_transport</span><span class="p">(</span><span class="n">Rtoa_ncep_balanced</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;PW&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Latitude&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">([</span><span class="o">-</span><span class="mi">90</span><span class="p">,</span> <span class="o">-</span><span class="mi">60</span><span class="p">,</span> <span class="o">-</span><span class="mi">30</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">60</span><span class="p">,</span> <span class="mi">90</span><span class="p">])</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Total northward heat transport inferred from NCEP reanalysis (after global balancing)&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The net downward TOA radiation flux in NCEP renalysis data is -12.0 W/m2.
+The net downward TOA radiation flux after balancing the data is -1.66e-06 W/m2.
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 1.0, &#39;Total northward heat transport inferred from NCEP reanalysis (after global balancing)&#39;)
+</pre></div>
+</div>
+<img alt="../_images/1e71c41daa1051d546e723ccfbf3f587c5dea9db167d6a233b737ea2327e2b9f.png" src="../_images/1e71c41daa1051d546e723ccfbf3f587c5dea9db167d6a233b737ea2327e2b9f.png" />
+</div>
+</div>
+<p>Does this correction make sense?</p>
+<figure class="align-default" id="id1">
+<a class="reference internal image-reference" href="../_images/transport_tmp1.jpg"><img alt="../_images/transport_tmp1.jpg" src="../_images/transport_tmp1.jpg" style="width: 675.0px; height: 436.5px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 38 </span><span class="caption-text">The ERBE period zonal mean annual cycle of the meridional energy transport in PW by (a) the atmosphere and ocean as inferred from ERBE RT, NRA δAE/δt, and GODAS δOE/δt; (b) the atmosphere based on NRA; and (c) by the ocean as implied by ERBE + NRA FS and GODAS δOE/δt. Stippling and hatching in (a)–(c) represent regions and times of year in which the standard deviation of the monthly mean values among estimates, some of which include the CERES period (see text), exceeds 0.5 and 1.0 PW, respectively. (d) The median annual mean transport by latitude for the total (gray), atmosphere (red), and ocean (blue) accompanied with the associated ±2σ range (shaded). Source: <a class="reference external" href="https://journals.ametsoc.org/view/journals/clim/21/10/2007jcli1936.1.xml">Fasullo and Trenberth (2008)</a></span><a class="headerlink" href="#id1" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+</section>
+<section id="separate-energy-budget-for-the-atmosphere-and-ocean">
+<h2>Separate energy budget for the atmosphere and ocean<a class="headerlink" href="#separate-energy-budget-for-the-atmosphere-and-ocean" title="Permalink to this heading">#</a></h2>
+<p>We can separate the energy budget for atmospheric and oceanic components. We need surface heat fluxes (SHF) between the interface.</p>
+<p>SHF usually consistes of four components:</p>
+<ul class="simple">
+<li><p>shortwave radiation</p></li>
+<li><p>longwave radiation</p></li>
+<li><p>sensible heat flux</p></li>
+<li><p>latent heat flux</p></li>
+</ul>
+<p>What we might be missing?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># monthly climatologies for surface flux data from reanalysis</span>
+<span class="c1">#  all defined as positive UP</span>
+<span class="n">ncep_url</span> <span class="o">=</span> <span class="s2">&quot;/Users/yuchiaol_ntuas/Desktop/ebooks/data/&quot;</span>
+<span class="n">ncep_nswrs</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_dataset</span><span class="p">(</span><span class="n">ncep_url</span> <span class="o">+</span> <span class="s2">&quot;nswrs.sfc.mon.1981-2010.ltm.nc&quot;</span><span class="p">,</span> <span class="n">decode_times</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">ncep_nlwrs</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_dataset</span><span class="p">(</span><span class="n">ncep_url</span> <span class="o">+</span> <span class="s2">&quot;nlwrs.sfc.mon.1981-2010.ltm.nc&quot;</span><span class="p">,</span> <span class="n">decode_times</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">ncep_shtfl</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_dataset</span><span class="p">(</span><span class="n">ncep_url</span> <span class="o">+</span> <span class="s2">&quot;shtfl.sfc.mon.1981-2010.ltm.nc&quot;</span><span class="p">,</span> <span class="n">decode_times</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">ncep_lhtfl</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_dataset</span><span class="p">(</span><span class="n">ncep_url</span> <span class="o">+</span> <span class="s2">&quot;lhtfl.sfc.mon.1981-2010.ltm.nc&quot;</span><span class="p">,</span> <span class="n">decode_times</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="c1">#  Calculate ANNUAL AVERAGE net upward surface flux</span>
+<span class="n">ncep_net_surface_up</span> <span class="o">=</span> <span class="p">(</span><span class="n">ncep_nlwrs</span><span class="o">.</span><span class="n">nlwrs</span>
+                     <span class="o">+</span> <span class="n">ncep_nswrs</span><span class="o">.</span><span class="n">nswrs</span>
+                     <span class="o">+</span> <span class="n">ncep_shtfl</span><span class="o">.</span><span class="n">shtfl</span>
+                     <span class="o">+</span> <span class="n">ncep_lhtfl</span><span class="o">.</span><span class="n">lhtfl</span>
+                      <span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="s1">&#39;time&#39;</span><span class="p">)</span>
+
+<span class="n">lon_ncep</span> <span class="o">=</span> <span class="n">ncep_net_surface_up</span><span class="o">.</span><span class="n">lon</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">cax</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">pcolormesh</span><span class="p">(</span><span class="n">lon_ncep</span><span class="p">,</span> <span class="n">lat_ncep</span><span class="p">,</span> <span class="n">ncep_net_surface_up</span><span class="p">,</span> 
+               <span class="n">cmap</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">seismic</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=-</span><span class="mf">200.</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mf">200.</span> <span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">cax</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Net upward surface energy flux in NCEP Reanalysis data&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 1.0, &#39;Net upward surface energy flux in NCEP Reanalysis data&#39;)
+</pre></div>
+</div>
+<img alt="../_images/d7fb11beeeb1efcd666bdf8bdb61c4716ee2f925880f890bf2ef7227abb43715.png" src="../_images/d7fb11beeeb1efcd666bdf8bdb61c4716ee2f925880f890bf2ef7227abb43715.png" />
+</div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>It is always important to check the sign of these fluxes. Different dataset may have difference definition of the sign.</p>
+</div>
+<p>We can now separate the whole system to upper atmosphere and lower ocean with the SHF exchanges energy between them. If we define the sign of SHF as positive upward, that is from the ocean to the atmosphere.</p>
+<figure class="align-default">
+<a class="reference internal image-reference" href="../_images/colum_atm_ocn_tmp1.png"><img alt="../_images/colum_atm_ocn_tmp1.png" src="../_images/colum_atm_ocn_tmp1.png" style="width: 633.0px; height: 387.0px;" /></a>
+</figure>
+<p>For the ocean:</p>
+<div class="math notranslate nohighlight" id="equation-my-label129">
+<span class="eqno">(128)<a class="headerlink" href="#equation-my-label129" title="Permalink to this equation">#</a></span>\[\frac{\partial E_o}{\partial t} = -SHF + OHT
+ = -SHF - \frac{1}{2\pi a^{2}\cos(\phi)}\frac{\partial H_o}{\partial \phi}\]</div>
+<p>If we consider an equilibrium state:</p>
+<div class="math notranslate nohighlight" id="equation-my-label130">
+<span class="eqno">(129)<a class="headerlink" href="#equation-my-label130" title="Permalink to this equation">#</a></span>\[H_{o}(\phi) = -2\pi a^{2} \int_{-\pi/2}^{\phi} SHF \cos(\phi')d\phi'\]</div>
+<p>For the atmosphere:</p>
+<div class="math notranslate nohighlight" id="equation-my-label131">
+<span class="eqno">(130)<a class="headerlink" href="#equation-my-label131" title="Permalink to this equation">#</a></span>\[\frac{\partial E_a}{\partial t} = R_{TOA} -SHF + AHT
+ = R_{TOA} -SHF - \frac{1}{2\pi a^{2}\cos(\phi)}\frac{\partial H_a}{\partial \phi}\]</div>
+<p>Similarly if we consider an equilibrium state:</p>
+<div class="math notranslate nohighlight" id="equation-my-label132">
+<span class="eqno">(131)<a class="headerlink" href="#equation-my-label132" title="Permalink to this equation">#</a></span>\[H_{a}(\phi) = 2\pi a^{2} \int_{-\pi/2}^{\phi} (R_{TOA} + SHF) \cos(\phi')d\phi'\]</div>
+<p>We can further separate the AHT into wet and dry component, that is <span class="math notranslate nohighlight">\(AHT = AHT_{dry} + AHT_{wet}\)</span>.
+<span class="math notranslate nohighlight">\(AHT_{wet}\)</span> is also called latent heat transport. Considering the water budget in the atmosphere:</p>
+<div class="math notranslate nohighlight" id="equation-my-label133">
+<span class="eqno">(132)<a class="headerlink" href="#equation-my-label133" title="Permalink to this equation">#</a></span>\[L_{v}\frac{\partial Q}{\partial t} = L_{v}(E-P) - AHT_{wet} = L_{v}(E-P) - \frac{1}{2\pi a^{2}\cos(\phi)}\frac{\partial H_{wet,LH}}{\partial \phi}\]</div>
+<p>where <span class="math notranslate nohighlight">\(Q\)</span> is the depth-integrated water vapor in kg/m<span class="math notranslate nohighlight">\(^2\)</span>, <span class="math notranslate nohighlight">\(E\)</span> and <span class="math notranslate nohighlight">\(P\)</span> are evaporation and precipitation in kg/m<span class="math notranslate nohighlight">\(^2\)</span>/s (=mm/s, why?), <span class="math notranslate nohighlight">\(L_{v}=2.5\times 10^{-6}\)</span> is the latend heat of vaporization.</p>
+<div class="math notranslate nohighlight" id="equation-my-label134">
+<span class="eqno">(133)<a class="headerlink" href="#equation-my-label134" title="Permalink to this equation">#</a></span>\[H_{wet, LH}(\phi) = 2\pi a^{2} \int_{-\pi/2}^{\phi} L_{v}(E-P) \cos(\phi')d\phi'\]</div>
+<p>So the dry component can be calculated as:</p>
+<div class="math notranslate nohighlight" id="equation-my-label135">
+<span class="eqno">(134)<a class="headerlink" href="#equation-my-label135" title="Permalink to this equation">#</a></span>\[H_{dry} = H_{a} - H_{wet, LH}\]</div>
+<p>Let’s look at CESM1 results:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">CESM_heat_transport</span><span class="p">(</span><span class="n">run</span><span class="p">,</span> <span class="n">timeslice</span><span class="o">=</span><span class="n">clim_slice_cpl</span><span class="p">):</span>
+    <span class="c1">#  Take zonal and time averages of the necessary input fields</span>
+    <span class="n">fieldlist</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;FLNT&#39;</span><span class="p">,</span><span class="s1">&#39;FSNT&#39;</span><span class="p">,</span><span class="s1">&#39;LHFLX&#39;</span><span class="p">,</span><span class="s1">&#39;SHFLX&#39;</span><span class="p">,</span><span class="s1">&#39;FLNS&#39;</span><span class="p">,</span><span class="s1">&#39;FSNS&#39;</span><span class="p">,</span><span class="s1">&#39;PRECSC&#39;</span><span class="p">,</span><span class="s1">&#39;PRECSL&#39;</span><span class="p">,</span><span class="s1">&#39;QFLX&#39;</span><span class="p">,</span><span class="s1">&#39;PRECC&#39;</span><span class="p">,</span><span class="s1">&#39;PRECL&#39;</span><span class="p">]</span>
+    <span class="n">zon</span> <span class="o">=</span> <span class="n">run</span><span class="p">[</span><span class="n">fieldlist</span><span class="p">]</span><span class="o">.</span><span class="n">isel</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="n">timeslice</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;lon&#39;</span><span class="p">,</span><span class="s1">&#39;time&#39;</span><span class="p">))</span>
+    <span class="n">OLR</span> <span class="o">=</span> <span class="n">zon</span><span class="o">.</span><span class="n">FLNT</span>
+    <span class="n">ASR</span> <span class="o">=</span> <span class="n">zon</span><span class="o">.</span><span class="n">FSNT</span>
+    <span class="n">Rtoa</span> <span class="o">=</span> <span class="n">ASR</span> <span class="o">-</span> <span class="n">OLR</span>  <span class="c1"># net downwelling radiation</span>
+    <span class="c1">#  surface energy budget terms, all defined as POSITIVE UP</span>
+    <span class="c1">#    (from ocean to atmosphere)</span>
+    <span class="n">LHF</span> <span class="o">=</span> <span class="n">zon</span><span class="o">.</span><span class="n">LHFLX</span>
+    <span class="n">SHF</span> <span class="o">=</span> <span class="n">zon</span><span class="o">.</span><span class="n">SHFLX</span>
+    <span class="n">LWsfc</span> <span class="o">=</span> <span class="n">zon</span><span class="o">.</span><span class="n">FLNS</span>
+    <span class="n">SWsfc</span> <span class="o">=</span> <span class="o">-</span><span class="n">zon</span><span class="o">.</span><span class="n">FSNS</span>
+    <span class="n">SnowFlux</span> <span class="o">=</span>  <span class="p">((</span><span class="n">zon</span><span class="o">.</span><span class="n">PRECSC</span> <span class="o">+</span> <span class="n">zon</span><span class="o">.</span><span class="n">PRECSL</span><span class="p">)</span> <span class="o">*</span>
+                      <span class="n">const</span><span class="o">.</span><span class="n">rho_w</span> <span class="o">*</span> <span class="n">const</span><span class="o">.</span><span class="n">Lhfus</span><span class="p">)</span>
+    <span class="c1"># net upward radiation from surface</span>
+    <span class="n">SurfaceRadiation</span> <span class="o">=</span> <span class="n">LWsfc</span> <span class="o">+</span> <span class="n">SWsfc</span>
+    <span class="c1"># net upward surface heat flux</span>
+    <span class="n">SurfaceHeatFlux</span> <span class="o">=</span> <span class="n">SurfaceRadiation</span> <span class="o">+</span> <span class="n">LHF</span> <span class="o">+</span> <span class="n">SHF</span> <span class="o">+</span> <span class="n">SnowFlux</span>
+    <span class="c1"># net heat flux into atmosphere</span>
+    <span class="n">Fatmin</span> <span class="o">=</span> <span class="n">Rtoa</span> <span class="o">+</span> <span class="n">SurfaceHeatFlux</span>
+    <span class="c1">#  hydrological cycle, all terms in  kg/m2/s or mm/s</span>
+    <span class="n">Evap</span> <span class="o">=</span> <span class="n">zon</span><span class="o">.</span><span class="n">QFLX</span>
+    <span class="n">Precip</span> <span class="o">=</span> <span class="p">(</span><span class="n">zon</span><span class="o">.</span><span class="n">PRECC</span> <span class="o">+</span> <span class="n">zon</span><span class="o">.</span><span class="n">PRECL</span><span class="p">)</span> <span class="o">*</span> <span class="n">const</span><span class="o">.</span><span class="n">rho_w</span>
+    <span class="n">EminusP</span> <span class="o">=</span> <span class="n">Evap</span> <span class="o">-</span> <span class="n">Precip</span>
+        
+    <span class="c1"># heat transport terms</span>
+    <span class="n">HT</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">HT</span><span class="p">[</span><span class="s1">&#39;total&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">inferred_heat_transport</span><span class="p">(</span><span class="n">Rtoa</span><span class="p">)</span>
+    <span class="n">HT</span><span class="p">[</span><span class="s1">&#39;atm&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">inferred_heat_transport</span><span class="p">(</span><span class="n">Fatmin</span><span class="p">)</span>
+    <span class="n">HT</span><span class="p">[</span><span class="s1">&#39;ocean&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">inferred_heat_transport</span><span class="p">(</span><span class="o">-</span><span class="n">SurfaceHeatFlux</span><span class="p">)</span>
+    <span class="n">HT</span><span class="p">[</span><span class="s1">&#39;latent&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">inferred_heat_transport</span><span class="p">(</span><span class="n">EminusP</span><span class="o">*</span><span class="n">const</span><span class="o">.</span><span class="n">Lhvap</span><span class="p">)</span> <span class="c1"># atm. latent heat transport from moisture imbal.</span>
+    <span class="n">HT</span><span class="p">[</span><span class="s1">&#39;dse&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">HT</span><span class="p">[</span><span class="s1">&#39;atm&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">HT</span><span class="p">[</span><span class="s1">&#39;latent&#39;</span><span class="p">]</span>  <span class="c1"># dry static energy transport as residual</span>
+
+    <span class="k">return</span> <span class="n">HT</span>
+
+<span class="c1">#  Compute heat transport partition for both control and 2xCO2 simulations</span>
+<span class="n">HT_control</span> <span class="o">=</span> <span class="n">CESM_heat_transport</span><span class="p">(</span><span class="n">atm</span><span class="p">[</span><span class="s1">&#39;cpl_control&#39;</span><span class="p">])</span>
+<span class="n">HT_2xCO2</span> <span class="o">=</span> <span class="n">CESM_heat_transport</span><span class="p">(</span><span class="n">atm</span><span class="p">[</span><span class="s1">&#39;cpl_CO2ramp&#39;</span><span class="p">])</span>
+
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+<span class="n">runs</span> <span class="o">=</span> <span class="p">[</span><span class="n">HT_control</span><span class="p">,</span> <span class="n">HT_2xCO2</span><span class="p">]</span>
+<span class="n">N</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">runs</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">n</span><span class="p">,</span> <span class="n">HT</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">([</span><span class="n">HT_control</span><span class="p">,</span> <span class="n">HT_2xCO2</span><span class="p">]):</span>
+    <span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">lat_cesm</span><span class="p">,</span> <span class="n">HT</span><span class="p">[</span><span class="s1">&#39;total&#39;</span><span class="p">],</span> <span class="s1">&#39;k-&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;total&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">lat_cesm</span><span class="p">,</span> <span class="n">HT</span><span class="p">[</span><span class="s1">&#39;atm&#39;</span><span class="p">],</span> <span class="s1">&#39;r-&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;atm&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">lat_cesm</span><span class="p">,</span> <span class="n">HT</span><span class="p">[</span><span class="s1">&#39;dse&#39;</span><span class="p">],</span> <span class="s1">&#39;r--&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;dry&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">lat_cesm</span><span class="p">,</span> <span class="n">HT</span><span class="p">[</span><span class="s1">&#39;latent&#39;</span><span class="p">],</span> <span class="s1">&#39;r:&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;latent&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">lat_cesm</span><span class="p">,</span> <span class="n">HT</span><span class="p">[</span><span class="s1">&#39;ocean&#39;</span><span class="p">],</span> <span class="s1">&#39;b-&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;ocean&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="o">-</span><span class="mi">90</span><span class="p">,</span><span class="mi">90</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">(</span><span class="n">ticks</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper left&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Latitude&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;PW&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/465b580458df634e4b4e43e7e0024144691af3e569acb27a67092b2005fee7ba.png" src="../_images/465b580458df634e4b4e43e7e0024144691af3e569acb27a67092b2005fee7ba.png" />
+</div>
+</div>
+<p>A couple of notes below:</p>
+<ul class="simple">
+<li><p>the energy transport can be also calculated as (for ocean?):</p></li>
+</ul>
+<div class="math notranslate nohighlight" id="equation-my-label136">
+<span class="eqno">(135)<a class="headerlink" href="#equation-my-label136" title="Permalink to this equation">#</a></span>\[H = \int_{0}^{2\pi}\int_{bottom}^{top} \rho \cdot v \cdot e \cdot a \cos(\phi) dzd\lambda\]</div>
+<ul class="simple">
+<li><p>for the ocean, <span class="math notranslate nohighlight">\(e_{o} \approx c_{w}T\)</span>, where <span class="math notranslate nohighlight">\(c_{w} = 4.2\times 10^{3}\)</span> J/kg/K is the specific heat of seawater.</p></li>
+<li><p>for the atmosphere, we usually use moist static energy (MSE):</p></li>
+</ul>
+<div class="math notranslate nohighlight" id="equation-my-label137">
+<span class="eqno">(136)<a class="headerlink" href="#equation-my-label137" title="Permalink to this equation">#</a></span>\[e_{a} \approx MSE = c_{p}T + gz + L_{v}q\]</div>
+<ul class="simple">
+<li><p>We can decomposite MSE into dry and wet/latent heat component. How?</p></li>
+<li><p>We usually neglect the kinetic energy <span class="math notranslate nohighlight">\(e_{k} = \frac{|\vec{v}|^2}{2}\)</span>, why?</p></li>
+</ul>
 </section>
 </section>
 
@@ -738,6 +1076,7 @@ Attempting to open the dataset  /Users/yuchiaol_ntuas/Desktop/ebooks/data/som_18
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#spatial-structure-of-insolation-and-surface-temperature">Spatial structure of insolation and surface temperature</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-rce-model-with-latitudinal-structure">A RCE model with latitudinal structure</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#zonal-mean-energy-budget-and-heat-transport">Zonal mean energy budget and heat transport</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#separate-energy-budget-for-the-atmosphere-and-ocean">Separate energy budget for the atmosphere and ocean</a></li>
 </ul>
   </nav></div>
 
