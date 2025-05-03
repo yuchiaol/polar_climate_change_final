@@ -843,4 +843,191 @@ We use the 2nd Legendre polynomial:
 ```
 
 ## Annual-mean EBM
+Let's put everything together and consider annual-mean, that is $Q(\phi,t)=Q(\phi)$ (no seasonal cycle).
+
+```{math}
+:label: my_label150
+C(\phi)\frac{\partial T_{s}}{\partial t} = (1-\alpha(\phi))Q(\phi) - (A+BT_{s}) + \frac{D}{\cos(\phi)}\frac{\partial }{\partial \phi}(\cos(\phi)\frac{\partial T_{s}}{\partial \phi})
+```
+
+In equilibrium state, we can drop tendency term:
+```{math}
+:label: my_label151
+0 = (1-\alpha(\phi))Q(\phi) - (A+BT_{s}) + \frac{D}{\cos(\phi)}\frac{\partial }{\partial \phi}(\cos(\phi)\frac{\partial T_{s}}{\partial \phi})
+```
+
+Let $x=\sin(\phi)$, we can get:
+```{math}
+:label: my_label152
+\frac{D}{B}\frac{d}{dx}((1-x^{2})\frac{dT_{s}}{dx}) - T_{s} = -\frac{(1-\alpha(x))Q(x)-A}{B}
+```
+
+```{note}
+D/B is a very important parameter for the efficiency of heat transport.
+```
+
+```{code-cell} ipython3
+#  Some imports needed to make and display animations
+from IPython.display import HTML
+from matplotlib import animation
+
+def setup_figure():
+    templimits = -20,32
+    radlimits = -340, 340
+    htlimits = -6,6
+    latlimits = -90,90
+    lat_ticks = np.arange(-90,90,30)
+
+    fig, axes = plt.subplots(3,1,figsize=(8,10))
+    axes[0].set_ylabel('Temperature (deg C)')
+    axes[0].set_ylim(templimits)
+    axes[1].set_ylabel('Energy budget (W m$^{-2}$)')
+    axes[1].set_ylim(radlimits)
+    axes[2].set_ylabel('Heat transport (PW)')
+    axes[2].set_ylim(htlimits)
+    axes[2].set_xlabel('Latitude')
+    for ax in axes: ax.set_xlim(latlimits); ax.set_xticks(lat_ticks); ax.grid()
+    fig.suptitle('Diffusive energy balance model with annual-mean insolation', fontsize=14)
+    return fig, axes
+
+def initial_figure(model):
+    #  Make figure and axes
+    fig, axes = setup_figure()
+    # plot initial data
+    lines = []
+    lines.append(axes[0].plot(model.lat, model.Ts)[0])
+    lines.append(axes[1].plot(model.lat, model.ASR, 'k--', label='SW')[0])
+    lines.append(axes[1].plot(model.lat, -model.OLR, 'r--', label='LW')[0])
+    lines.append(axes[1].plot(model.lat, model.net_radiation, 'c-', label='net rad')[0])
+    lines.append(axes[1].plot(model.lat, model.heat_transport_convergence, 'g--', label='dyn')[0])
+    lines.append(axes[1].plot(model.lat, 
+            model.net_radiation+model.heat_transport_convergence, 'b-', label='total')[0])
+    axes[1].legend(loc='upper right')
+    lines.append(axes[2].plot(model.lat_bounds, model.heat_transport)[0])
+    lines.append(axes[0].text(60, 25, 'Day 0'))
+    return fig, axes, lines
+
+def animate(day, model, lines):
+    model.step_forward()
+    #  The rest of this is just updating the plot
+    lines[0].set_ydata(model.Ts)
+    lines[1].set_ydata(model.ASR)
+    lines[2].set_ydata(-model.OLR)
+    lines[3].set_ydata(model.net_radiation)
+    lines[4].set_ydata(model.heat_transport_convergence)
+    lines[5].set_ydata(model.net_radiation+model.heat_transport_convergence)
+    lines[6].set_ydata(model.heat_transport)
+    lines[-1].set_text('Day {}'.format(int(model.time['days_elapsed'])))
+    return lines   
+
+#  A model starting from isothermal initial conditions
+e = climlab.EBM_annual()
+e.Ts[:] = 15.  # in degrees Celsius
+e.compute_diagnostics()
+
+#  Plot initial data
+fig, axes, lines = initial_figure(e)
+
+ani = animation.FuncAnimation(fig, animate, frames=np.arange(1, 100), fargs=(e, lines))
+
+HTML(ani.to_html5_video())
+
+```
+
+We try an example using climlab:
+```{code-cell} ipython3
+D = 0.1
+model = climlab.EBM_annual(name='EBM', A=210, B=2, D=D, a0=0.354, a2=0.25)
+print(model)
+
+# The model object stores a dictionary of important parameters
+print(model.param)
+
+# Run it out long enough to reach equilibrium
+model.integrate_years(10)
+
+fig, axes = plt.subplots(1,2, figsize=(12,4))
+ax = axes[0]
+ax.plot(model.lat, model.Ts, label=('D = %0.1f' %D))
+ax.plot(lat_ncep, Ts_ncep_annual, label='obs')
+ax.set_ylabel('Temperature (degC)')
+ax = axes[1]
+energy_in = np.squeeze(model.ASR - model.OLR)
+ax.plot(model.lat, energy_in, label=('D = %0.1f' %D))
+ax.plot(lat_ncep, ASR_ncep_annual - OLR_ncep_annual, label='obs')
+ax.set_ylabel('Net downwelling radiation at TOA (W m$^{-2}$)')
+for ax in axes:
+    ax.set_xlabel('Latitude'); ax.legend(); ax.grid();
+
+def inferred_heat_transport( energy_in, lat_deg ):
+    '''Returns the inferred heat transport (in PW) by integrating the net energy imbalance from pole to pole.'''
+    from scipy import integrate
+    from climlab import constants as const
+    lat_rad = np.deg2rad( lat_deg )
+    return ( 1E-15 * 2 * np.pi * const.a**2 * 
+            integrate.cumulative_trapezoid( np.cos(lat_rad)*energy_in,
+            x=lat_rad, initial=0. ) )
+
+fig, ax = plt.subplots()
+ax.plot(model.lat, inferred_heat_transport(energy_in, model.lat), label=('D = %0.1f' %D))
+ax.set_ylabel('Heat transport (PW)')
+ax.legend(); ax.grid()
+ax.set_xlabel('Latitude')
+
+```
+
+What do we see?
+
+
+## Finding optimal diffusivity $D$
+We would like to find a $D$ such that temperature gradient between the pole and equator $\Delta T = 45$ K, and peak heat transport $H = 5.5$ PW.
+
+```{code-cell} ipython3
+Darray = np.arange(0., 2.05, 0.05)
+
+model_list = []
+Tmean_list = []
+deltaT_list = []
+Hmax_list = []
+
+for D in Darray:
+    ebm = climlab.EBM_annual(A=210, B=2, a0=0.354, a2=0.25, D=D)
+    ebm.integrate_years(20., verbose=False)
+    Tmean = ebm.global_mean_temperature()
+    deltaT = np.max(ebm.Ts) - np.min(ebm.Ts)
+    energy_in = np.squeeze(ebm.ASR - ebm.OLR)
+    Htrans = ebm.heat_transport
+    Hmax = np.max(Htrans)
+    model_list.append(ebm)
+    Tmean_list.append(Tmean)
+    deltaT_list.append(deltaT)
+    Hmax_list.append(Hmax)
+
+color1 = 'b'
+color2 = 'r'
+
+fig = plt.figure(figsize=(8,6))
+ax1 = fig.add_subplot(111)
+ax1.plot(Darray, deltaT_list, color=color1)
+ax1.plot(Darray, Tmean_list, 'b--')
+ax1.set_xlabel(r'D (W m$^{-2}$ K$^{-1}$)', fontsize=14)
+ax1.set_xticks(np.arange(Darray[0], Darray[-1], 0.2))
+ax1.set_ylabel(r'$\Delta T$ (equator to pole)', fontsize=14,  color=color1)
+for tl in ax1.get_yticklabels():
+    tl.set_color(color1)
+ax2 = ax1.twinx()
+ax2.plot(Darray, Hmax_list, color=color2)
+ax2.set_ylabel('Maximum poleward heat transport (PW)', fontsize=14, color=color2)
+for tl in ax2.get_yticklabels():
+    tl.set_color(color2)
+ax1.set_title('Effect of diffusivity on temperature gradient and heat transport in the EBM', fontsize=16)
+ax1.grid()
+
+ax1.plot([0.6, 0.6], [0, 140], 'k-');
+
+```
+
+
+
+
 
