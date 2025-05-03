@@ -14,7 +14,7 @@ kernelspec:
 # One-dimensional Energy Balance Model
 
 ```{note}
-The Python scripts used below are modified from Prof. Brian E. J. Rose's climlab [website](https://brian-rose.github.io/ClimateLaboratoryBook/courseware/heat-transport.html).
+The Python scripts used below and some materials are modified from Prof. Brian E. J. Rose's climlab [website](https://brian-rose.github.io/ClimateLaboratoryBook/courseware/heat-transport.html).
 ```
 
 ## Spatial structure of insolation and surface temperature
@@ -621,9 +621,226 @@ scale: 140%
 Changes in northward energy transports in PW from 2001∼2020 to 2081 ∼2100 in the A2 Scenario: (a) atmospheric energy transport, (b) moisture (solid) and DSE (dashed) transport, and (c) oceanic energy transport. Source: [Hwang et al. (2011)](https://agupubs.onlinelibrary.wiley.com/doi/full/10.1029/2011GL048546)
 ```
 
+## Parameterization for heat transport
+If the climate system is not in equilibrium, how do you calculate the AHT and eventually the temperature? I think this is a very difficult problem, rooted in the turbulent nonclosure (a lot to discuss...). One way to do it is that we parameterize the processes involve, or make it "simpler".
 
+We start with the energy budget for a thin zonal band at latitude $\phi$:
 
+```{math}
+:label: my_label138
+\frac{\partial E(\phi)}{\partial t} = ASR(\phi) - OLR(\phi) - \frac{1}{2\pi a^{2}\cos(\phi)}\frac{\partial H}{\partial \phi}
+``` 
 
+We approximate or "parameterize" the heat transport as a down-gradient diffusion process:
+```{math}
+:label: my_label139
+H(\phi) = -2\pi a^{2}\cos(\phi)D\frac{\partial T_{s}}{\partial \phi}
+```
+where $D$ is the diffusivity or thermal conductivity in unit of W/m$^2$/K.
+It is noted that we consider surface air temperature in the gradient. Why can we do this?
 
+Let's put paramertized $H$ into the budget equation:
+```{math}
+:label: my_label140
+\frac{\partial E(\phi)}{\partial t} = ASR(\phi) - OLR(\phi) - \frac{1}{2\pi a^{2}\cos(\phi)}\frac{\partial }{\partial \phi}(-2\pi a^{2}\cos(\phi)D\frac{\partial T_{s}}{\partial \phi})
+```
 
+Assume $D$ is a constant:
+```{math}
+:label: my_label141
+\frac{\partial E(\phi)}{\partial t} = ASR(\phi) - OLR(\phi) + \frac{D}{\cos(\phi)}\frac{\partial }{\partial \phi}(\cos(\phi)\frac{\partial T_{s}}{\partial \phi})
+```
+
+Next we parameterize the internal energy as:
+```{math}
+:label: my_label142
+E(\phi) = C(\phi)T_{s}(\phi)
+```
+where $C$ is the effective heat capacity in units of J/m$^2$/K.
+
+So the energy buget equation becomes:
+```{math}
+:label: my_label143
+C(\phi)\frac{\partial T_{s}}{\partial t} = ASR(\phi) - OLR(\phi) + \frac{D}{\cos(\phi)}\frac{\partial }{\partial \phi}(\cos(\phi)\frac{\partial T_{s}}{\partial \phi})
+``` 
+
+- looks like heat equation?
+- take global average?
+
+Let's exercise to solve a temperature diffusion equation with climlab:
+```{math}
+:label: my_label144
+C(\phi)\frac{\partial T_{s}}{\partial t} = \frac{D}{\cos(\phi)}\frac{\partial }{\partial \phi}(\cos(\phi)\frac{\partial T_{s}}{\partial \phi})
+```
+
+```{code-cell} ipython3
+%matplotlib inline
+import numpy as np
+import matplotlib.pyplot as plt
+import climlab
+from climlab import constants as const
+
+#  First define an initial temperature field
+#   that is warm at the equator and cold at the poles
+#   and varies smoothly with latitude in between
+
+from climlab.utils import legendre
+sfc = climlab.domain.zonal_mean_surface(num_lat=90, water_depth=10.)
+lat = sfc.lat.points
+initial = 12. - 40. * legendre.P2(np.sin(np.deg2rad(lat)))
+
+fig, ax = plt.subplots()
+ax.plot(lat, initial)
+ax.set_xlabel('Latitude')
+ax.set_ylabel('Temperature (deg C)');
+
+##  Set up the climlab diffusion process
+
+# make a copy of initial so that it remains unmodified
+Ts = climlab.Field(np.array(initial), domain=sfc)
+# thermal diffusivity in W/m**2/degC
+D = 0.55
+# create the climlab diffusion process
+#  setting the diffusivity and a timestep of ONE MONTH
+d = climlab.dynamics.MeridionalHeatDiffusion(name='Diffusion', 
+            state=Ts, D=D, timestep=const.seconds_per_month)
+print(d)
+
+#  We are going to step forward one month at a time
+#  and store the temperature each time
+n_iter = 5
+temp = np.zeros((Ts.size, n_iter+1))
+temp[:, 0] = np.squeeze(Ts)
+for n in range(n_iter):
+    d.step_forward()
+    temp[:, n+1] = np.squeeze(Ts)
+
+#  Now plot the temperatures
+fig,ax = plt.subplots()
+ax.plot(lat, temp)
+ax.set_xlabel('Latitude')
+ax.set_ylabel('Temperature (deg C)')
+ax.legend(range(n_iter+1)); ax.grid();
+
+```
+
+Here we use the 2nd Legendre polynomial:
+```{math}
+:label: my_label145
+P_{2}(x) = \frac{1}{2}(3x^{2}-1),
+```
+where $x=\sin(\phi)$.
+
+```{code-cell} ipython3
+x = np.linspace(-1,1)
+fig,ax = plt.subplots()
+ax.plot(x, legendre.P2(x))
+ax.set_title('$P_2(x)$')
+
+```
+
+## Parameterization for the radiative processes
+For shortwave, we assume the planetary albedo is fixed:
+```{math}
+:label: my_label146
+ASR(\phi) = (1-\alpha)Q(\phi)
+```
+
+For longwave radiation, we simplifiy it with a linear form:
+```{math}
+:label: my_label147
+OLR(\phi) = A+B\times T_{s}(\phi)
+```
+
+- A in units of W/m$^2$. What is this? (forcing?)
+- B in units of W/m$^2$/K. What is this? (feedback parameter?)
+
+We need to find A and B. We now fit their values using reanalysis data.
+
+```{code-cell} ipython3
+import xarray as xr
+## The NOAA ESRL server is shutdown! January 2019
+ncep_url = "/Users/yuchiaol_ntuas/Desktop/ebooks/data/"
+#ncep_url = "http://www.esrl.noaa.gov/psd/thredds/dodsC/Datasets/ncep.reanalysis.derived/"
+ncep_Ts = xr.open_dataset( ncep_url + "skt.sfc.mon.1981-2010.ltm.nc", decode_times=False)
+#url = 'http://apdrc.soest.hawaii.edu:80/dods/public_data/Reanalysis_Data/NCEP/NCEP/clima/'
+#ncep_Ts = xr.open_dataset(url + 'surface_gauss/skt')
+lat_ncep = ncep_Ts.lat; lon_ncep = ncep_Ts.lon
+print( ncep_Ts)
+
+#  Take the annual and zonal average!
+Ts_ncep_annual = ncep_Ts.skt.mean(dim=('lon','time'))
+
+# TOA radiation data
+ncep_ulwrf = xr.open_dataset( ncep_url + "ulwrf.ntat.mon.1981-2010.ltm.nc", decode_times=False)
+ncep_dswrf = xr.open_dataset( ncep_url + "dswrf.ntat.mon.1981-2010.ltm.nc", decode_times=False)
+ncep_uswrf = xr.open_dataset( ncep_url + "uswrf.ntat.mon.1981-2010.ltm.nc", decode_times=False)
+OLR_ncep_annual = ncep_ulwrf.ulwrf.mean(dim=('lon','time'))
+ASR_ncep_annual = (ncep_dswrf.dswrf - ncep_uswrf.uswrf).mean(dim=('lon','time'))
+
+#  Use a linear regression package to compute best fit for the slope and intercept
+from scipy.stats import linregress
+slope, intercept, r_value, p_value, std_err = linregress(Ts_ncep_annual, OLR_ncep_annual)
+
+print( 'Best fit is A = %0.0f W/m2 and B = %0.1f W/m2/degC' %(intercept, slope))
+
+#  More standard values
+A = 210.
+B = 2.
+
+fig, ax1 = plt.subplots(figsize=(8,6))
+ax1.plot( Ts_ncep_annual, OLR_ncep_annual, 'o' , label='data')
+ax1.plot( Ts_ncep_annual, intercept + slope * Ts_ncep_annual, 'k--', label='best fit')
+ax1.plot( Ts_ncep_annual, A + B * Ts_ncep_annual, 'r--', label='B=2')
+ax1.set_xlabel('Surface temperature (C)', fontsize=16)
+ax1.set_ylabel('OLR (W m$^{-2}$)', fontsize=16)
+ax1.set_title('OLR versus surface temperature from NCEP reanalysis', fontsize=18)
+ax1.legend(loc='upper left')
+ax1.grid()
+
+```
+
+```{note}
+- Try take global average before regression. What A and B do you get? 
+
+- And if global average temperature is 288 K, what global-averaged OLR do you get?
+
+- $B=2$, is this consistent to the total feedback parameter we obtain before?
+
+```
+
+## Specification for the albedo
+```{code-cell} ipython3
+days = np.linspace(1.,50.)/50 * const.days_per_year
+Qann_ncep = climlab.solar.insolation.daily_insolation(lat_ncep, days ).mean(dim='day')
+albedo_ncep = 1 - ASR_ncep_annual / Qann_ncep
+
+albedo_ncep_global = np.average(albedo_ncep, weights=np.cos(np.deg2rad(lat_ncep)))
+
+print( 'The annual, global mean planetary albedo is %0.3f' %albedo_ncep_global)
+fig,ax = plt.subplots()
+ax.plot(lat_ncep, albedo_ncep)
+ax.grid();
+ax.set_xlabel('Latitude')
+ax.set_ylabel('Albedo');
+
+# Add a new curve to the previous figure
+a0 = albedo_ncep_global
+a2 = 0.25
+ax.plot(lat_ncep, a0 + a2 * legendre.P2(np.sin(np.deg2rad(lat_ncep))))
+
+```
+
+We use the 2nd Legendre polynomial:
+```{math}
+:label: my_label148
+\alpha(\phi) = \alpha_{0} + \alpha_{2}P_{2}(\sin(\phi))
+```
+
+```{math}
+:label: my_label149
+\alpha_{0} = 0.354, \mbox{    } \alpha_{2}=0.25
+```
+
+## Annual-mean EBM
 
