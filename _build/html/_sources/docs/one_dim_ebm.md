@@ -613,6 +613,16 @@ e_{a} \approx MSE = c_{p}T + gz + L_{v}q
 - We can decomposite MSE into dry and wet/latent heat component. How?
 - We usually neglect the kinetic energy $e_{k} = \frac{|\vec{v}|^2}{2}$, why?
 
+Professor Yen-Ting Hwang's GRL paper:
+```{figure} /_static/lecture_specific/lecture1_figures/hwang_2011_grl_tmp1.png
+---
+scale: 140%
+---
+Changes in northward energy transports in PW from 2001∼2020 to 2081 ∼2100 in the A2 Scenario: (a) atmospheric energy transport, (b) moisture (solid) and DSE (dashed) transport, and (c) oceanic energy transport. Source: [Hwang et al. (2011)](https://agupubs.onlinelibrary.wiley.com/doi/full/10.1029/2011GL048546)
+```
+
+
+
 
 
 
