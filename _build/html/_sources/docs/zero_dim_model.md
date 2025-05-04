@@ -13,6 +13,10 @@ kernelspec:
 
 # Zero-dimensional Energy Balance Model
 
+```{note}
+The Python scripts used below and some materials are modified from Prof. Brian E. J. Rose's climlab [website](https://brian-rose.github.io/ClimateLaboratoryBook/courseware/zero-dim-ebm.html).
+```
+
 ## Global energy budget
 We start with the observed global energy budget, which is not too difficult to understand but is rather essential to many aspects of climate dynamics and modeling studies.
 

@@ -13,6 +13,10 @@ kernelspec:
 
 # Radiative Convective Equilibrium (RCE)
 
+```{note}
+The Python scripts used below and some materials are modified from Prof. Brian E. J. Rose's climlab [website](https://brian-rose.github.io/ClimateLaboratoryBook/courseware/sensitivity-feedback.html).
+```
+
 ## Observational estimate
 We start with the vertical thermal structure of the atmosphere in the reanalysis data.
 
