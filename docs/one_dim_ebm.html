@@ -67,7 +67,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'docs/one_dim_ebm';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Arctic-Midlatitude Linkage" href="effect_aa.html" />
+    <link rel="next" title="Seasonal cycle" href="seasonality.html" />
     <link rel="prev" title="Radiative Advective Equilibrium (RAE)" href="rae_model.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -175,6 +175,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="climate_sensitivity.html">Climate Sensitivity and Feedback</a></li>
 <li class="toctree-l1"><a class="reference internal" href="rae_model.html">Radiative Advective Equilibrium (RAE)</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">One-dimensional Energy Balance Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="seasonality.html">Seasonal cycle</a></li>
 <li class="toctree-l1"><a class="reference internal" href="effect_aa.html">Arctic-Midlatitude Linkage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="history_modelling.html">The History of Climate Modeling</a></li>
 </ul>
@@ -332,6 +333,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#specification-for-the-albedo">Specification for the albedo</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#annual-mean-ebm">Annual-mean EBM</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#finding-optimal-diffusivity-d">Finding optimal diffusivity <span class="math notranslate nohighlight">\(D\)</span></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#state-dependent-diffusivity">State-dependent diffusivity</a></li>
 </ul>
             </nav>
         </div>
@@ -18859,6 +18861,22 @@ Integrating for 900 steps, 3652.4220000000005 days, or 10 years.
 </div>
 </div>
 </section>
+<section id="state-dependent-diffusivity">
+<h2>State-dependent diffusivity<a class="headerlink" href="#state-dependent-diffusivity" title="Permalink to this heading">#</a></h2>
+<figure class="align-default" id="id3">
+<a class="reference internal image-reference" href="../_images/chang_merlis_2023_tmp1.png"><img alt="../_images/chang_merlis_2023_tmp1.png" src="../_images/chang_merlis_2023_tmp1.png" style="width: 786.0px; height: 470.4px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 40 </span><span class="caption-text">EBM solutions with climate invariant diffusivity. (a) Change in surface temperature DT vs latitude for
+numerical solutions [Eq. (1); solid lines] and analytic theory (dashed lines) for different values of control diffusivity
+D indicated in the legend. (b) Change in the second-order Legendre polynomial component of temperature DT2 vs
+D for numerical solutions [Eq. (1)] and the analytic theory [Eq. (7) scaled by the global-mean temperature change
+DT0]. (c) As in (a), but for the numerical solutions for the EBM with the linearized MSE approximation, Eq. (5).
+(d) As in (b), but for the change in the second-order Legendre polynomial component of MSE Dh2 and the analytic
+theory [Eq. (10) scaled by DT0]. See section 2b of the text for the detailed calculations of the theoretical
+estimates for DT in (a) and (c). Source: <a class="reference external" href="https://journals.ametsoc.org/view/journals/clim/36/22/JCLI-D-23-0121.1.xml?tab_body=pdf">Change and Merlis (2023)</a></span><a class="headerlink" href="#id3" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -18901,11 +18919,11 @@ Integrating for 900 steps, 3652.4220000000005 days, or 10 years.
       </div>
     </a>
     <a class="right-next"
-       href="effect_aa.html"
+       href="seasonality.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Arctic-Midlatitude Linkage</p>
+        <p class="prev-next-title">Seasonal cycle</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -18933,6 +18951,7 @@ Integrating for 900 steps, 3652.4220000000005 days, or 10 years.
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#specification-for-the-albedo">Specification for the albedo</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#annual-mean-ebm">Annual-mean EBM</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#finding-optimal-diffusivity-d">Finding optimal diffusivity <span class="math notranslate nohighlight">\(D\)</span></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#state-dependent-diffusivity">State-dependent diffusivity</a></li>
 </ul>
   </nav></div>
 

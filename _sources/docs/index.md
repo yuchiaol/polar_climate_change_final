@@ -41,6 +41,10 @@ Here are some useful and relevant online materials:
     -   [NCEP CPC Teleconnections](http://www.cpc.ncep.noaa.gov/products/precip/CWlink/daily_ao_index/teleconnections.shtml)
     -   [Zachary D. Lawrence's Real-time Stratospheric Forecasts](https://stratobserve.com/)
 
+Datasets
+- [NCEP reanalysis](https://downloads.psl.noaa.gov/Datasets/ncep.reanalysis.derived/)
+
+
 ```{note}
 These lectures were built using the new Sphinx-based [Jupyter Book
 2.0](https://beta.jupyterbook.org/intro.html) tool set, as part of the

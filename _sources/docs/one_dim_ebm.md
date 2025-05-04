@@ -1027,7 +1027,21 @@ ax1.plot([0.6, 0.6], [0, 140], 'k-');
 
 ```
 
+## State-dependent diffusivity
+```{figure} /_static/lecture_specific/lecture1_figures/chang_merlis_2023_tmp1.png
+---
+scale: 60%
+---
+EBM solutions with climate invariant diffusivity. (a) Change in surface temperature DT vs latitude for
+numerical solutions [Eq. (1); solid lines] and analytic theory (dashed lines) for different values of control diffusivity
+D indicated in the legend. (b) Change in the second-order Legendre polynomial component of temperature DT2 vs
+D for numerical solutions [Eq. (1)] and the analytic theory [Eq. (7) scaled by the global-mean temperature change
+DT0]. (c) As in (a), but for the numerical solutions for the EBM with the linearized MSE approximation, Eq. (5).
+(d) As in (b), but for the change in the second-order Legendre polynomial component of MSE Dh2 and the analytic
+theory [Eq. (10) scaled by DT0]. See section 2b of the text for the detailed calculations of the theoretical
+estimates for DT in (a) and (c). Source: [Change and Merlis (2023)](https://journals.ametsoc.org/view/journals/clim/36/22/JCLI-D-23-0121.1.xml?tab_body=pdf)
 
+```
 
 
 
