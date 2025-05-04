@@ -139,6 +139,10 @@ Willingness to lead discussion for reading materials and participate in group co
 
 - [The Climate Laboratory](https://brian-rose.github.io/ClimateLaboratoryBook/home.html)
 
+```{note}
+I would like to especially thank Professor Brian E. J. Rose (University at Albany) to kindly share his climate modeling course materials and allow us to use the Python scripts and data. Some materials are obtained from [The Climate Laboratory](https://brian-rose.github.io/ClimateLaboratoryBook/home.html).
+```
+
 - Idealized models
 
 
