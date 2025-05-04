@@ -46,6 +46,12 @@ Datasets
 
 
 ```{note}
+I would like to especially thank Professor Brian E. J. Rose (University at Albany) to kindly share his climate modeling course materials and allow us to use the Python scripts and data. Some materials are obtained from [The Climate Laboratory](https://brian-rose.github.io/ClimateLaboratoryBook/home.html).
+
+```
+
+
+```{note}
 These lectures were built using the new Sphinx-based [Jupyter Book
 2.0](https://beta.jupyterbook.org/intro.html) tool set, as part of the
 [ExecutableBookProject](https://ebp.jupyterbook.org/en/latest/).  They are
