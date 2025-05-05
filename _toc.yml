@@ -16,5 +16,7 @@ sections:
 - file: docs/rae_model
 - file: docs/one_dim_ebm
 - file: docs/seasonality
+- file: docs/ice_albedo_ebm
+- file: docs/ice_cap_ebm
 - file: docs/effect_aa
 - file: docs/history_modelling
