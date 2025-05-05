@@ -96,7 +96,6 @@ scale: 45%
 a Emergent constraint based on the ensemble regression (ER) between eddy momentum feedback and the zonal wind response index (ZWRI). Black line shows the regression with hatching showing the 95% confidence interval. Horizontal green line shows the constrained ensemble mean response, with the shading showing its 95% confidence interval (Methods). Vertical black line and grey shading shows the mean and range of eddy feedback from the reanalyses. Ellipses show the 95% uncertainties obtained by bootstrapping with replacement the ensemble members. b As a but for the stratospheric polar vortex (SPV) response. A one-sided test is used to calculate p values since we expect the response to increase as eddy feedback strengthens. All data are for DJF. Source: [Smith et al. (2022)](https://www.nature.com/articles/s41467-022-28283-y).
 ```
 
-
 ## Sources and papers
 - Review article: [Cohen et al. (2014)](https://www.nature.com/articles/ngeo2234)
 - Key paper: [Francis and Vavrus 2012](https://agupubs.onlinelibrary.wiley.com/doi/full/10.1029/2012gl051000)
