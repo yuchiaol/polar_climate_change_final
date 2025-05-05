@@ -1,0 +1,770 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Diffusive Response &#8212; Polar Climate Change Home</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=ac02cc09edc035673794" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=ac02cc09edc035673794" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=ac02cc09edc035673794" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=ac02cc09edc035673794" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=ac02cc09edc035673794" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=ac02cc09edc035673794" />
+  <script src="../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=ac02cc09edc035673794"></script>
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'docs/diffusive_response';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Arctic-Midlatitude Linkage" href="effect_aa.html" />
+    <link rel="prev" title="Ice Albedo Feedback in EBM" href="ice_albedo_ebm.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="index.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/front_page_image.jpg" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../_static/front_page_image.jpg" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="syllabus.html">Syllabus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="overview_arctic.html">Overview of Arctic and Antarctic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="snow.html">Snow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="permafrost.html">Permafrost</a></li>
+<li class="toctree-l1"><a class="reference internal" href="glaciers.html">Glaciers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sea_ice.html">Sea ice</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pv_ssw.html">Polar Stratospheric Circulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cause_aa.html">Causes of Polar Amplification</a></li>
+<li class="toctree-l1"><a class="reference internal" href="zero_dim_model.html">Zero-dimensional Energy Balance Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="layer_model.html">Layered Energy Balance Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rce_model.html">Radiative Convective Equilibrium (RCE)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="climate_sensitivity.html">Climate Sensitivity and Feedback</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rae_model.html">Radiative Advective Equilibrium (RAE)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="one_dim_ebm.html">One-dimensional Energy Balance Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="seasonality.html">Seasonal cycle</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ice_albedo_ebm.html">Ice Albedo Feedback in EBM</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Diffusive Response</a></li>
+<li class="toctree-l1"><a class="reference internal" href="effect_aa.html">Arctic-Midlatitude Linkage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="history_modelling.html">The History of Climate Modeling</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/docs/diffusive_response.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Diffusive Response</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-effect-of-diffusivity-with-albedo-feedback">The effect of diffusivity with albedo feedback</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#diffusive-response-to-a-point-source-of-energy-at-45-on">Diffusive response to a point source of energy at 45<span class="math notranslate nohighlight">\(^o\)</span>N</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="diffusive-response">
+<span id="id1"></span><h1>Diffusive Response<a class="headerlink" href="#diffusive-response" title="Permalink to this heading">#</a></h1>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The Python scripts used below and some materials are modified from Prof. Brian E. J. Rose’s climlab <a class="reference external" href="https://brian-rose.github.io/ClimateLaboratoryBook/courseware/seasonal-cycle.html">website</a>.</p>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">climlab</span>
+
+<span class="c1">#  for convenience, set up a dictionary with our reference parameters</span>
+<span class="n">param</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;A&#39;</span><span class="p">:</span><span class="mi">210</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;a0&#39;</span><span class="p">:</span><span class="mf">0.3</span><span class="p">,</span> <span class="s1">&#39;a2&#39;</span><span class="p">:</span><span class="mf">0.078</span><span class="p">,</span> <span class="s1">&#39;ai&#39;</span><span class="p">:</span><span class="mf">0.62</span><span class="p">,</span> <span class="s1">&#39;Tf&#39;</span><span class="p">:</span><span class="o">-</span><span class="mf">10.</span><span class="p">}</span>
+<span class="n">model1</span> <span class="o">=</span> <span class="n">climlab</span><span class="o">.</span><span class="n">EBM_annual</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;Annual EBM with ice line&#39;</span><span class="p">,</span> 
+                            <span class="n">num_lat</span><span class="o">=</span><span class="mi">180</span><span class="p">,</span> <span class="n">D</span><span class="o">=</span><span class="mf">0.55</span><span class="p">,</span> <span class="o">**</span><span class="n">param</span> <span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span> <span class="n">model1</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">model1</span><span class="o">.</span><span class="n">param</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">ebm_plot</span><span class="p">(</span> <span class="n">model</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">12</span><span class="p">),</span> <span class="n">show</span><span class="o">=</span><span class="kc">True</span> <span class="p">):</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;This function makes a plot of the current state of the model,</span>
+<span class="sd">    including temperature, energy budget, and heat transport.&#39;&#39;&#39;</span>
+    <span class="n">templimits</span> <span class="o">=</span> <span class="o">-</span><span class="mi">30</span><span class="p">,</span><span class="mi">35</span>
+    <span class="n">radlimits</span> <span class="o">=</span> <span class="o">-</span><span class="mi">340</span><span class="p">,</span> <span class="mi">340</span>
+    <span class="n">htlimits</span> <span class="o">=</span> <span class="o">-</span><span class="mi">7</span><span class="p">,</span><span class="mi">7</span>
+    <span class="n">latlimits</span> <span class="o">=</span> <span class="o">-</span><span class="mi">90</span><span class="p">,</span><span class="mi">90</span>
+    <span class="n">lat_ticks</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mi">90</span><span class="p">,</span><span class="mi">90</span><span class="p">,</span><span class="mi">30</span><span class="p">)</span>
+    
+    <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="n">figsize</span><span class="p">)</span>
+    
+    <span class="n">ax1</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">lat</span><span class="p">,</span> <span class="n">model</span><span class="o">.</span><span class="n">Ts</span><span class="p">)</span>
+    <span class="n">ax1</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="n">latlimits</span><span class="p">)</span>
+    <span class="n">ax1</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="n">templimits</span><span class="p">)</span>
+    <span class="n">ax1</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Temperature (°C)&#39;</span><span class="p">)</span>
+    <span class="n">ax1</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">(</span> <span class="n">lat_ticks</span> <span class="p">)</span>
+    <span class="n">ax1</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+    
+    <span class="n">ax2</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">ax2</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">lat</span><span class="p">,</span> <span class="n">model</span><span class="o">.</span><span class="n">ASR</span><span class="p">,</span> <span class="s1">&#39;k--&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;SW&#39;</span> <span class="p">)</span>
+    <span class="n">ax2</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">lat</span><span class="p">,</span> <span class="o">-</span><span class="n">model</span><span class="o">.</span><span class="n">OLR</span><span class="p">,</span> <span class="s1">&#39;r--&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;LW&#39;</span> <span class="p">)</span>
+    <span class="n">ax2</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">lat</span><span class="p">,</span> <span class="n">model</span><span class="o">.</span><span class="n">net_radiation</span><span class="p">,</span> <span class="s1">&#39;c-&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;net rad&#39;</span> <span class="p">)</span>
+    <span class="n">ax2</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">lat</span><span class="p">,</span> <span class="n">model</span><span class="o">.</span><span class="n">heat_transport_convergence</span><span class="p">,</span> <span class="s1">&#39;g--&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;dyn&#39;</span> <span class="p">)</span>
+    <span class="n">ax2</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">lat</span><span class="p">,</span> <span class="n">model</span><span class="o">.</span><span class="n">net_radiation</span>
+                        <span class="o">+</span> <span class="n">model</span><span class="o">.</span><span class="n">heat_transport_convergence</span><span class="p">,</span> <span class="s1">&#39;b-&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;total&#39;</span> <span class="p">)</span>
+    <span class="n">ax2</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="n">latlimits</span><span class="p">)</span>
+    <span class="n">ax2</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="n">radlimits</span><span class="p">)</span>
+    <span class="n">ax2</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Energy budget (W m$^{-2}$)&#39;</span><span class="p">)</span>
+    <span class="n">ax2</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">(</span> <span class="n">lat_ticks</span> <span class="p">)</span>
+    <span class="n">ax2</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+    <span class="n">ax2</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+    
+    <span class="n">ax3</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+    <span class="n">ax3</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">lat_bounds</span><span class="p">,</span> <span class="n">model</span><span class="o">.</span><span class="n">heat_transport</span><span class="p">)</span>
+    <span class="n">ax3</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="n">latlimits</span><span class="p">)</span>
+    <span class="n">ax3</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="n">htlimits</span><span class="p">)</span>
+    <span class="n">ax3</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Heat transport (PW)&#39;</span><span class="p">)</span>
+    <span class="n">ax3</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Latitude&#39;</span><span class="p">)</span>
+    <span class="n">ax3</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">(</span> <span class="n">lat_ticks</span> <span class="p">)</span>
+    <span class="n">ax3</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+
+    <span class="k">return</span> <span class="n">fig</span>
+
+<span class="n">model1</span><span class="o">.</span><span class="n">integrate_years</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">f</span> <span class="o">=</span> <span class="n">ebm_plot</span><span class="p">(</span><span class="n">model1</span><span class="p">)</span>
+
+<span class="n">model1</span><span class="o">.</span><span class="n">icelat</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>climlab Process of type &lt;class &#39;climlab.model.ebm.EBM_annual&#39;&gt;. 
+State variables and domain shapes: 
+  Ts: (180, 1) 
+The subprocess tree: 
+Annual EBM with ice line: &lt;class &#39;climlab.model.ebm.EBM_annual&#39;&gt;
+   LW: &lt;class &#39;climlab.radiation.aplusbt.AplusBT&#39;&gt;
+   insolation: &lt;class &#39;climlab.radiation.insolation.AnnualMeanInsolation&#39;&gt;
+   albedo: &lt;class &#39;climlab.surface.albedo.StepFunctionAlbedo&#39;&gt;
+      iceline: &lt;class &#39;climlab.surface.albedo.Iceline&#39;&gt;
+      warm_albedo: &lt;class &#39;climlab.surface.albedo.P2Albedo&#39;&gt;
+      cold_albedo: &lt;class &#39;climlab.surface.albedo.ConstantAlbedo&#39;&gt;
+   SW: &lt;class &#39;climlab.radiation.absorbed_shorwave.SimpleAbsorbedShortwave&#39;&gt;
+   diffusion: &lt;class &#39;climlab.dynamics.meridional_heat_diffusion.MeridionalHeatDiffusion&#39;&gt;
+
+{&#39;timestep&#39;: 350632.51200000005, &#39;S0&#39;: 1365.2, &#39;s2&#39;: -0.48, &#39;A&#39;: 210, &#39;B&#39;: 2, &#39;D&#39;: 0.55, &#39;Tf&#39;: -10.0, &#39;water_depth&#39;: 10.0, &#39;a0&#39;: 0.3, &#39;a2&#39;: 0.078, &#39;ai&#39;: 0.62}
+Integrating for 450 steps, 1826.2110000000002 days, or 5 years.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Total elapsed time is 5.000000000000044 years.
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([-70.,  70.])
+</pre></div>
+</div>
+<img alt="../_images/be35e15513c9b562c0e666591a7266828897fea24ec48fec7beca0a194ee0cb2.png" src="../_images/be35e15513c9b562c0e666591a7266828897fea24ec48fec7beca0a194ee0cb2.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">deltaA</span> <span class="o">=</span> <span class="mf">4.</span>
+
+<span class="n">model2</span> <span class="o">=</span> <span class="n">climlab</span><span class="o">.</span><span class="n">process_like</span><span class="p">(</span><span class="n">model1</span><span class="p">)</span>
+<span class="n">model2</span><span class="o">.</span><span class="n">subprocess</span><span class="p">[</span><span class="s1">&#39;LW&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">A</span> <span class="o">=</span> <span class="n">param</span><span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">deltaA</span>
+<span class="n">model2</span><span class="o">.</span><span class="n">integrate_years</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">model1</span><span class="o">.</span><span class="n">lat</span><span class="p">,</span> <span class="n">model1</span><span class="o">.</span><span class="n">Ts</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">model2</span><span class="o">.</span><span class="n">lat</span><span class="p">,</span> <span class="n">model2</span><span class="o">.</span><span class="n">Ts</span><span class="p">)</span>
+
+<span class="n">model2</span><span class="o">.</span><span class="n">icelat</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([-90.,  90.])
+</pre></div>
+</div>
+<img alt="../_images/3ae39f8a96857b1fdacb5d2f25b0c6d693ab9e21a22f9cc1c463cb5edbb113d1.png" src="../_images/3ae39f8a96857b1fdacb5d2f25b0c6d693ab9e21a22f9cc1c463cb5edbb113d1.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model3</span> <span class="o">=</span> <span class="n">climlab</span><span class="o">.</span><span class="n">process_like</span><span class="p">(</span><span class="n">model1</span><span class="p">)</span>
+<span class="n">model3</span><span class="o">.</span><span class="n">subprocess</span><span class="p">[</span><span class="s1">&#39;LW&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">A</span> <span class="o">=</span> <span class="n">param</span><span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="mi">2</span><span class="o">*</span><span class="n">deltaA</span>
+<span class="n">model3</span><span class="o">.</span><span class="n">integrate_years</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">model1</span><span class="o">.</span><span class="n">lat</span><span class="p">,</span> <span class="n">model1</span><span class="o">.</span><span class="n">Ts</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">model2</span><span class="o">.</span><span class="n">lat</span><span class="p">,</span> <span class="n">model2</span><span class="o">.</span><span class="n">Ts</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">model3</span><span class="o">.</span><span class="n">lat</span><span class="p">,</span> <span class="n">model3</span><span class="o">.</span><span class="n">Ts</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="o">-</span><span class="mi">90</span><span class="p">,</span> <span class="mi">90</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/37755b5e09f59ae7ed7aa0692b8959ab1bd2533568be07078dc7d56b9c79755b.png" src="../_images/37755b5e09f59ae7ed7aa0692b8959ab1bd2533568be07078dc7d56b9c79755b.png" />
+</div>
+</div>
+<section id="the-effect-of-diffusivity-with-albedo-feedback">
+<h2>The effect of diffusivity with albedo feedback<a class="headerlink" href="#the-effect-of-diffusivity-with-albedo-feedback" title="Permalink to this heading">#</a></h2>
+<p>We repeat the results of <a class="reference external" href="https://www.sciencedirect.com/science/article/pii/0377026578900064?via%3Dihub">Stone (1978)</a></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">param</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;A&#39;</span><span class="p">:</span><span class="mi">210</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;a0&#39;</span><span class="p">:</span><span class="mf">0.3</span><span class="p">,</span> <span class="s1">&#39;a2&#39;</span><span class="p">:</span><span class="mf">0.078</span><span class="p">,</span> <span class="s1">&#39;ai&#39;</span><span class="p">:</span><span class="mf">0.62</span><span class="p">,</span> <span class="s1">&#39;Tf&#39;</span><span class="p">:</span><span class="o">-</span><span class="mf">10.</span><span class="p">}</span>
+<span class="nb">print</span><span class="p">(</span> <span class="n">param</span><span class="p">)</span>
+
+<span class="n">Darray</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">2.05</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">)</span>
+
+<span class="n">model_list</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">Tmean_list</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">deltaT_list</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">Hmax_list</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">D</span> <span class="ow">in</span> <span class="n">Darray</span><span class="p">:</span>
+    <span class="n">ebm</span> <span class="o">=</span> <span class="n">climlab</span><span class="o">.</span><span class="n">EBM_annual</span><span class="p">(</span><span class="n">num_lat</span><span class="o">=</span><span class="mi">180</span><span class="p">,</span> <span class="n">D</span><span class="o">=</span><span class="n">D</span><span class="p">,</span> <span class="o">**</span><span class="n">param</span> <span class="p">)</span>
+    <span class="n">ebm</span><span class="o">.</span><span class="n">integrate_years</span><span class="p">(</span><span class="mf">5.</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">Tmean</span> <span class="o">=</span> <span class="n">ebm</span><span class="o">.</span><span class="n">global_mean_temperature</span><span class="p">()</span>
+    <span class="n">deltaT</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">ebm</span><span class="o">.</span><span class="n">Ts</span><span class="p">)</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">ebm</span><span class="o">.</span><span class="n">Ts</span><span class="p">)</span>
+    <span class="n">HT</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(</span><span class="n">ebm</span><span class="o">.</span><span class="n">heat_transport</span><span class="p">)</span>
+    <span class="n">ind</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">ebm</span><span class="o">.</span><span class="n">lat_bounds</span><span class="o">==</span><span class="mf">35.</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">Hmax</span> <span class="o">=</span> <span class="n">HT</span><span class="p">[</span><span class="n">ind</span><span class="p">]</span>
+    <span class="n">model_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ebm</span><span class="p">)</span>
+    <span class="n">Tmean_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Tmean</span><span class="p">)</span>
+    <span class="n">deltaT_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">deltaT</span><span class="p">)</span>
+    <span class="n">Hmax_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Hmax</span><span class="p">)</span>
+
+<span class="n">color1</span> <span class="o">=</span> <span class="s1">&#39;b&#39;</span>
+<span class="n">color2</span> <span class="o">=</span> <span class="s1">&#39;r&#39;</span>
+
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+<span class="n">ax1</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">Darray</span><span class="p">,</span> <span class="n">deltaT_list</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">color1</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;$\Delta T$&#39;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">Darray</span><span class="p">,</span> <span class="n">Tmean_list</span><span class="p">,</span> <span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">color1</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;$\overline</span><span class="si">{T}</span><span class="s1">$&#39;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;D (W m$^{-2}$ °C$^{-1}$)&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">Darray</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">Darray</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="mf">0.2</span><span class="p">))</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;Temperature (°C)&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">,</span>  <span class="n">color</span><span class="o">=</span><span class="n">color1</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">tl</span> <span class="ow">in</span> <span class="n">ax1</span><span class="o">.</span><span class="n">get_yticklabels</span><span class="p">():</span>
+    <span class="n">tl</span><span class="o">.</span><span class="n">set_color</span><span class="p">(</span><span class="n">color1</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;center right&#39;</span><span class="p">)</span>
+<span class="n">ax2</span> <span class="o">=</span> <span class="n">ax1</span><span class="o">.</span><span class="n">twinx</span><span class="p">()</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">Darray</span><span class="p">,</span> <span class="n">Hmax_list</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">color2</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Poleward heat transport across 35.5° (PW)&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">color2</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">tl</span> <span class="ow">in</span> <span class="n">ax2</span><span class="o">.</span><span class="n">get_yticklabels</span><span class="p">():</span>
+    <span class="n">tl</span><span class="o">.</span><span class="n">set_color</span><span class="p">(</span><span class="n">color2</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Effect of diffusivity on EBM with albedo feedback&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;A&#39;: 210, &#39;B&#39;: 2, &#39;a0&#39;: 0.3, &#39;a2&#39;: 0.078, &#39;ai&#39;: 0.62, &#39;Tf&#39;: -10.0}
+</pre></div>
+</div>
+<img alt="../_images/b23a48e324b0e4e0df4d736f1de4f27fa54171c5b1ec991bbbce47d59f4847a7.png" src="../_images/b23a48e324b0e4e0df4d736f1de4f27fa54171c5b1ec991bbbce47d59f4847a7.png" />
+</div>
+</div>
+</section>
+<section id="diffusive-response-to-a-point-source-of-energy-at-45-on">
+<h2>Diffusive response to a point source of energy at 45<span class="math notranslate nohighlight">\(^o\)</span>N<a class="headerlink" href="#diffusive-response-to-a-point-source-of-energy-at-45-on" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>without albedo feedback</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">param_noalb</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;A&#39;</span><span class="p">:</span> <span class="mi">210</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;D&#39;</span><span class="p">:</span> <span class="mf">0.55</span><span class="p">,</span> <span class="s1">&#39;Tf&#39;</span><span class="p">:</span> <span class="o">-</span><span class="mf">10.0</span><span class="p">,</span> <span class="s1">&#39;a0&#39;</span><span class="p">:</span> <span class="mf">0.3</span><span class="p">,</span> <span class="s1">&#39;a2&#39;</span><span class="p">:</span> <span class="mf">0.078</span><span class="p">}</span>
+<span class="n">m1</span> <span class="o">=</span> <span class="n">climlab</span><span class="o">.</span><span class="n">EBM_annual</span><span class="p">(</span><span class="n">num_lat</span><span class="o">=</span><span class="mi">180</span><span class="p">,</span> <span class="o">**</span><span class="n">param_noalb</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">m1</span><span class="p">)</span>
+
+<span class="n">m1</span><span class="o">.</span><span class="n">integrate_years</span><span class="p">(</span><span class="mf">5.</span><span class="p">)</span>
+
+<span class="n">m2</span> <span class="o">=</span> <span class="n">climlab</span><span class="o">.</span><span class="n">process_like</span><span class="p">(</span><span class="n">m1</span><span class="p">)</span>
+
+<span class="n">point_source</span> <span class="o">=</span> <span class="n">climlab</span><span class="o">.</span><span class="n">process</span><span class="o">.</span><span class="n">energy_budget</span><span class="o">.</span><span class="n">ExternalEnergySource</span><span class="p">(</span><span class="n">state</span><span class="o">=</span><span class="n">m2</span><span class="o">.</span><span class="n">state</span><span class="p">,</span> <span class="n">timestep</span><span class="o">=</span><span class="n">m2</span><span class="o">.</span><span class="n">timestep</span><span class="p">)</span>
+<span class="n">ind</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">m2</span><span class="o">.</span><span class="n">lat</span> <span class="o">==</span> <span class="mf">45.5</span><span class="p">)</span>
+<span class="n">point_source</span><span class="o">.</span><span class="n">heating_rate</span><span class="p">[</span><span class="s1">&#39;Ts&#39;</span><span class="p">][</span><span class="n">ind</span><span class="p">]</span> <span class="o">=</span> <span class="mf">100.</span>
+
+<span class="n">m2</span><span class="o">.</span><span class="n">add_subprocess</span><span class="p">(</span><span class="s1">&#39;point source&#39;</span><span class="p">,</span> <span class="n">point_source</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span> <span class="n">m2</span><span class="p">)</span>
+
+<span class="n">m2</span><span class="o">.</span><span class="n">integrate_years</span><span class="p">(</span><span class="mf">5.</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">m2</span><span class="o">.</span><span class="n">lat</span><span class="p">,</span> <span class="n">m2</span><span class="o">.</span><span class="n">Ts</span> <span class="o">-</span> <span class="n">m1</span><span class="o">.</span><span class="n">Ts</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="o">-</span><span class="mi">90</span><span class="p">,</span><span class="mi">90</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Latitude&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\Delta T_s$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>climlab Process of type &lt;class &#39;climlab.model.ebm.EBM_annual&#39;&gt;. 
+State variables and domain shapes: 
+  Ts: (180, 1) 
+The subprocess tree: 
+Untitled: &lt;class &#39;climlab.model.ebm.EBM_annual&#39;&gt;
+   LW: &lt;class &#39;climlab.radiation.aplusbt.AplusBT&#39;&gt;
+   insolation: &lt;class &#39;climlab.radiation.insolation.AnnualMeanInsolation&#39;&gt;
+   albedo: &lt;class &#39;climlab.surface.albedo.P2Albedo&#39;&gt;
+   SW: &lt;class &#39;climlab.radiation.absorbed_shorwave.SimpleAbsorbedShortwave&#39;&gt;
+   diffusion: &lt;class &#39;climlab.dynamics.meridional_heat_diffusion.MeridionalHeatDiffusion&#39;&gt;
+
+Integrating for 450 steps, 1826.2110000000002 days, or 5.0 years.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Total elapsed time is 5.000000000000044 years.
+climlab Process of type &lt;class &#39;climlab.model.ebm.EBM_annual&#39;&gt;. 
+State variables and domain shapes: 
+  Ts: (180, 1) 
+The subprocess tree: 
+Untitled: &lt;class &#39;climlab.model.ebm.EBM_annual&#39;&gt;
+   LW: &lt;class &#39;climlab.radiation.aplusbt.AplusBT&#39;&gt;
+   insolation: &lt;class &#39;climlab.radiation.insolation.AnnualMeanInsolation&#39;&gt;
+   albedo: &lt;class &#39;climlab.surface.albedo.P2Albedo&#39;&gt;
+   SW: &lt;class &#39;climlab.radiation.absorbed_shorwave.SimpleAbsorbedShortwave&#39;&gt;
+   diffusion: &lt;class &#39;climlab.dynamics.meridional_heat_diffusion.MeridionalHeatDiffusion&#39;&gt;
+   point source: &lt;class &#39;climlab.process.energy_budget.ExternalEnergySource&#39;&gt;
+
+Integrating for 450 steps, 1826.2110000000002 days, or 5.0 years.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Total elapsed time is 9.999999999999863 years.
+</pre></div>
+</div>
+<img alt="../_images/af108edd8262a7cea8fd9c8d88ee68318856c36faf7652376bdb25594a4d3c0c.png" src="../_images/af108edd8262a7cea8fd9c8d88ee68318856c36faf7652376bdb25594a4d3c0c.png" />
+</div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The length scale of the point warming is suggested to be proportional to <span class="math notranslate nohighlight">\(\sqrt{\frac{D}{B}}\)</span></p>
+</div>
+<ul class="simple">
+<li><p>with albedo</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">m3</span> <span class="o">=</span> <span class="n">climlab</span><span class="o">.</span><span class="n">EBM_annual</span><span class="p">(</span><span class="n">num_lat</span><span class="o">=</span><span class="mi">180</span><span class="p">,</span> <span class="o">**</span><span class="n">param</span><span class="p">)</span>
+<span class="n">m3</span><span class="o">.</span><span class="n">integrate_years</span><span class="p">(</span><span class="mf">5.</span><span class="p">)</span>
+<span class="n">m4</span> <span class="o">=</span> <span class="n">climlab</span><span class="o">.</span><span class="n">process_like</span><span class="p">(</span><span class="n">m3</span><span class="p">)</span>
+<span class="n">point_source</span> <span class="o">=</span> <span class="n">climlab</span><span class="o">.</span><span class="n">process</span><span class="o">.</span><span class="n">energy_budget</span><span class="o">.</span><span class="n">ExternalEnergySource</span><span class="p">(</span><span class="n">state</span><span class="o">=</span><span class="n">m4</span><span class="o">.</span><span class="n">state</span><span class="p">,</span> <span class="n">timestep</span><span class="o">=</span><span class="n">m4</span><span class="o">.</span><span class="n">timestep</span><span class="p">)</span>
+<span class="n">point_source</span><span class="o">.</span><span class="n">heating_rate</span><span class="p">[</span><span class="s1">&#39;Ts&#39;</span><span class="p">][</span><span class="n">ind</span><span class="p">]</span> <span class="o">=</span> <span class="mf">100.</span>
+<span class="n">m4</span><span class="o">.</span><span class="n">add_subprocess</span><span class="p">(</span><span class="s1">&#39;point source&#39;</span><span class="p">,</span> <span class="n">point_source</span><span class="p">)</span>
+<span class="n">m4</span><span class="o">.</span><span class="n">integrate_years</span><span class="p">(</span><span class="mf">5.</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">m4</span><span class="o">.</span><span class="n">lat</span><span class="p">,</span> <span class="n">m4</span><span class="o">.</span><span class="n">Ts</span> <span class="o">-</span> <span class="n">m3</span><span class="o">.</span><span class="n">Ts</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="o">-</span><span class="mi">90</span><span class="p">,</span><span class="mi">90</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Latitude&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\Delta T_s$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Integrating for 450 steps, 1826.2110000000002 days, or 5.0 years.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Total elapsed time is 5.000000000000044 years.
+Integrating for 450 steps, 1826.2110000000002 days, or 5.0 years.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Total elapsed time is 9.999999999999863 years.
+</pre></div>
+</div>
+<img alt="../_images/8019daab3e13bff574abf4491a5ed65a9e8cd42f51f02fda511491a313d328e3.png" src="../_images/8019daab3e13bff574abf4491a5ed65a9e8cd42f51f02fda511491a313d328e3.png" />
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./docs"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  <!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="ice_albedo_ebm.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Ice Albedo Feedback in EBM</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="effect_aa.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Arctic-Midlatitude Linkage</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-effect-of-diffusivity-with-albedo-feedback">The effect of diffusivity with albedo feedback</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#diffusive-response-to-a-point-source-of-energy-at-45-on">Diffusive response to a point source of energy at 45<span class="math notranslate nohighlight">\(^o\)</span>N</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Yu-Chiao Liang
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=ac02cc09edc035673794"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=ac02cc09edc035673794"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

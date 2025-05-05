@@ -21,7 +21,7 @@ The Python scripts used below and some materials are modified from Prof. Brian E
 The idea is to change the albedo as a function of latitude and a threshold temperatre $T_{f} = -10 ^{o}C$. This is historically inheritated from Budyko's model.
 
 ```{math}
-:label: my_label171
+:label: my_label173
 \begin{eqnarray}
 \alpha(\phi,T(\phi)) &=& \alpha_{0} + \alpha_{2}P_{2}(\sin(\phi)), &\mbox{  when }& T(\phi) > T_{f}\\
 &=& \alpha_{i}, &\mbox{  when }& T(\phi) \le T_{f}
@@ -185,110 +185,38 @@ ebm_plot(m)
 
 ```
 
-## The effect of diffusivity with albedo feedback
-We repeat the results of [Stone (1978)](https://www.sciencedirect.com/science/article/pii/0377026578900064?via%3Dihub)
+## Ice cap instability
+If we continue decreasing solar insolation:
 
 ```{code-cell} ipython3
-param = {'A':210, 'B':2, 'a0':0.3, 'a2':0.078, 'ai':0.62, 'Tf':-10.}
-print( param)
+#  Now make the solar constant smaller:
+m.subprocess.insolation.S0 = 1200.
+#  First, get to equilibrium
+m.integrate_years(5.)
+#  Check for energy balance
+climlab.global_mean(m.net_radiation)
 
-Darray = np.arange(0., 2.05, 0.05)
+m.integrate_years(10.)
+#  Check for energy balance
+climlab.global_mean(m.net_radiation)
 
+ebm_plot(m)
 
-model_list = []
-Tmean_list = []
-deltaT_list = []
-Hmax_list = []
-for D in Darray:
-    ebm = climlab.EBM_annual(num_lat=360, D=D, **param )
-    ebm.integrate_years(5., verbose=False)
-    Tmean = ebm.global_mean_temperature()
-    deltaT = np.max(ebm.Ts) - np.min(ebm.Ts)
-    HT = np.squeeze(ebm.heat_transport)
-    ind = np.where(ebm.lat_bounds==35.5)[0]
-    Hmax = HT[ind]
-    model_list.append(ebm)
-    Tmean_list.append(Tmean)
-    deltaT_list.append(deltaT)
-    Hmax_list.append(Hmax)
-
-color1 = 'b'
-color2 = 'r'
-
-fig = plt.figure(figsize=(8,6))
-ax1 = fig.add_subplot(111)
-ax1.plot(Darray, deltaT_list, color=color1, label=r'$\Delta T$')
-ax1.plot(Darray, Tmean_list, '--', color=color1, label=r'$\overline{T}$')
-ax1.set_xlabel('D (W m$^{-2}$ °C$^{-1}$)', fontsize=14)
-ax1.set_xticks(np.arange(Darray[0], Darray[-1], 0.2))
-ax1.set_ylabel(r'Temperature (°C)', fontsize=14,  color=color1)
-for tl in ax1.get_yticklabels():
-    tl.set_color(color1)
-ax1.legend(loc='center right')
-ax2 = ax1.twinx()
-ax2.plot(Darray, Hmax_list, color=color2)
-ax2.set_ylabel('Poleward heat transport across 35.5° (PW)', fontsize=14, color=color2)
-for tl in ax2.get_yticklabels():
-    tl.set_color(color2)
-ax1.set_title('Effect of diffusivity on EBM with albedo feedback', fontsize=16)
-ax1.grid()
+m.icelat
 
 ```
 
-## Diffusive response to a point source of energy at 45$^o$N
-
-- without albedo feedback
-
+If we now trun it back to present-day value:
 ```{code-cell} ipython3
-param_noalb = {'A': 210, 'B': 2, 'D': 0.55, 'Tf': -10.0, 'a0': 0.3, 'a2': 0.078}
-m1 = climlab.EBM_annual(num_lat=180, **param_noalb)
-print(m1)
+#  Now make the solar constant smaller:
+m.subprocess.insolation.S0 = 1365.2
+#  First, get to equilibrium
+m.integrate_years(5.)
+#  Check for energy balance
+climlab.global_mean(m.net_radiation)
 
-m1.integrate_years(5.)
-
-m2 = climlab.process_like(m1)
-
-point_source = climlab.process.energy_budget.ExternalEnergySource(state=m2.state, timestep=m2.timestep)
-ind = np.where(m2.lat == 45.5)
-point_source.heating_rate['Ts'][ind] = 100.
-
-m2.add_subprocess('point source', point_source)
-print( m2)
-
-m2.integrate_years(5.)
-
-plt.plot(m2.lat, m2.Ts - m1.Ts)
-plt.xlim(-90,90)
-plt.xlabel('Latitude')
-plt.ylabel(r'$\Delta T_s$')
-plt.grid()
-
+ebm_plot(m)
 ```
-
-```{note}
-The length scale of the point warming is suggested to be proportional to $\sqrt{\frac{D}{B}}$
-
-```
-
-- with albedo
-```{code-cell} ipython3
-m3 = climlab.EBM_annual(num_lat=180, **param)
-m3.integrate_years(5.)
-m4 = climlab.process_like(m3)
-point_source = climlab.process.energy_budget.ExternalEnergySource(state=m4.state, timestep=m4.timestep)
-point_source.heating_rate['Ts'][ind] = 100.
-m4.add_subprocess('point source', point_source)
-m4.integrate_years(5.)
-
-plt.plot(m4.lat, m4.Ts - m3.Ts)
-plt.xlim(-90,90)
-plt.xlabel('Latitude')
-plt.ylabel(r'$\Delta T_s$')
-plt.grid()
-
-```
-
-
 
 ## Homework assignment X (due xxx)
 - Solar forcing. Please change the solar forcing and discuss the results.
