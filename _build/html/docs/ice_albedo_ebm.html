@@ -67,7 +67,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'docs/ice_albedo_ebm';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Ice Cap Instability" href="ice_cap_ebm.html" />
+    <link rel="next" title="Diffusive Response" href="diffusive_response.html" />
     <link rel="prev" title="Seasonal cycle" href="seasonality.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -177,7 +177,8 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="one_dim_ebm.html">One-dimensional Energy Balance Model</a></li>
 <li class="toctree-l1"><a class="reference internal" href="seasonality.html">Seasonal cycle</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Ice Albedo Feedback in EBM</a></li>
-<li class="toctree-l1"><a class="reference internal" href="ice_cap_ebm.html">Ice Cap Instability</a></li>
+<li class="toctree-l1"><a class="reference internal" href="diffusive_response.html">Diffusive Response</a></li>
+<li class="toctree-l1"><a class="reference internal" href="snowball.html">Snowball Earth</a></li>
 <li class="toctree-l1"><a class="reference internal" href="effect_aa.html">Arctic-Midlatitude Linkage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="history_modelling.html">The History of Climate Modeling</a></li>
 </ul>
@@ -329,8 +330,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interactive-ice-snow-line-step-function">Interactive ice/snow line (step function)</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#polar-amplified-warming-in-ebm-yeah">Polar-amplified warming in EBM (Yeah!!!)</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#solar-forcing">Solar forcing</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-effect-of-diffusivity-with-albedo-feedback">The effect of diffusivity with albedo feedback</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#diffusive-response-to-a-point-source-of-energy-at-45-on">Diffusive response to a point source of energy at 45<span class="math notranslate nohighlight">\(^o\)</span>N</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ice-cap-instability">Ice cap instability</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#homework-assignment-x-due-xxx">Homework assignment X (due xxx)</a></li>
 </ul>
             </nav>
@@ -352,8 +352,8 @@ document.write(`
 <section id="interactive-ice-snow-line-step-function">
 <h2>Interactive ice/snow line (step function)<a class="headerlink" href="#interactive-ice-snow-line-step-function" title="Permalink to this heading">#</a></h2>
 <p>The idea is to change the albedo as a function of latitude and a threshold temperatre <span class="math notranslate nohighlight">\(T_{f} = -10 ^{o}C\)</span>. This is historically inheritated from Budyko’s model.</p>
-<div class="math notranslate nohighlight" id="equation-my-label171">
-<span class="eqno">(170)<a class="headerlink" href="#equation-my-label171" title="Permalink to this equation">#</a></span>\[\begin{split}\begin{eqnarray}
+<div class="math notranslate nohighlight" id="equation-my-label173">
+<span class="eqno">(170)<a class="headerlink" href="#equation-my-label173" title="Permalink to this equation">#</a></span>\[\begin{split}\begin{eqnarray}
 \alpha(\phi,T(\phi)) &amp;=&amp; \alpha_{0} + \alpha_{2}P_{2}(\sin(\phi)), &amp;\mbox{  when }&amp; T(\phi) &gt; T_{f}\\
 &amp;=&amp; \alpha_{i}, &amp;\mbox{  when }&amp; T(\phi) \le T_{f}
 \end{eqnarray}\end{split}\]</div>
@@ -540,7 +540,7 @@ Integrating for 450 steps, 1826.2110000000002 days, or 5 years.
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x120da24d0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x143713910&gt;
 </pre></div>
 </div>
 <img alt="../_images/f4814fc95acf7ed8a9730e71bc3c30882ae5b4da3d234ee07d09f810f59437d9.png" src="../_images/f4814fc95acf7ed8a9730e71bc3c30882ae5b4da3d234ee07d09f810f59437d9.png" />
@@ -592,156 +592,25 @@ Integrating for 900 steps, 3652.4220000000005 days, or 10.0 years.
 </div>
 </div>
 </section>
-<section id="the-effect-of-diffusivity-with-albedo-feedback">
-<h2>The effect of diffusivity with albedo feedback<a class="headerlink" href="#the-effect-of-diffusivity-with-albedo-feedback" title="Permalink to this heading">#</a></h2>
-<p>We repeat the results of <a class="reference external" href="https://www.sciencedirect.com/science/article/pii/0377026578900064?via%3Dihub">Stone (1978)</a></p>
+<section id="ice-cap-instability">
+<h2>Ice cap instability<a class="headerlink" href="#ice-cap-instability" title="Permalink to this heading">#</a></h2>
+<p>If we continue decreasing solar insolation:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">param</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;A&#39;</span><span class="p">:</span><span class="mi">210</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;a0&#39;</span><span class="p">:</span><span class="mf">0.3</span><span class="p">,</span> <span class="s1">&#39;a2&#39;</span><span class="p">:</span><span class="mf">0.078</span><span class="p">,</span> <span class="s1">&#39;ai&#39;</span><span class="p">:</span><span class="mf">0.62</span><span class="p">,</span> <span class="s1">&#39;Tf&#39;</span><span class="p">:</span><span class="o">-</span><span class="mf">10.</span><span class="p">}</span>
-<span class="nb">print</span><span class="p">(</span> <span class="n">param</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#  Now make the solar constant smaller:</span>
+<span class="n">m</span><span class="o">.</span><span class="n">subprocess</span><span class="o">.</span><span class="n">insolation</span><span class="o">.</span><span class="n">S0</span> <span class="o">=</span> <span class="mf">1200.</span>
+<span class="c1">#  First, get to equilibrium</span>
+<span class="n">m</span><span class="o">.</span><span class="n">integrate_years</span><span class="p">(</span><span class="mf">5.</span><span class="p">)</span>
+<span class="c1">#  Check for energy balance</span>
+<span class="n">climlab</span><span class="o">.</span><span class="n">global_mean</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">net_radiation</span><span class="p">)</span>
 
-<span class="n">Darray</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">2.05</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">)</span>
+<span class="n">m</span><span class="o">.</span><span class="n">integrate_years</span><span class="p">(</span><span class="mf">10.</span><span class="p">)</span>
+<span class="c1">#  Check for energy balance</span>
+<span class="n">climlab</span><span class="o">.</span><span class="n">global_mean</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">net_radiation</span><span class="p">)</span>
 
+<span class="n">ebm_plot</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
 
-<span class="n">model_list</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="n">Tmean_list</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="n">deltaT_list</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="n">Hmax_list</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="k">for</span> <span class="n">D</span> <span class="ow">in</span> <span class="n">Darray</span><span class="p">:</span>
-    <span class="n">ebm</span> <span class="o">=</span> <span class="n">climlab</span><span class="o">.</span><span class="n">EBM_annual</span><span class="p">(</span><span class="n">num_lat</span><span class="o">=</span><span class="mi">360</span><span class="p">,</span> <span class="n">D</span><span class="o">=</span><span class="n">D</span><span class="p">,</span> <span class="o">**</span><span class="n">param</span> <span class="p">)</span>
-    <span class="n">ebm</span><span class="o">.</span><span class="n">integrate_years</span><span class="p">(</span><span class="mf">5.</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-    <span class="n">Tmean</span> <span class="o">=</span> <span class="n">ebm</span><span class="o">.</span><span class="n">global_mean_temperature</span><span class="p">()</span>
-    <span class="n">deltaT</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">ebm</span><span class="o">.</span><span class="n">Ts</span><span class="p">)</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">ebm</span><span class="o">.</span><span class="n">Ts</span><span class="p">)</span>
-    <span class="n">HT</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(</span><span class="n">ebm</span><span class="o">.</span><span class="n">heat_transport</span><span class="p">)</span>
-    <span class="n">ind</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">ebm</span><span class="o">.</span><span class="n">lat_bounds</span><span class="o">==</span><span class="mf">35.5</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
-    <span class="n">Hmax</span> <span class="o">=</span> <span class="n">HT</span><span class="p">[</span><span class="n">ind</span><span class="p">]</span>
-    <span class="n">model_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ebm</span><span class="p">)</span>
-    <span class="n">Tmean_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Tmean</span><span class="p">)</span>
-    <span class="n">deltaT_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">deltaT</span><span class="p">)</span>
-    <span class="n">Hmax_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Hmax</span><span class="p">)</span>
-
-<span class="n">color1</span> <span class="o">=</span> <span class="s1">&#39;b&#39;</span>
-<span class="n">color2</span> <span class="o">=</span> <span class="s1">&#39;r&#39;</span>
-
-<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
-<span class="n">ax1</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">)</span>
-<span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">Darray</span><span class="p">,</span> <span class="n">deltaT_list</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">color1</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;$\Delta T$&#39;</span><span class="p">)</span>
-<span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">Darray</span><span class="p">,</span> <span class="n">Tmean_list</span><span class="p">,</span> <span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">color1</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;$\overline</span><span class="si">{T}</span><span class="s1">$&#39;</span><span class="p">)</span>
-<span class="n">ax1</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;D (W m$^{-2}$ °C$^{-1}$)&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
-<span class="n">ax1</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">Darray</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">Darray</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="mf">0.2</span><span class="p">))</span>
-<span class="n">ax1</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;Temperature (°C)&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">,</span>  <span class="n">color</span><span class="o">=</span><span class="n">color1</span><span class="p">)</span>
-<span class="k">for</span> <span class="n">tl</span> <span class="ow">in</span> <span class="n">ax1</span><span class="o">.</span><span class="n">get_yticklabels</span><span class="p">():</span>
-    <span class="n">tl</span><span class="o">.</span><span class="n">set_color</span><span class="p">(</span><span class="n">color1</span><span class="p">)</span>
-<span class="n">ax1</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;center right&#39;</span><span class="p">)</span>
-<span class="n">ax2</span> <span class="o">=</span> <span class="n">ax1</span><span class="o">.</span><span class="n">twinx</span><span class="p">()</span>
-<span class="n">ax2</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">Darray</span><span class="p">,</span> <span class="n">Hmax_list</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">color2</span><span class="p">)</span>
-<span class="n">ax2</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Poleward heat transport across 35.5° (PW)&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">color2</span><span class="p">)</span>
-<span class="k">for</span> <span class="n">tl</span> <span class="ow">in</span> <span class="n">ax2</span><span class="o">.</span><span class="n">get_yticklabels</span><span class="p">():</span>
-    <span class="n">tl</span><span class="o">.</span><span class="n">set_color</span><span class="p">(</span><span class="n">color2</span><span class="p">)</span>
-<span class="n">ax1</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Effect of diffusivity on EBM with albedo feedback&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
-<span class="n">ax1</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;A&#39;: 210, &#39;B&#39;: 2, &#39;a0&#39;: 0.3, &#39;a2&#39;: 0.078, &#39;ai&#39;: 0.62, &#39;Tf&#39;: -10.0}
-</pre></div>
-</div>
-<img alt="../_images/36d7acb6ba575812fadc502aa87dddf4368c36af59d5e6a622e40a850070aa50.png" src="../_images/36d7acb6ba575812fadc502aa87dddf4368c36af59d5e6a622e40a850070aa50.png" />
-</div>
-</div>
-</section>
-<section id="diffusive-response-to-a-point-source-of-energy-at-45-on">
-<h2>Diffusive response to a point source of energy at 45<span class="math notranslate nohighlight">\(^o\)</span>N<a class="headerlink" href="#diffusive-response-to-a-point-source-of-energy-at-45-on" title="Permalink to this heading">#</a></h2>
-<ul class="simple">
-<li><p>without albedo feedback</p></li>
-</ul>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">param_noalb</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;A&#39;</span><span class="p">:</span> <span class="mi">210</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;D&#39;</span><span class="p">:</span> <span class="mf">0.55</span><span class="p">,</span> <span class="s1">&#39;Tf&#39;</span><span class="p">:</span> <span class="o">-</span><span class="mf">10.0</span><span class="p">,</span> <span class="s1">&#39;a0&#39;</span><span class="p">:</span> <span class="mf">0.3</span><span class="p">,</span> <span class="s1">&#39;a2&#39;</span><span class="p">:</span> <span class="mf">0.078</span><span class="p">}</span>
-<span class="n">m1</span> <span class="o">=</span> <span class="n">climlab</span><span class="o">.</span><span class="n">EBM_annual</span><span class="p">(</span><span class="n">num_lat</span><span class="o">=</span><span class="mi">180</span><span class="p">,</span> <span class="o">**</span><span class="n">param_noalb</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">m1</span><span class="p">)</span>
-
-<span class="n">m1</span><span class="o">.</span><span class="n">integrate_years</span><span class="p">(</span><span class="mf">5.</span><span class="p">)</span>
-
-<span class="n">m2</span> <span class="o">=</span> <span class="n">climlab</span><span class="o">.</span><span class="n">process_like</span><span class="p">(</span><span class="n">m1</span><span class="p">)</span>
-
-<span class="n">point_source</span> <span class="o">=</span> <span class="n">climlab</span><span class="o">.</span><span class="n">process</span><span class="o">.</span><span class="n">energy_budget</span><span class="o">.</span><span class="n">ExternalEnergySource</span><span class="p">(</span><span class="n">state</span><span class="o">=</span><span class="n">m2</span><span class="o">.</span><span class="n">state</span><span class="p">,</span> <span class="n">timestep</span><span class="o">=</span><span class="n">m2</span><span class="o">.</span><span class="n">timestep</span><span class="p">)</span>
-<span class="n">ind</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">m2</span><span class="o">.</span><span class="n">lat</span> <span class="o">==</span> <span class="mf">45.5</span><span class="p">)</span>
-<span class="n">point_source</span><span class="o">.</span><span class="n">heating_rate</span><span class="p">[</span><span class="s1">&#39;Ts&#39;</span><span class="p">][</span><span class="n">ind</span><span class="p">]</span> <span class="o">=</span> <span class="mf">100.</span>
-
-<span class="n">m2</span><span class="o">.</span><span class="n">add_subprocess</span><span class="p">(</span><span class="s1">&#39;point source&#39;</span><span class="p">,</span> <span class="n">point_source</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span> <span class="n">m2</span><span class="p">)</span>
-
-<span class="n">m2</span><span class="o">.</span><span class="n">integrate_years</span><span class="p">(</span><span class="mf">5.</span><span class="p">)</span>
-
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">m2</span><span class="o">.</span><span class="n">lat</span><span class="p">,</span> <span class="n">m2</span><span class="o">.</span><span class="n">Ts</span> <span class="o">-</span> <span class="n">m1</span><span class="o">.</span><span class="n">Ts</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="o">-</span><span class="mi">90</span><span class="p">,</span><span class="mi">90</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Latitude&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\Delta T_s$&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>climlab Process of type &lt;class &#39;climlab.model.ebm.EBM_annual&#39;&gt;. 
-State variables and domain shapes: 
-  Ts: (180, 1) 
-The subprocess tree: 
-Untitled: &lt;class &#39;climlab.model.ebm.EBM_annual&#39;&gt;
-   LW: &lt;class &#39;climlab.radiation.aplusbt.AplusBT&#39;&gt;
-   insolation: &lt;class &#39;climlab.radiation.insolation.AnnualMeanInsolation&#39;&gt;
-   albedo: &lt;class &#39;climlab.surface.albedo.P2Albedo&#39;&gt;
-   SW: &lt;class &#39;climlab.radiation.absorbed_shorwave.SimpleAbsorbedShortwave&#39;&gt;
-   diffusion: &lt;class &#39;climlab.dynamics.meridional_heat_diffusion.MeridionalHeatDiffusion&#39;&gt;
-
-Integrating for 450 steps, 1826.2110000000002 days, or 5.0 years.
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Total elapsed time is 5.000000000000044 years.
-climlab Process of type &lt;class &#39;climlab.model.ebm.EBM_annual&#39;&gt;. 
-State variables and domain shapes: 
-  Ts: (180, 1) 
-The subprocess tree: 
-Untitled: &lt;class &#39;climlab.model.ebm.EBM_annual&#39;&gt;
-   LW: &lt;class &#39;climlab.radiation.aplusbt.AplusBT&#39;&gt;
-   insolation: &lt;class &#39;climlab.radiation.insolation.AnnualMeanInsolation&#39;&gt;
-   albedo: &lt;class &#39;climlab.surface.albedo.P2Albedo&#39;&gt;
-   SW: &lt;class &#39;climlab.radiation.absorbed_shorwave.SimpleAbsorbedShortwave&#39;&gt;
-   diffusion: &lt;class &#39;climlab.dynamics.meridional_heat_diffusion.MeridionalHeatDiffusion&#39;&gt;
-   point source: &lt;class &#39;climlab.process.energy_budget.ExternalEnergySource&#39;&gt;
-
-Integrating for 450 steps, 1826.2110000000002 days, or 5.0 years.
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Total elapsed time is 9.999999999999863 years.
-</pre></div>
-</div>
-<img alt="../_images/af108edd8262a7cea8fd9c8d88ee68318856c36faf7652376bdb25594a4d3c0c.png" src="../_images/af108edd8262a7cea8fd9c8d88ee68318856c36faf7652376bdb25594a4d3c0c.png" />
-</div>
-</div>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>The length scale of the point warming is suggested to be proportional to <span class="math notranslate nohighlight">\(\sqrt{\frac{D}{B}}\)</span></p>
-</div>
-<ul class="simple">
-<li><p>with albedo</p></li>
-</ul>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">m3</span> <span class="o">=</span> <span class="n">climlab</span><span class="o">.</span><span class="n">EBM_annual</span><span class="p">(</span><span class="n">num_lat</span><span class="o">=</span><span class="mi">180</span><span class="p">,</span> <span class="o">**</span><span class="n">param</span><span class="p">)</span>
-<span class="n">m3</span><span class="o">.</span><span class="n">integrate_years</span><span class="p">(</span><span class="mf">5.</span><span class="p">)</span>
-<span class="n">m4</span> <span class="o">=</span> <span class="n">climlab</span><span class="o">.</span><span class="n">process_like</span><span class="p">(</span><span class="n">m3</span><span class="p">)</span>
-<span class="n">point_source</span> <span class="o">=</span> <span class="n">climlab</span><span class="o">.</span><span class="n">process</span><span class="o">.</span><span class="n">energy_budget</span><span class="o">.</span><span class="n">ExternalEnergySource</span><span class="p">(</span><span class="n">state</span><span class="o">=</span><span class="n">m4</span><span class="o">.</span><span class="n">state</span><span class="p">,</span> <span class="n">timestep</span><span class="o">=</span><span class="n">m4</span><span class="o">.</span><span class="n">timestep</span><span class="p">)</span>
-<span class="n">point_source</span><span class="o">.</span><span class="n">heating_rate</span><span class="p">[</span><span class="s1">&#39;Ts&#39;</span><span class="p">][</span><span class="n">ind</span><span class="p">]</span> <span class="o">=</span> <span class="mf">100.</span>
-<span class="n">m4</span><span class="o">.</span><span class="n">add_subprocess</span><span class="p">(</span><span class="s1">&#39;point source&#39;</span><span class="p">,</span> <span class="n">point_source</span><span class="p">)</span>
-<span class="n">m4</span><span class="o">.</span><span class="n">integrate_years</span><span class="p">(</span><span class="mf">5.</span><span class="p">)</span>
-
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">m4</span><span class="o">.</span><span class="n">lat</span><span class="p">,</span> <span class="n">m4</span><span class="o">.</span><span class="n">Ts</span> <span class="o">-</span> <span class="n">m3</span><span class="o">.</span><span class="n">Ts</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="o">-</span><span class="mi">90</span><span class="p">,</span><span class="mi">90</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Latitude&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\Delta T_s$&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">m</span><span class="o">.</span><span class="n">icelat</span>
 </pre></div>
 </div>
 </div>
@@ -749,14 +618,41 @@ Integrating for 450 steps, 1826.2110000000002 days, or 5.0 years.
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Integrating for 450 steps, 1826.2110000000002 days, or 5.0 years.
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Total elapsed time is 5.000000000000044 years.
-Integrating for 450 steps, 1826.2110000000002 days, or 5.0 years.
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Total elapsed time is 19.99999999999943 years.
+Integrating for 900 steps, 3652.4220000000005 days, or 10.0 years.
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Total elapsed time is 9.999999999999863 years.
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Total elapsed time is 30.000000000000693 years.
 </pre></div>
 </div>
-<img alt="../_images/8019daab3e13bff574abf4491a5ed65a9e8cd42f51f02fda511491a313d328e3.png" src="../_images/8019daab3e13bff574abf4491a5ed65a9e8cd42f51f02fda511491a313d328e3.png" />
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([-0.,  0.])
+</pre></div>
+</div>
+<img alt="../_images/8ca36d1df39c73e107e5993fe97532ab5788cf1cf3540d77d4f214869cd997f8.png" src="../_images/8ca36d1df39c73e107e5993fe97532ab5788cf1cf3540d77d4f214869cd997f8.png" />
+</div>
+</div>
+<p>If we now trun it back to present-day value:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#  Now make the solar constant smaller:</span>
+<span class="n">m</span><span class="o">.</span><span class="n">subprocess</span><span class="o">.</span><span class="n">insolation</span><span class="o">.</span><span class="n">S0</span> <span class="o">=</span> <span class="mf">1365.2</span>
+<span class="c1">#  First, get to equilibrium</span>
+<span class="n">m</span><span class="o">.</span><span class="n">integrate_years</span><span class="p">(</span><span class="mf">5.</span><span class="p">)</span>
+<span class="c1">#  Check for energy balance</span>
+<span class="n">climlab</span><span class="o">.</span><span class="n">global_mean</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">net_radiation</span><span class="p">)</span>
+
+<span class="n">ebm_plot</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Integrating for 450 steps, 1826.2110000000002 days, or 5.0 years.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Total elapsed time is 35.0000000000016 years.
+</pre></div>
+</div>
+<img alt="../_images/c2674046b2021134889179ae45e41bfd204cc56e2a5f761aed94c644de52f889.png" src="../_images/c2674046b2021134889179ae45e41bfd204cc56e2a5f761aed94c644de52f889.png" />
 </div>
 </div>
 </section>
@@ -803,7 +699,7 @@ Integrating for 900 steps, 3652.4220000000005 days, or 10.0 years.
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Total elapsed time is 14.999999999999647 years.
 </pre></div>
 </div>
-<img alt="../_images/a4e4e4c4cfbe53a9654a41ca4a5810eef90688b36fc95ccc49dee2403b71414c.png" src="../_images/a4e4e4c4cfbe53a9654a41ca4a5810eef90688b36fc95ccc49dee2403b71414c.png" />
+<img alt="../_images/c76cf7bb5754614e26ef9b09b986e32b842b025904cff6089a26682ee03e3f01.png" src="../_images/c76cf7bb5754614e26ef9b09b986e32b842b025904cff6089a26682ee03e3f01.png" />
 </div>
 </div>
 </section>
@@ -849,11 +745,11 @@ Integrating for 900 steps, 3652.4220000000005 days, or 10.0 years.
       </div>
     </a>
     <a class="right-next"
-       href="ice_cap_ebm.html"
+       href="diffusive_response.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Ice Cap Instability</p>
+        <p class="prev-next-title">Diffusive Response</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -875,8 +771,7 @@ Integrating for 900 steps, 3652.4220000000005 days, or 10.0 years.
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interactive-ice-snow-line-step-function">Interactive ice/snow line (step function)</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#polar-amplified-warming-in-ebm-yeah">Polar-amplified warming in EBM (Yeah!!!)</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#solar-forcing">Solar forcing</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-effect-of-diffusivity-with-albedo-feedback">The effect of diffusivity with albedo feedback</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#diffusive-response-to-a-point-source-of-energy-at-45-on">Diffusive response to a point source of energy at 45<span class="math notranslate nohighlight">\(^o\)</span>N</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ice-cap-instability">Ice cap instability</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#homework-assignment-x-due-xxx">Homework assignment X (due xxx)</a></li>
 </ul>
   </nav></div>

@@ -37,8 +37,8 @@ nbclient.exceptions.CellTimeoutError: A cell timed out while it was being execut
 The message was: Cell execution timed out.
 Here is a preview of the cell contents:
 -------------------
-['model2 = climlab.EBM_annual(num_lat = 180, **param)', 'S0array = np.linspace(1400., 1200., 200)', 'model2.integrate_years(5)', 'icelat_cooling = np.empty_like(S0array)', 'icelat_warming = np.empty_like(S0array)']
+["param = {'A':210, 'B':2, 'a0':0.3, 'a2':0.078, 'ai':0.62, 'Tf':-10.}", 'print( param)', '', 'Darray = np.arange(0., 2.05, 0.05)', '']
 ...
-["ax.set_ylabel('Ice edge latitude', fontsize=16)", "ax.set_xlabel('Solar constant (W m$^{-2}$)', fontsize=16)", "ax.plot( [const.S0, const.S0], [-10, 100], 'k--', label='present-day' )", "ax.legend(loc='upper left')", "ax.set_title('Solar constant versus ice edge latitude in the EBM with albedo feedback', fontsize=16);"]
+["ax2.set_ylabel('Poleward heat transport across 35.5° (PW)', fontsize=14, color=color2)", 'for tl in ax2.get_yticklabels():', '    tl.set_color(color2)', "ax1.set_title('Effect of diffusivity on EBM with albedo feedback', fontsize=16)", 'ax1.grid()']
 -------------------
 
