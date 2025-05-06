@@ -20,4 +20,5 @@ sections:
 - file: docs/diffusive_response
 - file: docs/snowball
 - file: docs/effect_aa
+- file: docs/observations
 - file: docs/history_modelling
