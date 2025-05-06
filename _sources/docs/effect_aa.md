@@ -11,7 +11,7 @@ kernelspec:
 
 (effect_aa)=
 
-# Arctic-Midlatitude Linkage
+# 19. Arctic-Midlatitude Linkage
 
 > Arctic-Midlatitude Linkage has been hotly discussed and debated in the past years. [Here's an an article on “CarbonBrief”](https://www.carbonbrief.org/qa-how-is-arctic-warming-linked-to-polar-vortext-other-extreme-weather?fbclid=IwAR3IdscKbEHYVgGdkInmUMBzArEswKu51fGUOQG4OazrNg5MqXQUtQ5hWkQ).
 
