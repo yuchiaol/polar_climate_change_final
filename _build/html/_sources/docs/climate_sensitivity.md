@@ -11,7 +11,7 @@ kernelspec:
 
 (ecs_feedback)=
 
-# Climate Sensitivity and Feedback
+# 12. Climate Sensitivity and Feedback
 
 ## Radiative forcing
 We start with the radiative forcing in a RCE model. Recall that the instantaneous radiative forcing is the quick change in the TOA energy budget before the climate system begins to adjust. 

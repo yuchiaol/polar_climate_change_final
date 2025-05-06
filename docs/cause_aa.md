@@ -11,7 +11,7 @@ kernelspec:
 
 (cause_aa)=
 
-# Causes of Polar Amplification
+# 8. Causes of Polar Amplification
 
 > Arctic/Polar Amplification is a prominent feature of global warming!
 

@@ -11,7 +11,7 @@ kernelspec:
 
 (rae_model)=
 
-# Radiative Advective Equilibrium (RAE)
+# 13. Radiative Advective Equilibrium (RAE)
 
 ## Climate regimes
 RCE model is powerful to understand the most important feature of atmospheric vertical thermal profile. However, outside the tropical region, the the pathway of energy balance can be different from the RCE paradigm. 

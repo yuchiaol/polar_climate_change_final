@@ -11,7 +11,7 @@ kernelspec:
 
 (syllabus)=
 
-# Syllabus
+# 1. Syllabus
 
 2021/22 Semester; Credit: 3; Class Number: AtmSci7098
 

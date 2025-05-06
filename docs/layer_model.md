@@ -11,7 +11,7 @@ kernelspec:
 
 (layer_model)=
 
-# Layered Energy Balance Model
+# 10. Layered Energy Balance Model
 
 The zero-dimensional energy balance model discussed in previous lecture does not contain vertical distribution of the atmosphere, which is important in understanding climate change. We will introduce the simple two-layer model, simple three-layer model, and n-layer model. These models will pave a road for understanding Manabe's radiative-convective equilibrium that will be discussed in the next lecture. Before these, let's start with radiation process in the atmosphere.
 

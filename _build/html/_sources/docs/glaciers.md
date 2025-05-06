@@ -11,7 +11,7 @@ kernelspec:
 
 (glaciers)=
 
-# Glaciers
+# 5. Glaciers
 
 ```{note}
 [The Randolph Glacier Inventory](https://www.glims.org/rgi_user_guide/welcome.html) is a global inventaroy of glacier outlines. This is cool!!! You could play around it.

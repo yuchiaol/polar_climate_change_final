@@ -11,7 +11,7 @@ kernelspec:
 
 (diffusive_response)=
 
-# Diffusive Response
+# 17. Diffusive Response
 
 ```{note}
 The Python scripts used below and some materials are modified from Prof. Brian E. J. Rose's climlab [website](https://brian-rose.github.io/ClimateLaboratoryBook/courseware/seasonal-cycle.html).
