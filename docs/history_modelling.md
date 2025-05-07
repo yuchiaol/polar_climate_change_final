@@ -11,7 +11,7 @@ kernelspec:
 
 (history_modelling)=
 
-# A1. The History of Climate Modeling
+# A2. The History of Climate Modeling
 
 In this lecture, we briefly go over the history of climate modeling. I follow the timeline organized by [a CarbonBrief online article](https://www.carbonbrief.org/timeline-history-climate-modelling/)
 and use materials from articles written by [Dr. Yi-Hsuan Chen](https://pb.ps-taiwan.org/modules/news/article.php?storyid=648) and [Dr. Yen-Ting Hwang](https://pb.ps-taiwan.org/modules/news/article.php?storyid=647). 

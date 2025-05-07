@@ -21,4 +21,5 @@ sections:
 - file: docs/snowball
 - file: docs/effect_aa
 - file: docs/observations
+- file: docs/polar_amplification
 - file: docs/history_modelling

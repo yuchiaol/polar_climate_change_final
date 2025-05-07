@@ -181,7 +181,8 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">18. Snowball Earth</a></li>
 <li class="toctree-l1"><a class="reference internal" href="effect_aa.html">19. Arctic-Midlatitude Linkage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="observations.html">20. Observations</a></li>
-<li class="toctree-l1"><a class="reference internal" href="history_modelling.html">A1. The History of Climate Modeling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="polar_amplification.html">A1. Polar Amplification</a></li>
+<li class="toctree-l1"><a class="reference internal" href="history_modelling.html">A2. The History of Climate Modeling</a></li>
 </ul>
 
     </div>
@@ -455,7 +456,9 @@ Annual Mean EBM with ice line: &lt;class &#39;climlab.model.ebm.EBM_annual&#39;&
 
 Integrating for 450 steps, 1826.2110000000002 days, or 5 years.
 Total elapsed time is 5.000000000000044 years.
--19.726674194909386
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-19.726674194909386
 </pre></div>
 </div>
 <img alt="../_images/3b569423abef2c149529e048c2939a7c42e9c107350304f9de443ab987d89769.png" src="../_images/3b569423abef2c149529e048c2939a7c42e9c107350304f9de443ab987d89769.png" />
@@ -516,10 +519,13 @@ Total elapsed time is 5.000000000000044 years.
 <div class="math notranslate nohighlight" id="equation-my-label805">
 <span class="eqno">(175)<a class="headerlink" href="#equation-my-label805" title="Permalink to this equation">#</a></span>\[\lambda = \lambda_{LW} + \lambda_{SW} = -2 + \frac{-108.3}{-40} = -2 + 2.7 \approx -1 \mbox{  W/m$^2$/K}\]</div>
 <p>Below the code may not be run on your laptop.</p>
+</section>
+<section id="hysteresis">
+<h2>Hysteresis<a class="headerlink" href="#hysteresis" title="Permalink to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model2</span> <span class="o">=</span> <span class="n">climlab</span><span class="o">.</span><span class="n">EBM_annual</span><span class="p">(</span><span class="n">num_lat</span> <span class="o">=</span> <span class="mi">180</span><span class="p">,</span> <span class="o">**</span><span class="n">param</span><span class="p">)</span>
-<span class="n">S0array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">1400.</span><span class="p">,</span> <span class="mf">1200.</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">S0array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">1400.</span><span class="p">,</span> <span class="mf">1200.</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span>
 <span class="n">model2</span><span class="o">.</span><span class="n">integrate_years</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
 
 <span class="nb">print</span><span class="p">(</span> <span class="n">model2</span><span class="o">.</span><span class="n">icelat</span><span class="p">)</span>
@@ -532,13 +538,33 @@ Total elapsed time is 5.000000000000044 years.
     <span class="n">model2</span><span class="o">.</span><span class="n">subprocess</span><span class="p">[</span><span class="s1">&#39;insolation&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">S0</span> <span class="o">=</span> <span class="n">S0array</span><span class="p">[</span><span class="n">n</span><span class="p">]</span>
     <span class="n">model2</span><span class="o">.</span><span class="n">integrate_years</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
     <span class="n">icelat_cooling</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">model2</span><span class="o">.</span><span class="n">icelat</span><span class="p">)</span>
-<span class="c1"># Then warm...</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Integrating for 450 steps, 1826.2110000000002 days, or 5 years.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Total elapsed time is 5.000000000000044 years.
+[-70.  70.]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Then warm...</span>
 <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">S0array</span><span class="o">.</span><span class="n">size</span><span class="p">):</span>
     <span class="n">model2</span><span class="o">.</span><span class="n">subprocess</span><span class="p">[</span><span class="s1">&#39;insolation&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">S0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">flipud</span><span class="p">(</span><span class="n">S0array</span><span class="p">)[</span><span class="n">n</span><span class="p">]</span>
     <span class="n">model2</span><span class="o">.</span><span class="n">integrate_years</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
     <span class="n">icelat_warming</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">model2</span><span class="o">.</span><span class="n">icelat</span><span class="p">)</span>
-
-<span class="n">model3</span> <span class="o">=</span> <span class="n">climlab</span><span class="o">.</span><span class="n">EBM_annual</span><span class="p">(</span><span class="n">num_lat</span><span class="o">=</span><span class="mi">180</span><span class="p">,</span> <span class="o">**</span><span class="n">param</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model3</span> <span class="o">=</span> <span class="n">climlab</span><span class="o">.</span><span class="n">EBM_annual</span><span class="p">(</span><span class="n">num_lat</span><span class="o">=</span><span class="mi">180</span><span class="p">,</span> <span class="o">**</span><span class="n">param</span><span class="p">)</span>
 <span class="n">S0array3</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">1350.</span><span class="p">,</span> <span class="mf">1400.</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span>
 <span class="c1">#S0array3 = np.linspace(1350., 1400., 5)</span>
 <span class="n">icelat3</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty_like</span><span class="p">(</span><span class="n">S0array3</span><span class="p">)</span>
@@ -564,13 +590,7 @@ Total elapsed time is 5.000000000000044 years.
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Integrating for 450 steps, 1826.2110000000002 days, or 5 years.
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Total elapsed time is 5.000000000000044 years.
-[-70.  70.]
-</pre></div>
-</div>
+<img alt="../_images/1f8fba56be57d2cdcfdd3916f430629d37459f928c37f832139dd7755ace06fa.png" src="../_images/1f8fba56be57d2cdcfdd3916f430629d37459f928c37f832139dd7755ace06fa.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -590,8 +610,28 @@ Total elapsed time is 5.000000000000044 years.
 <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">();</span> <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">my_ticks</span><span class="p">);</span>
 
 <span class="nb">print</span><span class="p">(</span> <span class="n">model4</span><span class="o">.</span><span class="n">global_mean_temperature</span><span class="p">()</span> <span class="p">)</span>
-
-<span class="n">S0array_snowballmelt</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">1400.</span><span class="p">,</span> <span class="mf">1900.</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Integrating for 3600 steps, 14609.688000000002 days, or 40 years.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Total elapsed time is 1045.000000000071 years.
+The ice edge is at [-0.  0.] degrees latitude.
+Integrating for 900 steps, 3652.4220000000005 days, or 10 years.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Total elapsed time is 1055.0000000001087 years.
+57.73267527507378
+</pre></div>
+</div>
+<img alt="../_images/c05013795407e2e844afa51e6e29194ad5d01aaac652ee73d0574462c593b1d7.png" src="../_images/c05013795407e2e844afa51e6e29194ad5d01aaac652ee73d0574462c593b1d7.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">S0array_snowballmelt</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">1400.</span><span class="p">,</span> <span class="mf">1900.</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span>
 <span class="n">icelat_snowballmelt</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty_like</span><span class="p">(</span><span class="n">S0array_snowballmelt</span><span class="p">)</span>
 <span class="n">icelat_snowballmelt_cooling</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty_like</span><span class="p">(</span><span class="n">S0array_snowballmelt</span><span class="p">)</span>
 
@@ -599,8 +639,13 @@ Total elapsed time is 5.000000000000044 years.
     <span class="n">model2</span><span class="o">.</span><span class="n">subprocess</span><span class="p">[</span><span class="s1">&#39;insolation&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">S0</span> <span class="o">=</span> <span class="n">S0array_snowballmelt</span><span class="p">[</span><span class="n">n</span><span class="p">]</span>
     <span class="n">model2</span><span class="o">.</span><span class="n">integrate_years</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
     <span class="n">icelat_snowballmelt</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">model2</span><span class="o">.</span><span class="n">icelat</span><span class="p">)</span>
-
-<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">S0array_snowballmelt</span><span class="o">.</span><span class="n">size</span><span class="p">):</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">S0array_snowballmelt</span><span class="o">.</span><span class="n">size</span><span class="p">):</span>
     <span class="n">model2</span><span class="o">.</span><span class="n">subprocess</span><span class="p">[</span><span class="s1">&#39;insolation&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">S0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">flipud</span><span class="p">(</span><span class="n">S0array_snowballmelt</span><span class="p">)[</span><span class="n">n</span><span class="p">]</span>
     <span class="n">model2</span><span class="o">.</span><span class="n">integrate_years</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
     <span class="n">icelat_snowballmelt_cooling</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">model2</span><span class="o">.</span><span class="n">icelat</span><span class="p">)</span>
@@ -624,13 +669,10 @@ Total elapsed time is 5.000000000000044 years.
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../_images/4969f6e09203d67b0f19998c1e45d09134bd6e6d57175295701a3ca1e7fe25e7.png" src="../_images/4969f6e09203d67b0f19998c1e45d09134bd6e6d57175295701a3ca1e7fe25e7.png" />
 </div>
-</section>
-<section id="hysteresis">
-<h2>Hysteresis<a class="headerlink" href="#hysteresis" title="Permalink to this heading">#</a></h2>
-<figure class="align-default">
-<a class="reference internal image-reference" href="../_images/ball_snow_tmp1.jpg"><img alt="../_images/ball_snow_tmp1.jpg" src="../_images/ball_snow_tmp1.jpg" style="width: 800.0px; height: 480.0px;" /></a>
-</figure>
+</div>
 <p>We could get from the above results:</p>
 <ul class="simple">
 <li><p>For extremely large <span class="math notranslate nohighlight">\(S_0\)</span>, the only possible climate is a hot Earth with no ice.</p></li>

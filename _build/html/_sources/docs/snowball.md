@@ -157,9 +157,11 @@ We again calculate the feedback parameter:
 
 Below the code may not be run on your laptop.
 
+## Hysteresis
+
 ```{code-cell} ipython3
 model2 = climlab.EBM_annual(num_lat = 180, **param)
-S0array = np.linspace(1400., 1200., 100)
+S0array = np.linspace(1400., 1200., 50)
 model2.integrate_years(5)
 
 print( model2.icelat)
@@ -172,12 +174,19 @@ for n in range(S0array.size):
     model2.subprocess['insolation'].S0 = S0array[n]
     model2.integrate_years(10, verbose=False)
     icelat_cooling[n] = np.max(model2.icelat)
+
+```
+
+```{code-cell} ipython3
 # Then warm...
 for n in range(S0array.size):
     model2.subprocess['insolation'].S0 = np.flipud(S0array)[n]
     model2.integrate_years(10, verbose=False)
     icelat_warming[n] = np.max(model2.icelat)
 
+```
+
+```{code-cell} ipython3
 model3 = climlab.EBM_annual(num_lat=180, **param)
 S0array3 = np.linspace(1350., 1400., 50)
 #S0array3 = np.linspace(1350., 1400., 5)
@@ -219,6 +228,9 @@ plt.grid(); plt.xticks(my_ticks);
 
 print( model4.global_mean_temperature() )
 
+```
+
+```{code-cell} ipython3
 S0array_snowballmelt = np.linspace(1400., 1900., 50)
 icelat_snowballmelt = np.empty_like(S0array_snowballmelt)
 icelat_snowballmelt_cooling = np.empty_like(S0array_snowballmelt)
@@ -228,6 +240,9 @@ for n in range(S0array_snowballmelt.size):
     model2.integrate_years(10, verbose=False)
     icelat_snowballmelt[n] = np.max(model2.icelat)
 
+```
+
+```{code-cell} ipython3
 for n in range(S0array_snowballmelt.size):
     model2.subprocess['insolation'].S0 = np.flipud(S0array_snowballmelt)[n]
     model2.integrate_years(10, verbose=False)
@@ -250,12 +265,6 @@ ax.plot( [const.S0, const.S0], [-10, 100], 'k--', label='present-day' )
 ax.legend(loc='upper left')
 ax.set_title('Solar constant versus ice edge latitude in the EBM with albedo feedback', fontsize=16);
 
-```
-
-## Hysteresis
-
-```{figure} /_static/lecture_specific/lecture1_figures/ball_snow_tmp1.jpg
-:scale: 40%
 ```
 
 We could get from the above results:
