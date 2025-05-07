@@ -1,0 +1,1026 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>A1. Polar Amplification &#8212; Polar Climate Change Home</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=ac02cc09edc035673794" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=ac02cc09edc035673794" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=ac02cc09edc035673794" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=ac02cc09edc035673794" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=ac02cc09edc035673794" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=ac02cc09edc035673794" />
+  <script src="../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=ac02cc09edc035673794"></script>
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'docs/polar_amplification';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="A2. The History of Climate Modeling" href="history_modelling.html" />
+    <link rel="prev" title="20. Observations" href="observations.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="index.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/front_page_image.jpg" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../_static/front_page_image.jpg" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="syllabus.html">1. Syllabus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="overview_arctic.html">2. Overview of Arctic and Antarctic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="snow.html">3. Snow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="permafrost.html">4. Permafrost</a></li>
+<li class="toctree-l1"><a class="reference internal" href="glaciers.html">5. Glaciers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sea_ice.html">6. Sea ice</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pv_ssw.html">7. Polar Stratospheric Circulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cause_aa.html">8. Causes of Polar Amplification</a></li>
+<li class="toctree-l1"><a class="reference internal" href="zero_dim_model.html">9. Zero-dimensional Energy Balance Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="layer_model.html">10. Layered Energy Balance Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rce_model.html">11. Radiative Convective Equilibrium (RCE)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="climate_sensitivity.html">12. Climate Sensitivity and Feedback</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rae_model.html">13. Radiative Advective Equilibrium (RAE)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="one_dim_ebm.html">14. One-dimensional Energy Balance Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="seasonality.html">15. Seasonal cycle</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ice_albedo_ebm.html">16. Ice Albedo Feedback in EBM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="diffusive_response.html">17. Diffusive Response</a></li>
+<li class="toctree-l1"><a class="reference internal" href="snowball.html">18. Snowball Earth</a></li>
+<li class="toctree-l1"><a class="reference internal" href="effect_aa.html">19. Arctic-Midlatitude Linkage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="observations.html">20. Observations</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">A1. Polar Amplification</a></li>
+<li class="toctree-l1"><a class="reference internal" href="history_modelling.html">A2. The History of Climate Modeling</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/docs/polar_amplification.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>A1. Polar Amplification</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ebm-with-surface-and-atmosphere-layers">EBM with surface and atmosphere layers</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#include-meridional-heat-transport">Include meridional heat transport</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exclude-evaporation">Exclude evaporation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#column-model">Column model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Include meridional heat transport</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Exclude evaporation</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="a1-polar-amplification">
+<span id="polar-amplification"></span><h1>A1. Polar Amplification<a class="headerlink" href="#a1-polar-amplification" title="Permalink to this heading">#</a></h1>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The materials and scripts are obtained from climlab tutorial: <a class="reference external" href="https://climlab.readthedocs.io/en/latest/courseware/PolarAmplification.html">here</a></p>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">climlab</span>
+<span class="kn">from</span> <span class="nn">climlab</span> <span class="kn">import</span> <span class="n">constants</span> <span class="k">as</span> <span class="n">const</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="ebm-with-surface-and-atmosphere-layers">
+<h2>EBM with surface and atmosphere layers<a class="headerlink" href="#ebm-with-surface-and-atmosphere-layers" title="Permalink to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ebm</span> <span class="o">=</span> <span class="n">climlab</span><span class="o">.</span><span class="n">GreyRadiationModel</span><span class="p">(</span><span class="n">num_lev</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">num_lat</span><span class="o">=</span><span class="mi">90</span><span class="p">)</span>
+<span class="n">insolation</span> <span class="o">=</span> <span class="n">climlab</span><span class="o">.</span><span class="n">radiation</span><span class="o">.</span><span class="n">AnnualMeanInsolation</span><span class="p">(</span><span class="n">domains</span><span class="o">=</span><span class="n">ebm</span><span class="o">.</span><span class="n">Ts</span><span class="o">.</span><span class="n">domain</span><span class="p">)</span>
+<span class="n">ebm</span><span class="o">.</span><span class="n">add_subprocess</span><span class="p">(</span><span class="s1">&#39;insolation&#39;</span><span class="p">,</span> <span class="n">insolation</span><span class="p">)</span>
+<span class="n">ebm</span><span class="o">.</span><span class="n">subprocess</span><span class="o">.</span><span class="n">SW</span><span class="o">.</span><span class="n">flux_from_space</span> <span class="o">=</span> <span class="n">ebm</span><span class="o">.</span><span class="n">subprocess</span><span class="o">.</span><span class="n">insolation</span><span class="o">.</span><span class="n">insolation</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">ebm</span><span class="p">)</span>
+
+<span class="c1">#  add a fixed relative humidity process</span>
+<span class="c1">#  (will only affect surface evaporation)</span>
+<span class="n">h2o</span> <span class="o">=</span> <span class="n">climlab</span><span class="o">.</span><span class="n">radiation</span><span class="o">.</span><span class="n">ManabeWaterVapor</span><span class="p">(</span><span class="n">state</span><span class="o">=</span><span class="n">ebm</span><span class="o">.</span><span class="n">state</span><span class="p">,</span> <span class="o">**</span><span class="n">ebm</span><span class="o">.</span><span class="n">param</span><span class="p">)</span>
+<span class="n">ebm</span><span class="o">.</span><span class="n">add_subprocess</span><span class="p">(</span><span class="s1">&#39;H2O&#39;</span><span class="p">,</span> <span class="n">h2o</span><span class="p">)</span>
+
+<span class="c1">#  Add surface heat fluxes</span>
+<span class="n">shf</span> <span class="o">=</span> <span class="n">climlab</span><span class="o">.</span><span class="n">surface</span><span class="o">.</span><span class="n">SensibleHeatFlux</span><span class="p">(</span><span class="n">state</span><span class="o">=</span><span class="n">ebm</span><span class="o">.</span><span class="n">state</span><span class="p">,</span> <span class="n">Cd</span><span class="o">=</span><span class="mf">3E-4</span><span class="p">)</span>
+<span class="n">lhf</span> <span class="o">=</span> <span class="n">climlab</span><span class="o">.</span><span class="n">surface</span><span class="o">.</span><span class="n">LatentHeatFlux</span><span class="p">(</span><span class="n">state</span><span class="o">=</span><span class="n">ebm</span><span class="o">.</span><span class="n">state</span><span class="p">,</span> <span class="n">Cd</span><span class="o">=</span><span class="mf">3E-4</span><span class="p">)</span>
+<span class="c1"># couple water vapor to latent heat flux process</span>
+<span class="n">lhf</span><span class="o">.</span><span class="n">q</span> <span class="o">=</span> <span class="n">h2o</span><span class="o">.</span><span class="n">q</span>
+<span class="n">ebm</span><span class="o">.</span><span class="n">add_subprocess</span><span class="p">(</span><span class="s1">&#39;SHF&#39;</span><span class="p">,</span> <span class="n">shf</span><span class="p">)</span>
+<span class="n">ebm</span><span class="o">.</span><span class="n">add_subprocess</span><span class="p">(</span><span class="s1">&#39;LHF&#39;</span><span class="p">,</span> <span class="n">lhf</span><span class="p">)</span>
+
+<span class="n">ebm</span><span class="o">.</span><span class="n">integrate_years</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ebm</span><span class="o">.</span><span class="n">lat</span><span class="p">,</span> <span class="n">ebm</span><span class="o">.</span><span class="n">Ts</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ebm</span><span class="o">.</span><span class="n">lat</span><span class="p">,</span> <span class="n">ebm</span><span class="o">.</span><span class="n">Tatm</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>climlab Process of type &lt;class &#39;climlab.model.column.GreyRadiationModel&#39;&gt;. 
+State variables and domain shapes: 
+  Ts: (90, 1) 
+  Tatm: (90, 1) 
+The subprocess tree: 
+Untitled: &lt;class &#39;climlab.model.column.GreyRadiationModel&#39;&gt;
+   LW: &lt;class &#39;climlab.radiation.greygas.GreyGas&#39;&gt;
+   SW: &lt;class &#39;climlab.radiation.greygas.GreyGasSW&#39;&gt;
+   insolation: &lt;class &#39;climlab.radiation.insolation.AnnualMeanInsolation&#39;&gt;
+
+Integrating for 365 steps, 365.2422 days, or 1 years.
+Total elapsed time is 0.9993368783782377 years.
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x14a377610&gt;]
+</pre></div>
+</div>
+<img alt="../_images/e16cef1ef33d7237018326614d9cf323b90d27eb5666944d89217c2b62e8bd02.png" src="../_images/e16cef1ef33d7237018326614d9cf323b90d27eb5666944d89217c2b62e8bd02.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">co2ebm</span> <span class="o">=</span> <span class="n">climlab</span><span class="o">.</span><span class="n">process_like</span><span class="p">(</span><span class="n">ebm</span><span class="p">)</span>
+<span class="n">co2ebm</span><span class="o">.</span><span class="n">subprocess</span><span class="p">[</span><span class="s1">&#39;LW&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">absorptivity</span> <span class="o">=</span> <span class="n">ebm</span><span class="o">.</span><span class="n">subprocess</span><span class="p">[</span><span class="s1">&#39;LW&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">absorptivity</span><span class="o">*</span><span class="mf">1.1</span>
+
+<span class="n">co2ebm</span><span class="o">.</span><span class="n">integrate_years</span><span class="p">(</span><span class="mf">3.</span><span class="p">)</span>
+
+<span class="c1">#  no heat transport but with evaporation -- no polar amplification</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ebm</span><span class="o">.</span><span class="n">lat</span><span class="p">,</span> <span class="n">co2ebm</span><span class="o">.</span><span class="n">Ts</span> <span class="o">-</span> <span class="n">ebm</span><span class="o">.</span><span class="n">Ts</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ebm</span><span class="o">.</span><span class="n">lat</span><span class="p">,</span> <span class="n">co2ebm</span><span class="o">.</span><span class="n">Tatm</span> <span class="o">-</span> <span class="n">ebm</span><span class="o">.</span><span class="n">Tatm</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Integrating for 1095 steps, 1095.7266 days, or 3.0 years.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Total elapsed time is 3.997347513512951 years.
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x14a468cd0&gt;]
+</pre></div>
+</div>
+<img alt="../_images/12f900ad1e5fffb3b94d1b8e05326cd832ff2b02490d97d04cee07fb23309435.png" src="../_images/12f900ad1e5fffb3b94d1b8e05326cd832ff2b02490d97d04cee07fb23309435.png" />
+</div>
+</div>
+</section>
+<section id="include-meridional-heat-transport">
+<h2>Include meridional heat transport<a class="headerlink" href="#include-meridional-heat-transport" title="Permalink to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">diffebm</span> <span class="o">=</span> <span class="n">climlab</span><span class="o">.</span><span class="n">process_like</span><span class="p">(</span><span class="n">ebm</span><span class="p">)</span>
+<span class="c1"># thermal diffusivity in W/m**2/degC</span>
+<span class="n">D</span> <span class="o">=</span> <span class="mf">0.6</span>
+<span class="c1"># meridional diffusivity in m**2/s</span>
+<span class="n">K</span> <span class="o">=</span> <span class="n">D</span> <span class="o">/</span> <span class="n">diffebm</span><span class="o">.</span><span class="n">Tatm</span><span class="o">.</span><span class="n">domain</span><span class="o">.</span><span class="n">heat_capacity</span> <span class="o">*</span> <span class="n">const</span><span class="o">.</span><span class="n">a</span><span class="o">**</span><span class="mi">2</span>
+<span class="n">d</span> <span class="o">=</span> <span class="n">climlab</span><span class="o">.</span><span class="n">dynamics</span><span class="o">.</span><span class="n">MeridionalDiffusion</span><span class="p">(</span><span class="n">K</span><span class="o">=</span><span class="n">K</span><span class="p">,</span> <span class="n">state</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;Tatm&#39;</span><span class="p">:</span> <span class="n">diffebm</span><span class="o">.</span><span class="n">Tatm</span><span class="p">},</span> <span class="o">**</span><span class="n">diffebm</span><span class="o">.</span><span class="n">param</span><span class="p">)</span>
+<span class="n">diffebm</span><span class="o">.</span><span class="n">add_subprocess</span><span class="p">(</span><span class="s1">&#39;diffusion&#39;</span><span class="p">,</span> <span class="n">d</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">diffebm</span><span class="p">)</span>
+
+<span class="n">diffebm</span><span class="o">.</span><span class="n">integrate_years</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">diffebm</span><span class="o">.</span><span class="n">lat</span><span class="p">,</span> <span class="n">diffebm</span><span class="o">.</span><span class="n">Ts</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">diffebm</span><span class="o">.</span><span class="n">lat</span><span class="p">,</span> <span class="n">diffebm</span><span class="o">.</span><span class="n">Tatm</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>climlab Process of type &lt;class &#39;climlab.model.column.GreyRadiationModel&#39;&gt;. 
+State variables and domain shapes: 
+  Ts: (90, 1) 
+  Tatm: (90, 1) 
+The subprocess tree: 
+Untitled: &lt;class &#39;climlab.model.column.GreyRadiationModel&#39;&gt;
+   LW: &lt;class &#39;climlab.radiation.greygas.GreyGas&#39;&gt;
+   SW: &lt;class &#39;climlab.radiation.greygas.GreyGasSW&#39;&gt;
+   insolation: &lt;class &#39;climlab.radiation.insolation.AnnualMeanInsolation&#39;&gt;
+   H2O: &lt;class &#39;climlab.radiation.water_vapor.ManabeWaterVapor&#39;&gt;
+   SHF: &lt;class &#39;climlab.surface.turbulent.SensibleHeatFlux&#39;&gt;
+   LHF: &lt;class &#39;climlab.surface.turbulent.LatentHeatFlux&#39;&gt;
+   diffusion: &lt;class &#39;climlab.dynamics.meridional_advection_diffusion.MeridionalDiffusion&#39;&gt;
+
+Integrating for 1095 steps, 1095.7266 days, or 3 years.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Total elapsed time is 3.997347513512951 years.
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x14a6e0310&gt;]
+</pre></div>
+</div>
+<img alt="../_images/b6bb320373add7b59be1ae4e99632dc7b3ccea8e43bd6e456728f2e6e0991d5d.png" src="../_images/b6bb320373add7b59be1ae4e99632dc7b3ccea8e43bd6e456728f2e6e0991d5d.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">inferred_heat_transport</span><span class="p">(</span> <span class="n">energy_in</span><span class="p">,</span> <span class="n">lat_deg</span> <span class="p">):</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;Returns the inferred heat transport (in PW) by integrating the net energy imbalance from pole to pole.&#39;&#39;&#39;</span>
+    <span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">integrate</span>
+    <span class="kn">from</span> <span class="nn">climlab</span> <span class="kn">import</span> <span class="n">constants</span> <span class="k">as</span> <span class="n">const</span>
+    <span class="n">lat_rad</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">deg2rad</span><span class="p">(</span> <span class="n">lat_deg</span> <span class="p">)</span>
+    <span class="k">return</span> <span class="p">(</span> <span class="mf">1E-15</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">math</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">const</span><span class="o">.</span><span class="n">a</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">integrate</span><span class="o">.</span><span class="n">cumtrapz</span><span class="p">(</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">lat_rad</span><span class="p">)</span><span class="o">*</span><span class="n">energy_in</span><span class="p">,</span>
+            <span class="n">x</span><span class="o">=</span><span class="n">lat_rad</span><span class="p">,</span> <span class="n">initial</span><span class="o">=</span><span class="mf">0.</span> <span class="p">)</span> <span class="p">)</span>
+
+<span class="c1">#  Plot the northward heat transport in this model</span>
+<span class="n">Rtoa</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(</span><span class="n">diffebm</span><span class="o">.</span><span class="n">timeave</span><span class="p">[</span><span class="s1">&#39;ASR&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">diffebm</span><span class="o">.</span><span class="n">timeave</span><span class="p">[</span><span class="s1">&#39;OLR&#39;</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">diffebm</span><span class="o">.</span><span class="n">lat</span><span class="p">,</span> <span class="n">inferred_heat_transport</span><span class="p">(</span><span class="n">Rtoa</span><span class="p">,</span> <span class="n">diffebm</span><span class="o">.</span><span class="n">lat</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/z_/36cc8kqx7pqf8lzjc5cp2cf00000gn/T/ipykernel_29629/4142479116.py:6: DeprecationWarning: &#39;scipy.integrate.cumtrapz&#39; is deprecated in favour of &#39;scipy.integrate.cumulative_trapezoid&#39; and will be removed in SciPy 1.14.0
+  return ( 1E-15 * 2 * np.math.pi * const.a**2 * integrate.cumtrapz( np.cos(lat_rad)*energy_in,
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x14a74fe90&gt;]
+</pre></div>
+</div>
+<img alt="../_images/b3da4c9eac72d59b2d595be58631b3dbd29a049228e9a85695729ccef933b98f.png" src="../_images/b3da4c9eac72d59b2d595be58631b3dbd29a049228e9a85695729ccef933b98f.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">##  Now warm it up!</span>
+<span class="n">co2diffebm</span> <span class="o">=</span> <span class="n">climlab</span><span class="o">.</span><span class="n">process_like</span><span class="p">(</span><span class="n">diffebm</span><span class="p">)</span>
+<span class="n">co2diffebm</span><span class="o">.</span><span class="n">subprocess</span><span class="p">[</span><span class="s1">&#39;LW&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">absorptivity</span> <span class="o">=</span> <span class="n">diffebm</span><span class="o">.</span><span class="n">subprocess</span><span class="p">[</span><span class="s1">&#39;LW&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">absorptivity</span><span class="o">*</span><span class="mf">1.1</span>
+
+<span class="n">co2diffebm</span><span class="o">.</span><span class="n">integrate_years</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+
+<span class="c1">#  with heat transport and evaporation</span>
+<span class="c1">#   Get some modest polar amplifcation of surface warming</span>
+<span class="c1">#    but larger equatorial amplification of atmospheric warming</span>
+<span class="c1">#    Increased atmospheric gradient = increased poleward flux.</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">diffebm</span><span class="o">.</span><span class="n">lat</span><span class="p">,</span> <span class="n">co2diffebm</span><span class="o">.</span><span class="n">Ts</span> <span class="o">-</span> <span class="n">diffebm</span><span class="o">.</span><span class="n">Ts</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Ts&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">diffebm</span><span class="o">.</span><span class="n">lat</span><span class="p">,</span> <span class="n">co2diffebm</span><span class="o">.</span><span class="n">Tatm</span> <span class="o">-</span> <span class="n">diffebm</span><span class="o">.</span><span class="n">Tatm</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Tatm&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Integrating for 1826 steps, 1826.2110000000002 days, or 5 years.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Total elapsed time is 8.99676981465997 years.
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x149f8b4d0&gt;
+</pre></div>
+</div>
+<img alt="../_images/d9b5176855cb2137fd9f7ecdef409d696f8dbdda2cd2b0a9df764ae063f07d19.png" src="../_images/d9b5176855cb2137fd9f7ecdef409d696f8dbdda2cd2b0a9df764ae063f07d19.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Rtoa</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(</span><span class="n">diffebm</span><span class="o">.</span><span class="n">timeave</span><span class="p">[</span><span class="s1">&#39;ASR&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">diffebm</span><span class="o">.</span><span class="n">timeave</span><span class="p">[</span><span class="s1">&#39;OLR&#39;</span><span class="p">])</span>
+<span class="n">Rtoa_co2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(</span><span class="n">co2diffebm</span><span class="o">.</span><span class="n">timeave</span><span class="p">[</span><span class="s1">&#39;ASR&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">co2diffebm</span><span class="o">.</span><span class="n">timeave</span><span class="p">[</span><span class="s1">&#39;OLR&#39;</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">diffebm</span><span class="o">.</span><span class="n">lat</span><span class="p">,</span> <span class="n">inferred_heat_transport</span><span class="p">(</span><span class="n">Rtoa</span><span class="p">,</span> <span class="n">diffebm</span><span class="o">.</span><span class="n">lat</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;1xCO2&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">diffebm</span><span class="o">.</span><span class="n">lat</span><span class="p">,</span> <span class="n">inferred_heat_transport</span><span class="p">(</span><span class="n">Rtoa_co2</span><span class="p">,</span> <span class="n">diffebm</span><span class="o">.</span><span class="n">lat</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;2xCO2&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/z_/36cc8kqx7pqf8lzjc5cp2cf00000gn/T/ipykernel_29629/4142479116.py:6: DeprecationWarning: &#39;scipy.integrate.cumtrapz&#39; is deprecated in favour of &#39;scipy.integrate.cumulative_trapezoid&#39; and will be removed in SciPy 1.14.0
+  return ( 1E-15 * 2 * np.math.pi * const.a**2 * integrate.cumtrapz( np.cos(lat_rad)*energy_in,
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x14b041dd0&gt;
+</pre></div>
+</div>
+<img alt="../_images/995925fa65ac1e4f97a508de29c0a8effb7ba203059213b6b5bde7f8537a24c5.png" src="../_images/995925fa65ac1e4f97a508de29c0a8effb7ba203059213b6b5bde7f8537a24c5.png" />
+</div>
+</div>
+</section>
+<section id="exclude-evaporation">
+<h2>Exclude evaporation<a class="headerlink" href="#exclude-evaporation" title="Permalink to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">diffebm2</span> <span class="o">=</span> <span class="n">climlab</span><span class="o">.</span><span class="n">process_like</span><span class="p">(</span><span class="n">diffebm</span><span class="p">)</span>
+<span class="n">diffebm2</span><span class="o">.</span><span class="n">remove_subprocess</span><span class="p">(</span><span class="s1">&#39;LHF&#39;</span><span class="p">)</span>
+<span class="n">diffebm2</span><span class="o">.</span><span class="n">integrate_years</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">co2diffebm2</span> <span class="o">=</span> <span class="n">climlab</span><span class="o">.</span><span class="n">process_like</span><span class="p">(</span><span class="n">co2diffebm</span><span class="p">)</span>
+<span class="n">co2diffebm2</span><span class="o">.</span><span class="n">remove_subprocess</span><span class="p">(</span><span class="s1">&#39;LHF&#39;</span><span class="p">)</span>
+<span class="n">co2diffebm2</span><span class="o">.</span><span class="n">integrate_years</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+
+<span class="c1">#  With transport and no evaporation...</span>
+<span class="c1">#  No polar amplification, either of surface or air temperature!</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">diffebm2</span><span class="o">.</span><span class="n">lat</span><span class="p">,</span> <span class="n">co2diffebm2</span><span class="o">.</span><span class="n">Ts</span> <span class="o">-</span> <span class="n">diffebm2</span><span class="o">.</span><span class="n">Ts</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Ts&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">diffebm2</span><span class="o">.</span><span class="n">lat</span><span class="p">,</span> <span class="n">co2diffebm2</span><span class="o">.</span><span class="n">Tatm</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">diffebm2</span><span class="o">.</span><span class="n">Tatm</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Tatm&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+
+<span class="c1">#  And in this case, the lack of polar amplification is DESPITE an increase in the poleward heat transport.</span>
+<span class="n">Rtoa</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(</span><span class="n">diffebm2</span><span class="o">.</span><span class="n">timeave</span><span class="p">[</span><span class="s1">&#39;ASR&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">diffebm2</span><span class="o">.</span><span class="n">timeave</span><span class="p">[</span><span class="s1">&#39;OLR&#39;</span><span class="p">])</span>
+<span class="n">Rtoa_co2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(</span><span class="n">co2diffebm2</span><span class="o">.</span><span class="n">timeave</span><span class="p">[</span><span class="s1">&#39;ASR&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">co2diffebm2</span><span class="o">.</span><span class="n">timeave</span><span class="p">[</span><span class="s1">&#39;OLR&#39;</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">diffebm2</span><span class="o">.</span><span class="n">lat</span><span class="p">,</span> <span class="n">inferred_heat_transport</span><span class="p">(</span><span class="n">Rtoa</span><span class="p">,</span> <span class="n">diffebm2</span><span class="o">.</span><span class="n">lat</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;1xCO2&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">diffebm2</span><span class="o">.</span><span class="n">lat</span><span class="p">,</span> <span class="n">inferred_heat_transport</span><span class="p">(</span><span class="n">Rtoa_co2</span><span class="p">,</span> <span class="n">diffebm2</span><span class="o">.</span><span class="n">lat</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;2xCO2&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Integrating for 1095 steps, 1095.7266 days, or 3 years.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Total elapsed time is 6.995358148647664 years.
+Integrating for 1095 steps, 1095.7266 days, or 3 years.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Total elapsed time is 11.994780449794684 years.
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/z_/36cc8kqx7pqf8lzjc5cp2cf00000gn/T/ipykernel_29629/4142479116.py:6: DeprecationWarning: &#39;scipy.integrate.cumtrapz&#39; is deprecated in favour of &#39;scipy.integrate.cumulative_trapezoid&#39; and will be removed in SciPy 1.14.0
+  return ( 1E-15 * 2 * np.math.pi * const.a**2 * integrate.cumtrapz( np.cos(lat_rad)*energy_in,
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x14b1ed9d0&gt;
+</pre></div>
+</div>
+<img alt="../_images/1b5f4d7169dc966a090dd2faa6013ff98c86ca84f6a599cfdfc9ff35768181c1.png" src="../_images/1b5f4d7169dc966a090dd2faa6013ff98c86ca84f6a599cfdfc9ff35768181c1.png" />
+<img alt="../_images/966c8652a11e24e9952914d2cdefeb8a4bf201947550a9b0c8cefdd452fba5e6.png" src="../_images/966c8652a11e24e9952914d2cdefeb8a4bf201947550a9b0c8cefdd452fba5e6.png" />
+</div>
+</div>
+</section>
+<section id="column-model">
+<h2>Column model<a class="headerlink" href="#column-model" title="Permalink to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="n">climlab</span><span class="o">.</span><span class="n">GreyRadiationModel</span><span class="p">(</span><span class="n">num_lev</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">num_lat</span><span class="o">=</span><span class="mi">90</span><span class="p">,</span> <span class="n">abs_coeff</span><span class="o">=</span><span class="mf">1.6E-4</span><span class="p">)</span>
+<span class="n">insolation</span> <span class="o">=</span> <span class="n">climlab</span><span class="o">.</span><span class="n">radiation</span><span class="o">.</span><span class="n">AnnualMeanInsolation</span><span class="p">(</span><span class="n">domains</span><span class="o">=</span><span class="n">model</span><span class="o">.</span><span class="n">Ts</span><span class="o">.</span><span class="n">domain</span><span class="p">)</span>
+<span class="n">model</span><span class="o">.</span><span class="n">add_subprocess</span><span class="p">(</span><span class="s1">&#39;insolation&#39;</span><span class="p">,</span> <span class="n">insolation</span><span class="p">)</span>
+<span class="n">model</span><span class="o">.</span><span class="n">subprocess</span><span class="o">.</span><span class="n">SW</span><span class="o">.</span><span class="n">flux_from_space</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">subprocess</span><span class="o">.</span><span class="n">insolation</span><span class="o">.</span><span class="n">insolation</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+
+<span class="c1">#  Convective adjustment for atmosphere only</span>
+<span class="n">conv</span> <span class="o">=</span> <span class="n">climlab</span><span class="o">.</span><span class="n">convection</span><span class="o">.</span><span class="n">ConvectiveAdjustment</span><span class="p">(</span><span class="n">state</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;Tatm&#39;</span><span class="p">:</span><span class="n">model</span><span class="o">.</span><span class="n">Tatm</span><span class="p">},</span> <span class="n">adj_lapse_rate</span><span class="o">=</span><span class="mf">6.5</span><span class="p">,</span>
+                                                       <span class="o">**</span><span class="n">model</span><span class="o">.</span><span class="n">param</span><span class="p">)</span>
+<span class="n">model</span><span class="o">.</span><span class="n">add_subprocess</span><span class="p">(</span><span class="s1">&#39;convective adjustment&#39;</span><span class="p">,</span> <span class="n">conv</span><span class="p">)</span>
+
+<span class="c1">#  add a fixed relative humidity process</span>
+<span class="c1">#  (will only affect surface evaporation)</span>
+<span class="n">h2o</span> <span class="o">=</span> <span class="n">climlab</span><span class="o">.</span><span class="n">radiation</span><span class="o">.</span><span class="n">water_vapor</span><span class="o">.</span><span class="n">ManabeWaterVapor</span><span class="p">(</span><span class="n">state</span><span class="o">=</span><span class="n">model</span><span class="o">.</span><span class="n">state</span><span class="p">,</span> <span class="o">**</span><span class="n">model</span><span class="o">.</span><span class="n">param</span><span class="p">)</span>
+<span class="n">model</span><span class="o">.</span><span class="n">add_subprocess</span><span class="p">(</span><span class="s1">&#39;H2O&#39;</span><span class="p">,</span> <span class="n">h2o</span><span class="p">)</span>
+
+<span class="c1">#  Add surface heat fluxes</span>
+<span class="n">shf</span> <span class="o">=</span> <span class="n">climlab</span><span class="o">.</span><span class="n">surface</span><span class="o">.</span><span class="n">SensibleHeatFlux</span><span class="p">(</span><span class="n">state</span><span class="o">=</span><span class="n">model</span><span class="o">.</span><span class="n">state</span><span class="p">,</span> <span class="n">Cd</span><span class="o">=</span><span class="mf">1E-3</span><span class="p">)</span>
+<span class="n">lhf</span> <span class="o">=</span> <span class="n">climlab</span><span class="o">.</span><span class="n">surface</span><span class="o">.</span><span class="n">LatentHeatFlux</span><span class="p">(</span><span class="n">state</span><span class="o">=</span><span class="n">model</span><span class="o">.</span><span class="n">state</span><span class="p">,</span> <span class="n">Cd</span><span class="o">=</span><span class="mf">1E-3</span><span class="p">)</span>
+<span class="n">lhf</span><span class="o">.</span><span class="n">q</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">subprocess</span><span class="o">.</span><span class="n">H2O</span><span class="o">.</span><span class="n">q</span>
+<span class="n">model</span><span class="o">.</span><span class="n">add_subprocess</span><span class="p">(</span><span class="s1">&#39;SHF&#39;</span><span class="p">,</span> <span class="n">shf</span><span class="p">)</span>
+<span class="n">model</span><span class="o">.</span><span class="n">add_subprocess</span><span class="p">(</span><span class="s1">&#39;LHF&#39;</span><span class="p">,</span> <span class="n">lhf</span><span class="p">)</span>
+
+<span class="n">model</span><span class="o">.</span><span class="n">integrate_years</span><span class="p">(</span><span class="mf">3.</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">plot_temp_section</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">timeave</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+    <span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">timeave</span><span class="p">:</span>
+        <span class="n">field</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">timeave</span><span class="p">[</span><span class="s1">&#39;Tatm&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">transpose</span><span class="p">()</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">field</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">Tatm</span><span class="o">.</span><span class="n">transpose</span><span class="p">()</span>
+    <span class="n">cax</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">contourf</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">lat</span><span class="p">,</span> <span class="n">model</span><span class="o">.</span><span class="n">lev</span><span class="p">,</span> <span class="n">field</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">invert_yaxis</span><span class="p">()</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="o">-</span><span class="mi">90</span><span class="p">,</span><span class="mi">90</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">([</span><span class="o">-</span><span class="mi">90</span><span class="p">,</span> <span class="o">-</span><span class="mi">60</span><span class="p">,</span> <span class="o">-</span><span class="mi">30</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">60</span><span class="p">,</span> <span class="mi">90</span><span class="p">])</span>
+    <span class="n">fig</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">cax</span><span class="p">)</span>
+
+<span class="n">plot_temp_section</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">timeave</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>climlab Process of type &lt;class &#39;climlab.model.column.GreyRadiationModel&#39;&gt;. 
+State variables and domain shapes: 
+  Ts: (90, 1) 
+  Tatm: (90, 30) 
+The subprocess tree: 
+Untitled: &lt;class &#39;climlab.model.column.GreyRadiationModel&#39;&gt;
+   LW: &lt;class &#39;climlab.radiation.greygas.GreyGas&#39;&gt;
+   SW: &lt;class &#39;climlab.radiation.greygas.GreyGasSW&#39;&gt;
+   insolation: &lt;class &#39;climlab.radiation.insolation.AnnualMeanInsolation&#39;&gt;
+
+Integrating for 1095 steps, 1095.7266 days, or 3.0 years.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Total elapsed time is 2.998010635134713 years.
+</pre></div>
+</div>
+<img alt="../_images/b0e58242cda960b1a418c1ac614fd661efe2a9d1dc15b0547bf3818f0582290e.png" src="../_images/b0e58242cda960b1a418c1ac614fd661efe2a9d1dc15b0547bf3818f0582290e.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">co2model</span> <span class="o">=</span> <span class="n">climlab</span><span class="o">.</span><span class="n">process_like</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+<span class="n">co2model</span><span class="o">.</span><span class="n">subprocess</span><span class="p">[</span><span class="s1">&#39;LW&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">absorptivity</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">subprocess</span><span class="p">[</span><span class="s1">&#39;LW&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">absorptivity</span><span class="o">*</span><span class="mf">1.1</span>
+
+<span class="n">co2model</span><span class="o">.</span><span class="n">integrate_years</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+
+<span class="n">plot_temp_section</span><span class="p">(</span><span class="n">co2model</span><span class="p">,</span> <span class="n">timeave</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="c1">#  Without transport, get equatorial amplification</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">lat</span><span class="p">,</span> <span class="n">co2model</span><span class="o">.</span><span class="n">Ts</span> <span class="o">-</span> <span class="n">model</span><span class="o">.</span><span class="n">Ts</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Ts&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">lat</span><span class="p">,</span> <span class="n">co2model</span><span class="o">.</span><span class="n">Tatm</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">model</span><span class="o">.</span><span class="n">Tatm</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Tatm&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Integrating for 1095 steps, 1095.7266 days, or 3 years.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Total elapsed time is 5.996021270269426 years.
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x14b832690&gt;
+</pre></div>
+</div>
+<img alt="../_images/e3809a33e0ddc16bd957761dbd50e1a5b0d63084d38655161fb7a02232367bfa.png" src="../_images/e3809a33e0ddc16bd957761dbd50e1a5b0d63084d38655161fb7a02232367bfa.png" />
+<img alt="../_images/caabe5d946d5b03b6a6e4254de3d0fc5e08403441cb4707ddc2be138c10000fc.png" src="../_images/caabe5d946d5b03b6a6e4254de3d0fc5e08403441cb4707ddc2be138c10000fc.png" />
+</div>
+</div>
+</section>
+<section id="id1">
+<h2>Include meridional heat transport<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">diffmodel</span> <span class="o">=</span> <span class="n">climlab</span><span class="o">.</span><span class="n">process_like</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+
+<span class="c1"># thermal diffusivity in W/m**2/degC</span>
+<span class="n">D</span> <span class="o">=</span> <span class="mf">0.05</span>
+<span class="c1"># meridional diffusivity in m**2/s</span>
+<span class="n">K</span> <span class="o">=</span> <span class="n">D</span> <span class="o">/</span> <span class="n">diffmodel</span><span class="o">.</span><span class="n">Tatm</span><span class="o">.</span><span class="n">domain</span><span class="o">.</span><span class="n">heat_capacity</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">const</span><span class="o">.</span><span class="n">a</span><span class="o">**</span><span class="mi">2</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">K</span><span class="p">)</span>
+
+<span class="n">d</span> <span class="o">=</span> <span class="n">climlab</span><span class="o">.</span><span class="n">dynamics</span><span class="o">.</span><span class="n">MeridionalDiffusion</span><span class="p">(</span><span class="n">K</span><span class="o">=</span><span class="n">K</span><span class="p">,</span> <span class="n">state</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;Tatm&#39;</span><span class="p">:</span><span class="n">diffmodel</span><span class="o">.</span><span class="n">Tatm</span><span class="p">},</span> <span class="o">**</span><span class="n">diffmodel</span><span class="o">.</span><span class="n">param</span><span class="p">)</span>
+<span class="n">diffmodel</span><span class="o">.</span><span class="n">add_subprocess</span><span class="p">(</span><span class="s1">&#39;diffusion&#39;</span><span class="p">,</span> <span class="n">d</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">diffmodel</span><span class="p">)</span>
+
+<span class="n">diffmodel</span><span class="o">.</span><span class="n">integrate_years</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+
+<span class="n">plot_temp_section</span><span class="p">(</span><span class="n">diffmodel</span><span class="p">)</span>
+
+<span class="c1">#  Plot the northward heat transport in this model</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">Rtoa</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(</span><span class="n">diffmodel</span><span class="o">.</span><span class="n">timeave</span><span class="p">[</span><span class="s1">&#39;ASR&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">diffmodel</span><span class="o">.</span><span class="n">timeave</span><span class="p">[</span><span class="s1">&#39;OLR&#39;</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">diffmodel</span><span class="o">.</span><span class="n">lat</span><span class="p">,</span> <span class="n">inferred_heat_transport</span><span class="p">(</span><span class="n">Rtoa</span><span class="p">,</span> <span class="n">diffmodel</span><span class="o">.</span><span class="n">lat</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5946637.413346613
+climlab Process of type &lt;class &#39;climlab.model.column.GreyRadiationModel&#39;&gt;. 
+State variables and domain shapes: 
+  Ts: (90, 1) 
+  Tatm: (90, 30) 
+The subprocess tree: 
+Untitled: &lt;class &#39;climlab.model.column.GreyRadiationModel&#39;&gt;
+   LW: &lt;class &#39;climlab.radiation.greygas.GreyGas&#39;&gt;
+   SW: &lt;class &#39;climlab.radiation.greygas.GreyGasSW&#39;&gt;
+   insolation: &lt;class &#39;climlab.radiation.insolation.AnnualMeanInsolation&#39;&gt;
+   convective adjustment: &lt;class &#39;climlab.convection.convadj.ConvectiveAdjustment&#39;&gt;
+   H2O: &lt;class &#39;climlab.radiation.water_vapor.ManabeWaterVapor&#39;&gt;
+   SHF: &lt;class &#39;climlab.surface.turbulent.SensibleHeatFlux&#39;&gt;
+   LHF: &lt;class &#39;climlab.surface.turbulent.LatentHeatFlux&#39;&gt;
+   diffusion: &lt;class &#39;climlab.dynamics.meridional_advection_diffusion.MeridionalDiffusion&#39;&gt;
+
+Integrating for 1095 steps, 1095.7266 days, or 3 years.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Total elapsed time is 5.996021270269426 years.
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/z_/36cc8kqx7pqf8lzjc5cp2cf00000gn/T/ipykernel_29629/4142479116.py:6: DeprecationWarning: &#39;scipy.integrate.cumtrapz&#39; is deprecated in favour of &#39;scipy.integrate.cumulative_trapezoid&#39; and will be removed in SciPy 1.14.0
+  return ( 1E-15 * 2 * np.math.pi * const.a**2 * integrate.cumtrapz( np.cos(lat_rad)*energy_in,
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x14ba58150&gt;]
+</pre></div>
+</div>
+<img alt="../_images/1ed9d32925c247112a96e803e9b04f8f00f3e1abefa023dfd7ddc27fbbff02a5.png" src="../_images/1ed9d32925c247112a96e803e9b04f8f00f3e1abefa023dfd7ddc27fbbff02a5.png" />
+<img alt="../_images/65e11b45cd2c0dcb1a63118d0b4465166b0c24efd402d3916076e4f8cb208164.png" src="../_images/65e11b45cd2c0dcb1a63118d0b4465166b0c24efd402d3916076e4f8cb208164.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">##  Now warm it up!</span>
+<span class="n">co2diffmodel</span> <span class="o">=</span> <span class="n">climlab</span><span class="o">.</span><span class="n">process_like</span><span class="p">(</span><span class="n">diffmodel</span><span class="p">)</span>
+<span class="n">co2diffmodel</span><span class="o">.</span><span class="n">subprocess</span><span class="p">[</span><span class="s1">&#39;LW&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">absorptivity</span> <span class="o">=</span> <span class="n">diffmodel</span><span class="o">.</span><span class="n">subprocess</span><span class="p">[</span><span class="s1">&#39;LW&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">absorptivity</span><span class="o">*</span><span class="mf">1.1</span>
+
+<span class="n">co2diffmodel</span><span class="o">.</span><span class="n">integrate_years</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+
+<span class="c1">#  With transport, get polar amplification...</span>
+<span class="c1">#   of surface temperature, but not of air temperature!</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">diffmodel</span><span class="o">.</span><span class="n">lat</span><span class="p">,</span> <span class="n">co2diffmodel</span><span class="o">.</span><span class="n">Ts</span> <span class="o">-</span> <span class="n">diffmodel</span><span class="o">.</span><span class="n">Ts</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Ts&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">diffmodel</span><span class="o">.</span><span class="n">lat</span><span class="p">,</span> <span class="n">co2diffmodel</span><span class="o">.</span><span class="n">Tatm</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">diffmodel</span><span class="o">.</span><span class="n">Tatm</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Tatm&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+
+
+<span class="n">Rtoa</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(</span><span class="n">diffmodel</span><span class="o">.</span><span class="n">timeave</span><span class="p">[</span><span class="s1">&#39;ASR&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">diffmodel</span><span class="o">.</span><span class="n">timeave</span><span class="p">[</span><span class="s1">&#39;OLR&#39;</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">Rtoa_co2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(</span><span class="n">co2diffmodel</span><span class="o">.</span><span class="n">timeave</span><span class="p">[</span><span class="s1">&#39;ASR&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">co2diffmodel</span><span class="o">.</span><span class="n">timeave</span><span class="p">[</span><span class="s1">&#39;OLR&#39;</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">diffmodel</span><span class="o">.</span><span class="n">lat</span><span class="p">,</span> <span class="n">inferred_heat_transport</span><span class="p">(</span><span class="n">Rtoa</span><span class="p">,</span> <span class="n">diffmodel</span><span class="o">.</span><span class="n">lat</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;1xCO2&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">diffmodel</span><span class="o">.</span><span class="n">lat</span><span class="p">,</span> <span class="n">inferred_heat_transport</span><span class="p">(</span><span class="n">Rtoa_co2</span><span class="p">,</span> <span class="n">diffmodel</span><span class="o">.</span><span class="n">lat</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;2xCO2&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Integrating for 1095 steps, 1095.7266 days, or 3 years.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Total elapsed time is 8.994031905404139 years.
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/z_/36cc8kqx7pqf8lzjc5cp2cf00000gn/T/ipykernel_29629/4142479116.py:6: DeprecationWarning: &#39;scipy.integrate.cumtrapz&#39; is deprecated in favour of &#39;scipy.integrate.cumulative_trapezoid&#39; and will be removed in SciPy 1.14.0
+  return ( 1E-15 * 2 * np.math.pi * const.a**2 * integrate.cumtrapz( np.cos(lat_rad)*energy_in,
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x14bb4b3d0&gt;]
+</pre></div>
+</div>
+<img alt="../_images/6ecaf3d3c3081d4163bb05dfdb309e48ec67f8ef1b6e7acff2d68ff90125128f.png" src="../_images/6ecaf3d3c3081d4163bb05dfdb309e48ec67f8ef1b6e7acff2d68ff90125128f.png" />
+<img alt="../_images/ad9bb229557a5f0379f25082e61f9711c7c770e15ce0890ad162b09df8282c28.png" src="../_images/ad9bb229557a5f0379f25082e61f9711c7c770e15ce0890ad162b09df8282c28.png" />
+</div>
+</div>
+</section>
+<section id="id2">
+<h2>Exclude evaporation<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">diffmodel2</span> <span class="o">=</span> <span class="n">climlab</span><span class="o">.</span><span class="n">process_like</span><span class="p">(</span><span class="n">diffmodel</span><span class="p">)</span>
+<span class="n">diffmodel2</span><span class="o">.</span><span class="n">remove_subprocess</span><span class="p">(</span><span class="s1">&#39;LHF&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">diffmodel2</span><span class="p">)</span>
+
+<span class="n">diffmodel2</span><span class="o">.</span><span class="n">integrate_years</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>climlab Process of type &lt;class &#39;climlab.model.column.GreyRadiationModel&#39;&gt;. 
+State variables and domain shapes: 
+  Ts: (90, 1) 
+  Tatm: (90, 30) 
+The subprocess tree: 
+Untitled: &lt;class &#39;climlab.model.column.GreyRadiationModel&#39;&gt;
+   LW: &lt;class &#39;climlab.radiation.greygas.GreyGas&#39;&gt;
+   SW: &lt;class &#39;climlab.radiation.greygas.GreyGasSW&#39;&gt;
+   insolation: &lt;class &#39;climlab.radiation.insolation.AnnualMeanInsolation&#39;&gt;
+   convective adjustment: &lt;class &#39;climlab.convection.convadj.ConvectiveAdjustment&#39;&gt;
+   H2O: &lt;class &#39;climlab.radiation.water_vapor.ManabeWaterVapor&#39;&gt;
+   SHF: &lt;class &#39;climlab.surface.turbulent.SensibleHeatFlux&#39;&gt;
+   diffusion: &lt;class &#39;climlab.dynamics.meridional_advection_diffusion.MeridionalDiffusion&#39;&gt;
+
+Integrating for 1095 steps, 1095.7266 days, or 3 years.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Total elapsed time is 8.994031905404139 years.
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">co2diffmodel2</span> <span class="o">=</span> <span class="n">climlab</span><span class="o">.</span><span class="n">process_like</span><span class="p">(</span><span class="n">co2diffmodel</span><span class="p">)</span>
+<span class="n">co2diffmodel2</span><span class="o">.</span><span class="n">remove_subprocess</span><span class="p">(</span><span class="s1">&#39;LHF&#39;</span><span class="p">)</span>
+<span class="n">co2diffmodel2</span><span class="o">.</span><span class="n">integrate_years</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Integrating for 1095 steps, 1095.7266 days, or 3 years.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Total elapsed time is 11.992042540538852 years.
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#  With transport and no evaporation...</span>
+<span class="c1">#  No polar amplification, either of surface or air temperature!</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">diffmodel2</span><span class="o">.</span><span class="n">lat</span><span class="p">,</span> <span class="n">co2diffmodel2</span><span class="o">.</span><span class="n">Ts</span> <span class="o">-</span> <span class="n">diffmodel2</span><span class="o">.</span><span class="n">Ts</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Ts&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">diffmodel2</span><span class="o">.</span><span class="n">lat</span><span class="p">,</span> <span class="n">co2diffmodel2</span><span class="o">.</span><span class="n">Tatm</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">diffmodel2</span><span class="o">.</span><span class="n">Tatm</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Tatm&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+
+
+<span class="n">Rtoa</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(</span><span class="n">diffmodel2</span><span class="o">.</span><span class="n">timeave</span><span class="p">[</span><span class="s1">&#39;ASR&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">diffmodel2</span><span class="o">.</span><span class="n">timeave</span><span class="p">[</span><span class="s1">&#39;OLR&#39;</span><span class="p">])</span>
+<span class="n">Rtoa_co2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(</span><span class="n">co2diffmodel2</span><span class="o">.</span><span class="n">timeave</span><span class="p">[</span><span class="s1">&#39;ASR&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">co2diffmodel2</span><span class="o">.</span><span class="n">timeave</span><span class="p">[</span><span class="s1">&#39;OLR&#39;</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">diffmodel2</span><span class="o">.</span><span class="n">lat</span><span class="p">,</span> <span class="n">inferred_heat_transport</span><span class="p">(</span><span class="n">Rtoa</span><span class="p">,</span> <span class="n">diffmodel2</span><span class="o">.</span><span class="n">lat</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;1xCO2&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">diffmodel2</span><span class="o">.</span><span class="n">lat</span><span class="p">,</span> <span class="n">inferred_heat_transport</span><span class="p">(</span><span class="n">Rtoa_co2</span><span class="p">,</span> <span class="n">diffmodel2</span><span class="o">.</span><span class="n">lat</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;2xCO2&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/z_/36cc8kqx7pqf8lzjc5cp2cf00000gn/T/ipykernel_29629/4142479116.py:6: DeprecationWarning: &#39;scipy.integrate.cumtrapz&#39; is deprecated in favour of &#39;scipy.integrate.cumulative_trapezoid&#39; and will be removed in SciPy 1.14.0
+  return ( 1E-15 * 2 * np.math.pi * const.a**2 * integrate.cumtrapz( np.cos(lat_rad)*energy_in,
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x14ccb7c90&gt;]
+</pre></div>
+</div>
+<img alt="../_images/44d255dcb6be7fa3e5d2e0265c040cb1b7d0f0ef68758128fda24ee2ad65a63a.png" src="../_images/44d255dcb6be7fa3e5d2e0265c040cb1b7d0f0ef68758128fda24ee2ad65a63a.png" />
+<img alt="../_images/0f72f9e98a282547558bc62ec8867d7846bc41758d28b0155567dacc32de8db4.png" src="../_images/0f72f9e98a282547558bc62ec8867d7846bc41758d28b0155567dacc32de8db4.png" />
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./docs"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  <!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="observations.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">20. Observations</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="history_modelling.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">A2. The History of Climate Modeling</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ebm-with-surface-and-atmosphere-layers">EBM with surface and atmosphere layers</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#include-meridional-heat-transport">Include meridional heat transport</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exclude-evaporation">Exclude evaporation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#column-model">Column model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Include meridional heat transport</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Exclude evaporation</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Yu-Chiao Liang
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=ac02cc09edc035673794"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=ac02cc09edc035673794"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

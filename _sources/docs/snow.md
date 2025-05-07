@@ -9,7 +9,7 @@ kernelspec:
   name: python3
 ---
 
-(about_py)=
+(snow)=
 
 # 3. Snow
 
