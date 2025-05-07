@@ -34,24 +34,37 @@ The hypothesis rests on a phenomenon first discovered by climate modelers in the
 
 ```{figure} /_static/lecture_specific/lecture1_figures/snowball_tmp111.png
 :scale: 40%
+Fiture credit to: Professor Brian E. J. Rose
 ```
 
 The displancement of ice edge is $\delta \phi$, so the cooling tendency due to albedo change is:
 ```{math}
 :label: my_label801
-\delta \alphaS(\phi_{i})\cos(\phi_{i})\delta \phi
+\delta \alpha S(\phi_{i})\cos(\phi_{i})\delta \phi
 ```
 
 The warming tendency due to outgoing lownwave reduction is:
 ```{math}
+:label: my_label802
 B\delta T = -B\frac{dT}{d\phi}\delta \phi
 ```
+
+If warming tendency is larger than cooling tendency, then the system can reach an equilibrium state.
+```{math}
+:label: my_label803
+\begin{eqnarray}
+-B\frac{dT}{d\phi}\delta \phi > \delta \alpha S(\phi_{i})\cos(\phi_{i})\delta \phi \\
+\rightarrow \frac{\delta \alpha S(\phi_{i})\cos(\phi_{i})}{B} < -\frac{dT}{d\phi}
+\end{eqnarray}
+```
+
+If not, what will happen?
+$\frac{\delta \alpha S(\phi_{i})\cos(\phi_{i})}{B}$ is large in low latitudes, so the ice grows toward the south before it reaches an equilibrium state.
 
 
 ```{note}
 You may need to run this script on your workstation.
 ```
-
 
 ```{code-cell} ipython3
 %matplotlib inline
@@ -99,7 +112,13 @@ ax2.set_xticks(my_ticks)
 ax2.set_xlabel('Latitude')
 ax2.set_ylabel('ASR (W m$^{-2}$)')
 
-climlab.global_mean( model1.ASR - ASRequil )
+print(climlab.global_mean( model1.ASR - ASRequil ))
+```
+
+We can calculate the feedback parameter:
+```{math}
+:label: my_label804
+\lambda = \lambda_{LW} + \lambda_{SW} = -2 + \frac{-19.7}{-20} \approx -1 \mbox{  W/m$^2$/K}
 ```
 
 ```{code-cell} ipython3
@@ -117,8 +136,7 @@ plt.xlabel('Latitude')
 model1.Ts -= 40.
 model1.compute_diagnostics()
 
-
-climlab.global_mean( model1.ASR - ASRequil )
+print(climlab.global_mean( model1.ASR - ASRequil ))
 
 plt.plot( lat, Tequil, 'k--', label='equil' )
 plt.plot( lat, model1.Ts, 'k-', label='pert' )
@@ -130,6 +148,14 @@ plt.ylabel('Temperature (°C)')
 plt.xlabel('Latitude')
 
 ```
+
+We again calculate the feedback parameter:
+```{math}
+:label: my_label805
+\lambda = \lambda_{LW} + \lambda_{SW} = -2 + \frac{-108.3}{-40} = -2 + 2.7 \approx -1 \mbox{  W/m$^2$/K}
+```
+
+Below the code may not be run on your laptop.
 
 ```{code-cell} ipython3
 model2 = climlab.EBM_annual(num_lat = 180, **param)
@@ -232,6 +258,15 @@ ax.set_title('Solar constant versus ice edge latitude in the EBM with albedo fee
 :scale: 40%
 ```
 
+We could get from the above results:
 
+- For extremely large $S_0$, the only possible climate is a hot Earth with no ice.
+- For extremely small $S_0$, the only possible climate is a cold Earth completely covered in ice.
+- For a large range of $S_0$ including the present-day value, more than one climate is possible!
+- Once we get into a snowball Earth state, getting out again is rather difficult!
+
+
+Sources
+- [Rose 2015](https://agupubs.onlinelibrary.wiley.com/doi/10.1002/2014JD022659)
 
 

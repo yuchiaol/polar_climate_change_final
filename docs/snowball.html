@@ -363,15 +363,26 @@ document.write(`
 </section>
 <section id="large-ice-cap-instability">
 <h2>Large ice cap instability<a class="headerlink" href="#large-ice-cap-instability" title="Permalink to this heading">#</a></h2>
-<figure class="align-default">
+<figure class="align-default" id="id1">
 <a class="reference internal image-reference" href="../_images/snowball_tmp111.png"><img alt="../_images/snowball_tmp111.png" src="../_images/snowball_tmp111.png" style="width: 640.8000000000001px; height: 435.20000000000005px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 41 </span><span class="caption-text">Fiture credit to: Professor Brian E. J. Rose</span><a class="headerlink" href="#id1" title="Permalink to this image">#</a></p>
+</figcaption>
 </figure>
 <p>The displancement of ice edge is <span class="math notranslate nohighlight">\(\delta \phi\)</span>, so the cooling tendency due to albedo change is:</p>
 <div class="math notranslate nohighlight" id="equation-my-label801">
-<span class="eqno">(171)<a class="headerlink" href="#equation-my-label801" title="Permalink to this equation">#</a></span>\[\delta \alphaS(\phi_{i})\cos(\phi_{i})\delta \phi\]</div>
+<span class="eqno">(171)<a class="headerlink" href="#equation-my-label801" title="Permalink to this equation">#</a></span>\[\delta \alpha S(\phi_{i})\cos(\phi_{i})\delta \phi\]</div>
 <p>The warming tendency due to outgoing lownwave reduction is:</p>
-<div class="math notranslate nohighlight">
-\[B\delta T = -B\frac{dT}{d\phi}\delta \phi\]</div>
+<div class="math notranslate nohighlight" id="equation-my-label802">
+<span class="eqno">(172)<a class="headerlink" href="#equation-my-label802" title="Permalink to this equation">#</a></span>\[B\delta T = -B\frac{dT}{d\phi}\delta \phi\]</div>
+<p>If warming tendency is larger than cooling tendency, then the system can reach an equilibrium state.</p>
+<div class="math notranslate nohighlight" id="equation-my-label803">
+<span class="eqno">(173)<a class="headerlink" href="#equation-my-label803" title="Permalink to this equation">#</a></span>\[\begin{split}\begin{eqnarray}
+-B\frac{dT}{d\phi}\delta \phi &gt; \delta \alpha S(\phi_{i})\cos(\phi_{i})\delta \phi \\
+\rightarrow \frac{\delta \alpha S(\phi_{i})\cos(\phi_{i})}{B} &lt; -\frac{dT}{d\phi}
+\end{eqnarray}\end{split}\]</div>
+<p>If not, what will happen?
+<span class="math notranslate nohighlight">\(\frac{\delta \alpha S(\phi_{i})\cos(\phi_{i})}{B}\)</span> is large in low latitudes, so the ice grows toward the south before it reaches an equilibrium state.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>You may need to run this script on your workstation.</p>
@@ -423,7 +434,7 @@ document.write(`
 <span class="n">ax2</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Latitude&#39;</span><span class="p">)</span>
 <span class="n">ax2</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;ASR (W m$^{-2}$)&#39;</span><span class="p">)</span>
 
-<span class="n">climlab</span><span class="o">.</span><span class="n">global_mean</span><span class="p">(</span> <span class="n">model1</span><span class="o">.</span><span class="n">ASR</span> <span class="o">-</span> <span class="n">ASRequil</span> <span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">climlab</span><span class="o">.</span><span class="n">global_mean</span><span class="p">(</span> <span class="n">model1</span><span class="o">.</span><span class="n">ASR</span> <span class="o">-</span> <span class="n">ASRequil</span> <span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -444,14 +455,15 @@ Annual Mean EBM with ice line: &lt;class &#39;climlab.model.ebm.EBM_annual&#39;&
 
 Integrating for 450 steps, 1826.2110000000002 days, or 5 years.
 Total elapsed time is 5.000000000000044 years.
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array(-19.72667419)
+-19.726674194909386
 </pre></div>
 </div>
 <img alt="../_images/3b569423abef2c149529e048c2939a7c42e9c107350304f9de443ab987d89769.png" src="../_images/3b569423abef2c149529e048c2939a7c42e9c107350304f9de443ab987d89769.png" />
 </div>
 </div>
+<p>We can calculate the feedback parameter:</p>
+<div class="math notranslate nohighlight" id="equation-my-label804">
+<span class="eqno">(174)<a class="headerlink" href="#equation-my-label804" title="Permalink to this equation">#</a></span>\[\lambda = \lambda_{LW} + \lambda_{SW} = -2 + \frac{-19.7}{-20} \approx -1 \mbox{  W/m$^2$/K}\]</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span> <span class="n">lat</span><span class="p">,</span> <span class="n">Tequil</span><span class="p">,</span> <span class="s1">&#39;k--&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;equil&#39;</span> <span class="p">)</span>
@@ -477,8 +489,7 @@ Total elapsed time is 5.000000000000044 years.
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model1</span><span class="o">.</span><span class="n">Ts</span> <span class="o">-=</span> <span class="mf">40.</span>
 <span class="n">model1</span><span class="o">.</span><span class="n">compute_diagnostics</span><span class="p">()</span>
 
-
-<span class="n">climlab</span><span class="o">.</span><span class="n">global_mean</span><span class="p">(</span> <span class="n">model1</span><span class="o">.</span><span class="n">ASR</span> <span class="o">-</span> <span class="n">ASRequil</span> <span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">climlab</span><span class="o">.</span><span class="n">global_mean</span><span class="p">(</span> <span class="n">model1</span><span class="o">.</span><span class="n">ASR</span> <span class="o">-</span> <span class="n">ASRequil</span> <span class="p">))</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span> <span class="n">lat</span><span class="p">,</span> <span class="n">Tequil</span><span class="p">,</span> <span class="s1">&#39;k--&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;equil&#39;</span> <span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span> <span class="n">lat</span><span class="p">,</span> <span class="n">model1</span><span class="o">.</span><span class="n">Ts</span><span class="p">,</span> <span class="s1">&#39;k-&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;pert&#39;</span> <span class="p">)</span>
@@ -492,12 +503,19 @@ Total elapsed time is 5.000000000000044 years.
 </div>
 </div>
 <div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-108.34822044773354
+</pre></div>
+</div>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 0, &#39;Latitude&#39;)
 </pre></div>
 </div>
 <img alt="../_images/17f81064b38f50cc628e63d1109e42ea8a9484f74ebf1a0c1fbf60d9d8a69f4c.png" src="../_images/17f81064b38f50cc628e63d1109e42ea8a9484f74ebf1a0c1fbf60d9d8a69f4c.png" />
 </div>
 </div>
+<p>We again calculate the feedback parameter:</p>
+<div class="math notranslate nohighlight" id="equation-my-label805">
+<span class="eqno">(175)<a class="headerlink" href="#equation-my-label805" title="Permalink to this equation">#</a></span>\[\lambda = \lambda_{LW} + \lambda_{SW} = -2 + \frac{-108.3}{-40} = -2 + 2.7 \approx -1 \mbox{  W/m$^2$/K}\]</div>
+<p>Below the code may not be run on your laptop.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model2</span> <span class="o">=</span> <span class="n">climlab</span><span class="o">.</span><span class="n">EBM_annual</span><span class="p">(</span><span class="n">num_lat</span> <span class="o">=</span> <span class="mi">180</span><span class="p">,</span> <span class="o">**</span><span class="n">param</span><span class="p">)</span>
@@ -551,118 +569,6 @@ Total elapsed time is 5.000000000000044 years.
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Total elapsed time is 5.000000000000044 years.
 [-70.  70.]
-</pre></div>
-</div>
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">KeyboardInterrupt</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span> <span class="n">line</span> <span class="mi">13</span>
-<span class="g g-Whitespace">     </span><span class="mi">11</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">S0array</span><span class="o">.</span><span class="n">size</span><span class="p">):</span>
-<span class="g g-Whitespace">     </span><span class="mi">12</span>     <span class="n">model2</span><span class="o">.</span><span class="n">subprocess</span><span class="p">[</span><span class="s1">&#39;insolation&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">S0</span> <span class="o">=</span> <span class="n">S0array</span><span class="p">[</span><span class="n">n</span><span class="p">]</span>
-<span class="ne">---&gt; </span><span class="mi">13</span>     <span class="n">model2</span><span class="o">.</span><span class="n">integrate_years</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">14</span>     <span class="n">icelat_cooling</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">model2</span><span class="o">.</span><span class="n">icelat</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">15</span> <span class="c1"># Then warm...</span>
-
-<span class="nn">File ~/miniconda3/lib/python3.11/site-packages/climlab/process/time_dependent_process.py:419,</span> in <span class="ni">TimeDependentProcess.integrate_years</span><span class="nt">(self, years, verbose)</span>
-<span class="g g-Whitespace">    </span><span class="mi">416</span> <span class="c1">#  begin time loop</span>
-<span class="g g-Whitespace">    </span><span class="mi">417</span> <span class="k">for</span> <span class="n">count</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">numsteps</span><span class="p">):</span>
-<span class="g g-Whitespace">    </span><span class="mi">418</span>     <span class="c1"># Compute the timestep</span>
-<span class="ne">--&gt; </span><span class="mi">419</span>     <span class="bp">self</span><span class="o">.</span><span class="n">step_forward</span><span class="p">()</span>
-<span class="g g-Whitespace">    </span><span class="mi">420</span>     <span class="k">if</span> <span class="n">count</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">421</span>         <span class="c1"># on first step only...</span>
-<span class="g g-Whitespace">    </span><span class="mi">422</span>         <span class="c1">#  This implements a generic time-averaging feature</span>
-<span class="g g-Whitespace">    </span><span class="mi">423</span>         <span class="c1"># using the list of model state variables</span>
-<span class="g g-Whitespace">    </span><span class="mi">424</span>         <span class="bp">self</span><span class="o">.</span><span class="n">timeave</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
-
-<span class="nn">File ~/miniconda3/lib/python3.11/site-packages/climlab/process/time_dependent_process.py:333,</span> in <span class="ni">TimeDependentProcess.step_forward</span><span class="nt">(self)</span>
-<span class="g g-Whitespace">    </span><span class="mi">307</span> <span class="k">def</span> <span class="nf">step_forward</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="g g-Whitespace">    </span><span class="mi">308</span><span class="w">     </span><span class="sd">&quot;&quot;&quot;Updates state variables with computed tendencies.</span>
-<span class="g g-Whitespace">    </span><span class="mi">309</span><span class="sd"> </span>
-<span class="g g-Whitespace">    </span><span class="mi">310</span><span class="sd">     Calls the :func:`compute` method to get current tendencies for all</span>
-<span class="sd">   (...)</span>
-<span class="g g-Whitespace">    </span><span class="mi">331</span><span class="sd"> </span>
-<span class="g g-Whitespace">    </span><span class="mi">332</span><span class="sd">     &quot;&quot;&quot;</span>
-<span class="ne">--&gt; </span><span class="mi">333</span>     <span class="n">tenddict</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">compute</span><span class="p">()</span>
-<span class="g g-Whitespace">    </span><span class="mi">334</span>     <span class="c1">#  Total tendency is applied as an explicit forward timestep</span>
-<span class="nn">    335     # (already accounting properly for order of operations</span> in <span class="ni">compute</span><span class="nt">() )</span>
-<span class="g g-Whitespace">    </span><span class="mi">336</span>     <span class="k">for</span> <span class="n">varname</span><span class="p">,</span> <span class="n">tend</span> <span class="ow">in</span> <span class="n">tenddict</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-
-<span class="nn">File ~/miniconda3/lib/python3.11/site-packages/climlab/process/time_dependent_process.py:220,</span> in <span class="ni">TimeDependentProcess.compute</span><span class="nt">(self)</span>
-<span class="g g-Whitespace">    </span><span class="mi">218</span>     <span class="n">var</span> <span class="o">+=</span> <span class="n">tendencies</span><span class="p">[</span><span class="s1">&#39;explicit&#39;</span><span class="p">][</span><span class="n">name</span><span class="p">]</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">timestep</span>
-<span class="g g-Whitespace">    </span><span class="mi">219</span> <span class="c1"># Now compute all implicit processes -- matrix inversions</span>
-<span class="ne">--&gt; </span><span class="mi">220</span> <span class="n">tendencies</span><span class="p">[</span><span class="s1">&#39;implicit&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_compute_type</span><span class="p">(</span><span class="s1">&#39;implicit&#39;</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">221</span> <span class="c1">#  Same deal ... temporarily apply tendencies from implicit step</span>
-<span class="g g-Whitespace">    </span><span class="mi">222</span> <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">var</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-
-<span class="nn">File ~/miniconda3/lib/python3.11/site-packages/climlab/process/time_dependent_process.py:261,</span> in <span class="ni">TimeDependentProcess._compute_type</span><span class="nt">(self, proctype)</span>
-<span class="g g-Whitespace">    </span><span class="mi">259</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">time</span><span class="p">[</span><span class="s1">&#39;steps&#39;</span><span class="p">]</span> <span class="o">%</span> <span class="n">step_ratio</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">260</span>     <span class="n">proc</span><span class="o">.</span><span class="n">time</span><span class="p">[</span><span class="s1">&#39;active_now&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
-<span class="ne">--&gt; </span><span class="mi">261</span>     <span class="n">tenddict</span> <span class="o">=</span> <span class="n">proc</span><span class="o">.</span><span class="n">compute</span><span class="p">()</span>
-<span class="g g-Whitespace">    </span><span class="mi">262</span> <span class="k">else</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">263</span>     <span class="c1"># proc.tendencies is unchanged from last subprocess timestep if we didn&#39;t recompute it above</span>
-<span class="g g-Whitespace">    </span><span class="mi">264</span>     <span class="n">proc</span><span class="o">.</span><span class="n">time</span><span class="p">[</span><span class="s1">&#39;active_now&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
-
-<span class="nn">File ~/miniconda3/lib/python3.11/site-packages/climlab/process/time_dependent_process.py:235,</span> in <span class="ni">TimeDependentProcess.compute</span><span class="nt">(self)</span>
-<span class="g g-Whitespace">    </span><span class="mi">233</span>         <span class="bp">self</span><span class="o">.</span><span class="n">tendencies</span><span class="p">[</span><span class="n">varname</span><span class="p">]</span> <span class="o">+=</span> <span class="n">tend</span>
-<span class="g g-Whitespace">    </span><span class="mi">234</span> <span class="c1"># Finally compute my own tendencies, if any</span>
-<span class="ne">--&gt; </span><span class="mi">235</span> <span class="n">self_tend</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_compute</span><span class="p">()</span>
-<span class="g g-Whitespace">    </span><span class="mi">236</span> <span class="c1">#  Adjustment processes _compute method returns absolute adjustment</span>
-<span class="g g-Whitespace">    </span><span class="mi">237</span> <span class="c1">#  Needs to be converted to rate of change</span>
-<span class="g g-Whitespace">    </span><span class="mi">238</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">time_type</span> <span class="o">==</span> <span class="s1">&#39;adjustment&#39;</span><span class="p">:</span>
-
-<span class="nn">File ~/miniconda3/lib/python3.11/site-packages/climlab/process/implicit.py:56,</span> in <span class="ni">ImplicitProcess._compute</span><span class="nt">(self)</span>
-<span class="g g-Whitespace">     </span><span class="mi">53</span> <span class="c1"># express the adjustment (already accounting for the finite time step)</span>
-<span class="g g-Whitespace">     </span><span class="mi">54</span> <span class="c1">#  as a tendency per unit time, so that it can be applied along with explicit</span>
-<span class="g g-Whitespace">     </span><span class="mi">55</span> <span class="bp">self</span><span class="o">.</span><span class="n">adjustment</span> <span class="o">=</span> <span class="n">adjustment</span>
-<span class="ne">---&gt; </span><span class="mi">56</span> <span class="bp">self</span><span class="o">.</span><span class="n">_update_diagnostics</span><span class="p">(</span><span class="n">newstate</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">57</span> <span class="k">return</span> <span class="n">tendencies</span>
-
-<span class="nn">File ~/miniconda3/lib/python3.11/site-packages/climlab/dynamics/meridional_heat_diffusion.py:93,</span> in <span class="ni">MeridionalHeatDiffusion._update_diagnostics</span><span class="nt">(self, newstate)</span>
-<span class="g g-Whitespace">     </span><span class="mi">92</span> <span class="k">def</span> <span class="nf">_update_diagnostics</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">newstate</span><span class="p">):</span>
-<span class="ne">---&gt; </span><span class="mi">93</span>     <span class="nb">super</span><span class="p">(</span><span class="n">MeridionalHeatDiffusion</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">_update_diagnostics</span><span class="p">(</span><span class="n">newstate</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">94</span>     <span class="k">for</span> <span class="n">varname</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-<span class="g g-Whitespace">     </span><span class="mi">95</span>         <span class="n">heat_capacity</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="n">domain</span><span class="o">.</span><span class="n">heat_capacity</span>
-
-<span class="nn">File ~/miniconda3/lib/python3.11/site-packages/climlab/dynamics/advection_diffusion.py:211,</span> in <span class="ni">AdvectionDiffusion._update_diagnostics</span><span class="nt">(self, newstate)</span>
-<span class="g g-Whitespace">    </span><span class="mi">209</span> <span class="bp">self</span><span class="o">.</span><span class="n">advective_flux</span><span class="p">[:]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">moveaxis</span><span class="p">(</span><span class="n">adv_flux</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">diffusion_axis_index</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">210</span> <span class="n">source</span> <span class="o">=</span> <span class="mf">0.</span><span class="o">*</span><span class="n">field</span>
-<span class="ne">--&gt; </span><span class="mi">211</span> <span class="n">convergence</span> <span class="o">=</span> <span class="n">adv_diff_numerics</span><span class="o">.</span><span class="n">compute_tendency</span><span class="p">(</span><span class="n">field</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">212</span>     <span class="bp">self</span><span class="o">.</span><span class="n">_advdiffTriDiag</span><span class="p">,</span> <span class="n">source</span><span class="p">,</span> <span class="n">use_banded_solver</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">use_banded_solver</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">213</span> <span class="bp">self</span><span class="o">.</span><span class="n">flux_convergence</span><span class="p">[:]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">moveaxis</span><span class="p">(</span><span class="n">convergence</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">diffusion_axis_index</span><span class="p">)</span>
-
-<span class="nn">File ~/miniconda3/lib/python3.11/site-packages/climlab/dynamics/adv_diff_numerics.py:379,</span> in <span class="ni">compute_tendency</span><span class="nt">(field, tridiag, source, use_banded_solver)</span>
-<span class="g g-Whitespace">    </span><span class="mi">376</span>     <span class="n">tridiag</span> <span class="o">=</span> <span class="n">make_the_actual_tridiagonal_matrix</span><span class="p">(</span><span class="n">tridiag</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">377</span> <span class="c1">#  np.matmul expects the final 2 dims of each array to be matrices</span>
-<span class="g g-Whitespace">    </span><span class="mi">378</span> <span class="c1">#  add a singleton dimension to field so we get (J,J)x(J,1)-&gt;(J,1)</span>
-<span class="ne">--&gt; </span><span class="mi">379</span> <span class="n">result</span> <span class="o">=</span> <span class="n">matmul</span><span class="p">(</span><span class="n">tridiag</span><span class="p">,</span> <span class="n">field</span><span class="p">[</span><span class="o">...</span><span class="p">,</span><span class="n">newaxis</span><span class="p">])</span> <span class="o">+</span> <span class="n">source</span><span class="p">[</span><span class="o">...</span><span class="p">,</span><span class="n">newaxis</span><span class="p">]</span>
-<span class="g g-Whitespace">    </span><span class="mi">380</span> <span class="c1">#  Now strip the extra dim</span>
-<span class="g g-Whitespace">    </span><span class="mi">381</span> <span class="k">return</span> <span class="n">result</span><span class="p">[</span><span class="o">...</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span>
-
-<span class="nn">File ~/miniconda3/lib/python3.11/site-packages/climlab/domain/field.py:132,</span> in <span class="ni">Field.__array_finalize__</span><span class="nt">(self, obj)</span>
-<span class="g g-Whitespace">    </span><span class="mi">127</span>     <span class="c1">#  would be nice to have some automatic domain creation here if none given</span>
-<span class="g g-Whitespace">    </span><span class="mi">128</span> 
-<span class="g g-Whitespace">    </span><span class="mi">129</span>     <span class="c1"># Finally, we must return the newly created object:</span>
-<span class="g g-Whitespace">    </span><span class="mi">130</span>     <span class="k">return</span> <span class="n">obj</span>
-<span class="ne">--&gt; </span><span class="mi">132</span> <span class="k">def</span> <span class="nf">__array_finalize__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">):</span>
-<span class="g g-Whitespace">    </span><span class="mi">133</span>     <span class="c1"># ``self`` is a new object resulting from</span>
-<span class="g g-Whitespace">    </span><span class="mi">134</span>     <span class="c1"># ndarray.__new__(Field, ...), therefore it only has</span>
-<span class="g g-Whitespace">    </span><span class="mi">135</span>     <span class="c1"># attributes that the ndarray.__new__ constructor gave it -</span>
-<span class="g g-Whitespace">    </span><span class="mi">136</span>     <span class="c1"># i.e. those of a standard ndarray.</span>
-<span class="g g-Whitespace">    </span><span class="mi">137</span>     <span class="c1">#</span>
-<span class="g g-Whitespace">    </span><span class="mi">138</span>     <span class="c1"># We could have got to the ndarray.__new__ call in 3 ways:</span>
-<span class="g g-Whitespace">    </span><span class="mi">139</span>     <span class="c1"># From an explicit constructor - e.g. Field():</span>
-<span class="g g-Whitespace">    </span><span class="mi">140</span>     <span class="c1">#    obj is None</span>
-<span class="g g-Whitespace">    </span><span class="mi">141</span>     <span class="c1">#    (we&#39;re in the middle of the Field.__new__</span>
-<span class="g g-Whitespace">    </span><span class="mi">142</span>     <span class="c1">#    constructor, and self.domain will be set when we return to</span>
-<span class="g g-Whitespace">    </span><span class="mi">143</span>     <span class="c1">#    Field.__new__)</span>
-<span class="g g-Whitespace">    </span><span class="mi">144</span>     <span class="k">if</span> <span class="n">obj</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span> <span class="k">return</span>
-<span class="g g-Whitespace">    </span><span class="mi">145</span>     <span class="c1"># From view casting - e.g arr.view(Field):</span>
-<span class="g g-Whitespace">    </span><span class="mi">146</span>     <span class="c1">#    obj is arr</span>
-<span class="g g-Whitespace">    </span><span class="mi">147</span>     <span class="c1">#    (type(obj) can be Field)</span>
-   <span class="p">(</span><span class="o">...</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">154</span>     <span class="c1"># Field.__new__ constructor, but also with</span>
-<span class="g g-Whitespace">    </span><span class="mi">155</span>     <span class="c1"># arr.view(Field).</span>
-
-<span class="ne">KeyboardInterrupt</span>: 
 </pre></div>
 </div>
 </div>
@@ -725,6 +631,17 @@ Total elapsed time is 5.000000000000044 years.
 <figure class="align-default">
 <a class="reference internal image-reference" href="../_images/ball_snow_tmp1.jpg"><img alt="../_images/ball_snow_tmp1.jpg" src="../_images/ball_snow_tmp1.jpg" style="width: 800.0px; height: 480.0px;" /></a>
 </figure>
+<p>We could get from the above results:</p>
+<ul class="simple">
+<li><p>For extremely large <span class="math notranslate nohighlight">\(S_0\)</span>, the only possible climate is a hot Earth with no ice.</p></li>
+<li><p>For extremely small <span class="math notranslate nohighlight">\(S_0\)</span>, the only possible climate is a cold Earth completely covered in ice.</p></li>
+<li><p>For a large range of <span class="math notranslate nohighlight">\(S_0\)</span> including the present-day value, more than one climate is possible!</p></li>
+<li><p>Once we get into a snowball Earth state, getting out again is rather difficult!</p></li>
+</ul>
+<p>Sources</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://agupubs.onlinelibrary.wiley.com/doi/10.1002/2014JD022659">Rose 2015</a></p></li>
+</ul>
 </section>
 </section>
 
