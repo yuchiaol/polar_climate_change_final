@@ -11,7 +11,7 @@ kernelspec:
 
 (polar_amplification)=
 
-# A1. Polar Amplification
+# A1. Polar Amplification in simple models
 
 ```{note}
 The materials and scripts are obtained from climlab tutorial: [here](https://climlab.readthedocs.io/en/latest/courseware/PolarAmplification.html)
