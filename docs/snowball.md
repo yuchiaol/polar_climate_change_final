@@ -17,6 +17,37 @@ kernelspec:
 The Python scripts used below and some materials are modified from Prof. Brian E. J. Rose's climlab [website](https://brian-rose.github.io/ClimateLaboratoryBook/courseware/advanced-snowball-earth.html).
 ```
 
+## The snowball Earth hypothesis
+Various bizarre features in the geological record from 635 and 715 Ma ago indicate that the Earth underwent some very extreme environmental changes at least twice. The Snowball Earth hypothesis postulates that:
+
+The Earth was completely ice-covered (including the oceans)
+
+- The total glaciation endured for millions of years
+- CO2 slowly accumulated in the atmosphere from volcanoes
+- Weathering of rocks (normally acting to reduce CO2) extremely slow due to cold, dry climate
+- Eventually the extreme greenhouse effect is enough to melt back the ice
+- The Earth then enters a period of extremely hot climate.
+ 
+The hypothesis rests on a phenomenon first discovered by climate modelers in the Budyko-Sellers EBM: runaway ice-albedo feedback or large ice cap instability.
+
+## Large ice cap instability
+
+```{figure} /_static/lecture_specific/lecture1_figures/snowball_tmp111.png
+:scale: 40%
+```
+
+The displancement of ice edge is $\delta \phi$, so the cooling tendency due to albedo change is:
+```{math}
+:label: my_label801
+\delta \alphaS(\phi_{i})\cos(\phi_{i})\delta \phi
+```
+
+The warming tendency due to outgoing lownwave reduction is:
+```{math}
+B\delta T = -B\frac{dT}{d\phi}\delta \phi
+```
+
+
 ```{note}
 You may need to run this script on your workstation.
 ```
@@ -69,8 +100,9 @@ ax2.set_xlabel('Latitude')
 ax2.set_ylabel('ASR (W m$^{-2}$)')
 
 climlab.global_mean( model1.ASR - ASRequil )
+```
 
-
+```{code-cell} ipython3
 plt.plot( lat, Tequil, 'k--', label='equil' )
 plt.plot( lat, model1.Ts, 'k-', label='pert' )
 plt.grid(); plt.xlim(-90,90); plt.legend()
@@ -79,8 +111,9 @@ for n in range(5):
     plt.plot(lat, model1.Ts)
 plt.ylabel('Temperature (°C)')
 plt.xlabel('Latitude')
+```
 
-
+```{code-cell} ipython3
 model1.Ts -= 40.
 model1.compute_diagnostics()
 
@@ -95,32 +128,16 @@ for n in range(5):
     plt.plot(lat, model1.Ts)
 plt.ylabel('Temperature (°C)')
 plt.xlabel('Latitude')
-
-
-model1.Ts -= 40.
-model1.compute_diagnostics()
-
-
-climlab.global_mean( model1.ASR - ASRequil )
-
-plt.plot( lat, Tequil, 'k--', label='equil' )
-plt.plot( lat, model1.Ts, 'k-', label='pert' )
-plt.grid(); plt.xlim(-90,90); plt.legend()
-for n in range(5):
-    model1.integrate_years(years=1.0, verbose=False)
-    plt.plot(lat, model1.Ts)
-plt.ylabel('Temperature (°C)')
-plt.xlabel('Latitude')
-
-model2 = climlab.EBM_annual(num_lat = 90, **param)
-S0array = np.linspace(1400., 1200., 50)
-model2.integrate_years(5)
-
-print( model2.icelat)
 
 ```
 
 ```{code-cell} ipython3
+model2 = climlab.EBM_annual(num_lat = 180, **param)
+S0array = np.linspace(1400., 1200., 100)
+model2.integrate_years(5)
+
+print( model2.icelat)
+
 icelat_cooling = np.empty_like(S0array)
 icelat_warming = np.empty_like(S0array)
 
@@ -135,7 +152,7 @@ for n in range(S0array.size):
     model2.integrate_years(10, verbose=False)
     icelat_warming[n] = np.max(model2.icelat)
 
-model3 = climlab.EBM_annual(num_lat=90, **param)
+model3 = climlab.EBM_annual(num_lat=180, **param)
 S0array3 = np.linspace(1350., 1400., 50)
 #S0array3 = np.linspace(1350., 1400., 5)
 icelat3 = np.empty_like(S0array3)
@@ -157,8 +174,9 @@ ax.set_xlabel('Solar constant (W m$^{-2}$)', fontsize=16)
 ax.plot( [const.S0, const.S0], [-10, 100], 'k--', label='present-day' )
 ax.legend(loc='upper left')
 ax.set_title('Solar constant versus ice edge latitude in the EBM with albedo feedback', fontsize=16);
+```
 
-
+```{code-cell} ipython3
 model4 = climlab.process_like(model2)  # initialize with cold Snowball temperature
 model4.subprocess['insolation'].S0 = 1830.
 model4.integrate_years(40)
