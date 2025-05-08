@@ -37,15 +37,15 @@ nbclient.exceptions.CellTimeoutError: A cell timed out while it was being execut
 The message was: Cell execution timed out.
 Here is a preview of the cell contents:
 -------------------
-diffmodel2 = climlab.process_like(diffmodel)
-diffmodel2.remove_subprocess('LHF')
-print(diffmodel2)
+diffmodel3 = climlab.process_like(diffmodel)
+diffmodel3.subprocess['LHF'].Cd *= 0.5
+diffmodel3.integrate_years(5.)
 
-diffmodel2.integrate_years(3)
-
-co2diffmodel2 = climlab.process_like(co2diffmodel)
-co2diffmodel2.remove_subprocess('LHF')
-co2diffmodel2.integrate_years(3)
+#  Reduced evaporation gives equatorially enhanced warming of surface
+#  and cooling of near-surface air temperature
+plt.plot(diffmodel.lat, diffmodel3.Ts - diffmodel.Ts, label='Ts')
+plt.plot(diffmodel.lat, diffmodel3.Tatm[:,0] - diffmodel.Tatm[:,0], label='Tatm')
+plt.legend()
 
 -------------------
 

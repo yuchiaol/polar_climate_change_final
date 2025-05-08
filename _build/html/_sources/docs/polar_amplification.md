@@ -124,6 +124,9 @@ plt.legend()
 
 ```
 
+We get polar amplification in surface air temperature!!!
+
+
 ## Exclude evaporation
 ```{code-cell} ipython3
 diffebm2 = climlab.process_like(diffebm)
@@ -148,6 +151,8 @@ plt.plot(diffebm2.lat, inferred_heat_transport(Rtoa_co2, diffebm2.lat), label='2
 plt.legend()
 
 ```
+
+No polar amplification this time :(
 
 ## Column model
 
@@ -258,6 +263,9 @@ plt.plot(diffmodel.lat, inferred_heat_transport(Rtoa_co2, diffmodel.lat), label=
 
 ```
 
+
+We get polar amplification!!!
+
 ## Exclude evaporation
 ```{code-cell} ipython3
 diffmodel2 = climlab.process_like(diffmodel)
@@ -289,6 +297,8 @@ plt.plot(diffmodel2.lat, inferred_heat_transport(Rtoa, diffmodel2.lat), label='1
 plt.plot(diffmodel2.lat, inferred_heat_transport(Rtoa_co2, diffmodel2.lat), label='2xCO2')
 
 ```
+
+Excluding evaporation reduces polar amplification. Why?
 
 
 
