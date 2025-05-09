@@ -15,7 +15,7 @@ kernelspec:
 
 > Arctic/Polar Amplification is a prominent feature of global warming!
 
-## What is Arctic Amplification (AA)?
+## What is Arctic amplification (AA)?
 
 - Near-surface of the Northern Hemisphere high latitudes are warming at rates double that of lower latitudes (Cohen et al., 2014).
 
@@ -37,20 +37,20 @@ Trends in mean surface air temperature over the period 1960 to 2019. The fact th
 - Arctic amplification factor (AAF): Arctic surface air temperature change divided by global surface air temperature change.
 - Arctic amplification efficacy (AAE): AAF$_{XX}$ divided by AAF$_{CO_2}$, where $XX$ is the forcing agent.
 
-## AA in Observational Records and Models
+## AA in observational records and models
 
 - Paleoclimate records
 - Present-day observations
 - General circulation model
 - State-of-the-art climate model and future projection
 
-## AA Structure
+## AA structure
 
 - AA has distinct seasonal and meridional structures.
 
-## Physical Mechanisms Causing AA
+## Physical mechanisms causing AA
 
-## Climate Forcing
+## Climate forcing
 
 - Greenhouse gases. For example: carbon doxide, ozone-depleting substances, methane.
 - Aerosols 
@@ -65,7 +65,7 @@ scale: 35%
 Radiative forcings by emissions and climatic drivers from IPCC AR5 report. The story of evolution of radiative forcing bar charts can be seen [here](https://www.realclimate.org/index.php/archives/2013/10/the-evolution-of-radiative-forcing-bar-charts/).
 ```
 
-## Climate Feedbacks
+## Climate feedbacks
 
 A thorough review of these feedbacks' contributions to Arctic warming can be seen in [Goosse et al. 2018](https://www.nature.com/articles/s41467-018-04173-0). We will go through each feedback in class.
 
@@ -87,7 +87,7 @@ scale: 35%
 A schematic of some important radiative and non-radiative feedbacks in polar regions involving the atmosphere, the ocean, sea ice and ice sheets. Source: [Goosse et al. 2018](https://www.nature.com/articles/s41467-018-04173-0).
 ```
 
-## Poleward Energy Transport
+## Poleward energy transport
 
 - Atmospheric transport:
   - Dry static energy
@@ -98,7 +98,7 @@ A schematic of some important radiative and non-radiative feedbacks in polar reg
 - Remote forcing from tropics?
 - Timescale affects the portion of atmospheric and oceanic heat transports
 
-## Coupling Between Mechanisms 
+## Coupling between mechanisms 
 ```{figure} /_static/lecture_specific/lecture1_figures/feldl_feedbacks_combine.webp
 ---
 scale: 50%
@@ -106,7 +106,7 @@ scale: 50%
 Partial surface temperature change for the Arctic (60–90°N) compared to the tropics (30°S–30°N). Crosses are for conventionally defined temperature feedbacks and circles are for temperature feedbacks herein defined. Source: [Feldl et al. (2020)](https://www.nature.com/articles/s41612-020-00146-7)
 ```
 
-## Climate State Dependence
+## Climate state dependence
 ```{figure} /_static/lecture_specific/lecture1_figures/4ni_fig1.jpg
 ---
 scale: 30%

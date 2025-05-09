@@ -89,6 +89,12 @@ Schematic of influences on northern hemisphere mid-latitude weather. Source: Coh
 ## PAMIP – Polar Amplification Model Intercomparison Project
 - The PAMIP paper: [Smith et al. (2019)](https://gmd.copernicus.org/articles/12/1139/2019/)
 
+```{figure} /_static/lecture_specific/lecture1_figures/pamip_tmp0.png
+---
+scale: 65%
+---
+```
+
 ```{figure} /_static/lecture_specific/lecture1_figures/pamip_tmp1.webp
 ---
 scale: 45%
