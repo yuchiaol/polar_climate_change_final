@@ -275,7 +275,7 @@ We could get from the above results:
 - Once we get into a snowball Earth state, getting out again is rather difficult!
 
 
-Sources
+##Sources
 - [Rose 2015](https://agupubs.onlinelibrary.wiley.com/doi/10.1002/2014JD022659)
 
 
