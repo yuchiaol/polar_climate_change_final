@@ -267,7 +267,7 @@ ax.set_title('Solar constant versus ice edge latitude in the EBM with albedo fee
 
 ```
 
-We could get from the above results:
+From the above results, we can conclude:
 
 - For extremely large $S_0$, the only possible climate is a hot Earth with no ice.
 - For extremely small $S_0$, the only possible climate is a cold Earth completely covered in ice.

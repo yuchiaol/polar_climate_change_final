@@ -26,7 +26,7 @@ Office phone: 02-3366-3907<br>
 xxx and xxx, by appointment
 
 ### Location and Time
-Monday 1:20-3:10 pm and Thursday 10:20 am-12:10
+Monday 1:20-3:10 pm and Wednesday 10:20 am-12:10
 
 ### Course website
 [https://yuchiaol.github.io/polar_climate_change_final/docs/index.html](https://yuchiaol.github.io/polar_climate_change_final/docs/index.html)

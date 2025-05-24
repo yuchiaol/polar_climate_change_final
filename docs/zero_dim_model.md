@@ -142,6 +142,20 @@ Now let's put everything together:
 
 We will call $(1-\alpha)Q$ the absorbed shorwave radiation (ASR).
 
+## Earth's energy imbalance
+A recent commentary paper highlightes the energy imbalance: [Mauritsen et al. (2025)](https://agupubs.onlinelibrary.wiley.com/doi/10.1029/2024AV001636)
+
+```{figure} /_static/lecture_specific/lecture1_figures/energy_imbalance_tmp1.jpg
+:scale: 30%
+Annual global mean energy imbalance observed from space during 2001–2024. The imbalance is derived from the CERES-EBAF Edition 4.2.1 data set (Loeb et al., 2018). The blue line shows the linear trend over the 2001–2024 period when full annual means are available. Gray shading shows years affected by major El Niño events. Figure from Mauritsen et al. (2025).
+```
+
+```{figure} /_static/lecture_specific/lecture1_figures/energy_imbalance_tmp2.jpg
+:scale: 30%
+Climate model global mean temperature and energy imbalance under a strong mitigation scenario meeting the 2° target (SSP1-2.6). Time series are estimated from the IPCC AR6 Earth system emulator (IPCC, 2021, Chapter 7 supplementary material). Displayed data are from (Meyssignac et al., 2023). Uncertainty ranges indicate the 90 percent confidence interval of the spread caused by uncertainties in forcing, the climate response, and the carbon cycle. The displayed uncertainty range therefore excludes internal variability. The dots mark the peak year on each time series. Figure from Mauritsen et al. (2025).
+```
+
+
 ## Equilibrium state
 Assume that the Earth system is in energy balance, that is:
 

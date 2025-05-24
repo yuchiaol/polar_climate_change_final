@@ -21,6 +21,10 @@ This is a cool interactive webiste to illustrate sea-ice conditions: [Charctic I
 [NSIDC All About Sea Ice](https://nsidc.org/cryosphere/seaice/index.html) offers daily updates on sea ice conditions in the Arctic and Antarctic
 ```
 
+```{note}
+[Ice free Arctic](https://www.youtube.com/watch?v=rn32DV-bOIc)
+```
+
 ## What is sea ice?
 
 - Sea ice is formed in the salty ocean water (-1.8°C)
