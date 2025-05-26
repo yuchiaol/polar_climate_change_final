@@ -82,6 +82,28 @@ The retreat of Breiðamerkurjökull and growth of Jökulsárlón glacial lake. S
 Global sea level rise. Source: [Björnsson et al. (2018)](https://www.vatnajokulsthjodgardur.is/en/areas/melting-glaciers/glaciers-and-climate-change/references)
 ```
 
+"The Antarctic Ice Sheet (AIS) is Earth’s largest freshwater reservoir, storing enough ice to add 58 m to global sea level if it all melted, with ~5.3 m from the West Antarctic Ice Sheet (WAIS) and the rest from the East Antarctic Ice Sheet." - from [Fricker et al. (2025)](https://www.science.org/doi/10.1126/science.adt9619)
+
+```{figure} /_static/lecture_specific/lecture1_figures/Fricker_tmp1.png
+:scale: 60%
+Source: [Fricker et al. (2025)](https://www.science.org/doi/10.1126/science.adt9619)
+```
+
+```{figure} /_static/lecture_specific/lecture1_figures/Fricker_tmp2.png
+:scale: 55%
+Source: [Fricker et al. (2025)](https://www.science.org/doi/10.1126/science.adt9619)
+```
+
+```{figure} /_static/lecture_specific/lecture1_figures/Fricker_tmp3.png
+:scale: 55%
+Source: [Fricker et al. (2025)](https://www.science.org/doi/10.1126/science.adt9619)
+```
+
+```{figure} /_static/lecture_specific/lecture1_figures/Fricker_tmp4.png
+:scale: 55%
+Source: [Fricker et al. (2025)](https://www.science.org/doi/10.1126/science.adt9619)
+```
+
 ## Greenland glacier and natural variability
 ```{figure} /_static/lecture_specific/lecture1_figures/glacier_atm_tmp1.jpg
 :scale: 30%
