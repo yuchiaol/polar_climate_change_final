@@ -26,6 +26,19 @@ scale: 75%
 Trends in mean surface air temperature over the period 1960 to 2019. The fact that Arctic warms more than the rest of the globe in the past decades signatures the Arctic amplification. Credit: NASA GISS.
 ```
 
+```{note}
+"Starting with radiative-convective equilibrium, Manabe and Wetherald predicted tropospheric warming and stratospheric cooling. Upon adding atmospheric dynamics and the sea-ice albedo feedback they predicted the latitudinal pattern of global warming: polar-amplified warming and tropical upper-tropospheric warming. Finally, upon adding land processes and ocean dynamics they predicted the longitudinal pattern of global warming: land warms more than the ocean, the Southern Ocean can cool transiently." - from [Bordoni et al. (2025)](https://doi.org/10.1038/s41612-025-00955-8)
+```
+
+```{figure} /_static/lecture_specific/lecture1_figures/sm_2017_tmp1.png
+---
+scale: 55%
+---
+Figure 1 of Stouffer and Manabe (2017). Spatial distribution of surface air temperature change in a response to (a) doubling of CO2 during year 60–80 and (b) observations between 1961–1990 and 1991–2015.
+```
+
+
+
 ## Why AA is important?
 
 - Local impacts on human dimension

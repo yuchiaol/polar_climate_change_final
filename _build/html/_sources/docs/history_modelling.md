@@ -458,9 +458,42 @@ The equilibrium climate sensitivity (ECS) and transient climate response (TCR) a
 :scale: 60%
 ```
 
-## future from now?
+## Future from now?
 - high-resolution climate modeling?
 - AI approach?
+
+A recent prespective paper, [Bordoni et al. (2025)](https://doi.org/10.1038/s41612-025-00955-8), may help answer this question:
+
+- "We argue that the past is prologue for climate modeling and that embracing a variety of tools and methodologies is key to achieving convergent paths for meaningful progress."
+
+- "Projects such as the Coupled Model Intercomparison Project (CMIP) have allowed the global community to work together to address the question of what we should expect in terms of future climate change and to understand how our models behave."
+
+- "the use of simulations starting from different initial conditions but produced with a single climate model and identical external forcing has highlighted the importance of natural variability as a source of uncertainty in regional climate predictions across a range of timescales."
+
+- "Climate modeling has traditionally relied on improving predictions through advancements in theoretical understanding and the representation of physical processes."
+
+- "This longer record combined with the growing climate change signal means that signals are starting to emerge from the noise across many regions and seasons."
+
+- "At the same time, new tools are becoming available such as km- scale models and AI/ML methods. Therefore, while the climate is now changing rapidly, so too is the field of climate science, leading many to question where the field should be moving next."
+
+- "As one increases resolution, adds complexity, or includes new parameterizations, we uncover new physics but also new issues."
+
+- "The reality is that there will likely be steps back before large steps forward are possible and it is important for prediction and understanding to advance together."
+
+- "Weather emulators can be run by graduate students on their laptops in contrast to the most sophisticated physics-based high resolution NWP models that involve many scientists at large weather centers and require state-of-the-art super- computers."
+
+```{figure} /_static/lecture_specific/lecture1_figures/climate_model_evolution_tmp1.png
+:scale: 40%
+Progression of model components from early climate models to the latest Earth System Models. Source: [Bordoni et al. (2025)](https://doi.org/10.1038/s41612-025-00955-8)
+```
+
+```{figure} /_static/lecture_specific/lecture1_figures/climate_model_climb_tmp1.png
+:scale: 40%
+Schematic of convergent paths toward advances in climate modeling. Embracing different approaches, including hierarchical modeling, machine learning, and high-resolution modeling, will utimately lead to improved climate projections. Source: [Bordoni et al. (2025)](https://doi.org/10.1038/s41612-025-00955-8)
+```
+
+
+
 
 ## Mid-term project
 - Please chose one classic paper to summarize the findings and conclusion.
@@ -469,6 +502,8 @@ The equilibrium climate sensitivity (ECS) and transient climate response (TCR) a
 ## Final project (following mid-term project)
 - Discuss what are reasonable and unreasonable.
 - Can you use what you have learned to correct/improve the model?
+
+
 
 
 
