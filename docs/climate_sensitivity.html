@@ -334,6 +334,8 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#climate-feedback">Climate feedback</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-physical-model-putting-together">The physical model - putting together</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#radiative-kernel-analysis">Radiative kernel analysis</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#transient-and-equilibrium-responses">Transient and equilibrium responses</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#transient-response-in-simple-models">Transient response in simple models</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#homework-assignment-x-due-xxx">Homework assignment X (due xxx)</a></li>
 </ul>
             </nav>
@@ -914,6 +916,659 @@ This is called the radiative kernel method.</p>
 </figcaption>
 </figure>
 </section>
+<section id="transient-and-equilibrium-responses">
+<h2>Transient and equilibrium responses<a class="headerlink" href="#transient-and-equilibrium-responses" title="Permalink to this heading">#</a></h2>
+<p>Professor Brian E. J. Rose ran two sets of simulations:</p>
+<ul class="simple">
+<li><p>Fully-coupled simulations</p></li>
+</ul>
+<ol class="arabic simple">
+<li><p>pre-industrial control simulation</p></li>
+<li><p>1% per year CO2 ramp simulation</p></li>
+</ol>
+<ul class="simple">
+<li><p>Slab ocean simulations</p></li>
+</ul>
+<ol class="arabic simple">
+<li><p>pre-industrial control with prescribed q-flux</p></li>
+<li><p>2xCO2 scenario run out to equilibrium</p></li>
+</ol>
+<p>Which one is the slab ocean model?</p>
+<figure class="align-default" id="id5">
+<a class="reference internal image-reference" href="../_images/slab_fully_coupled_demo.png"><img alt="../_images/slab_fully_coupled_demo.png" src="../_images/slab_fully_coupled_demo.png" style="width: 801.6px; height: 151.2px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 45 </span><span class="caption-text">Figure credit to Ya-Fan Chung.</span><a class="headerlink" href="#id5" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>We are going to calcualte ECS and transient climate response (TCR). TCR is always smaller than ECS due to the transient effects of ocean heat uptake (?).</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The transient climate response (TCR) is defined as the change in global and annual mean surface temperature from an experiment in which the CO2 concentration is increased by 1% yr, and calculated using the difference between the start of the experiment and a 20-year period centred on the time of CO2 doubling.</p>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">startingamount</span> <span class="o">=</span> <span class="mf">1.</span>
+<span class="n">amount</span> <span class="o">=</span> <span class="n">startingamount</span>
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">70</span><span class="p">):</span>
+    <span class="n">amount</span> <span class="o">*=</span> <span class="mf">1.01</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">amount</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2.006763368395386
+</pre></div>
+</div>
+</div>
+</div>
+<p>What do you find?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">xarray</span> <span class="k">as</span> <span class="nn">xr</span>
+
+<span class="n">casenames</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;cpl_control&#39;</span><span class="p">:</span> <span class="s1">&#39;cpl_1850_f19&#39;</span><span class="p">,</span>
+             <span class="s1">&#39;cpl_CO2ramp&#39;</span><span class="p">:</span> <span class="s1">&#39;cpl_CO2ramp_f19&#39;</span><span class="p">,</span>
+             <span class="s1">&#39;som_control&#39;</span><span class="p">:</span> <span class="s1">&#39;som_1850_f19&#39;</span><span class="p">,</span>
+             <span class="s1">&#39;som_2xCO2&#39;</span><span class="p">:</span>   <span class="s1">&#39;som_1850_2xCO2&#39;</span><span class="p">,</span>
+            <span class="p">}</span>
+<span class="c1"># The path to the THREDDS server, should work from anywhere</span>
+<span class="n">basepath</span> <span class="o">=</span> <span class="s1">&#39;~/Desktop/ebooks/data/&#39;</span>
+<span class="c1"># For better performance if you can access the roselab_rit filesystem (e.g. from JupyterHub)</span>
+<span class="c1"># basepath = &#39;/roselab_rit/cesm_archive/&#39;</span>
+<span class="n">casepaths</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">casenames</span><span class="p">:</span>
+    <span class="n">casepaths</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">basepath</span>
+
+<span class="c1"># make a dictionary of all the CAM atmosphere output</span>
+<span class="n">atm</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">casenames</span><span class="p">:</span>
+    <span class="n">path</span> <span class="o">=</span> <span class="n">casepaths</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">+</span> <span class="n">casenames</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;.cam.h0.nc&#39;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Attempting to open the dataset &#39;</span><span class="p">,</span> <span class="n">path</span><span class="p">)</span>
+    <span class="n">atm</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_dataset</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">decode_times</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Attempting to open the dataset  ~/Desktop/ebooks/data/cpl_1850_f19.cam.h0.nc
+Attempting to open the dataset  ~/Desktop/ebooks/data/cpl_CO2ramp_f19.cam.h0.nc
+Attempting to open the dataset  ~/Desktop/ebooks/data/som_1850_f19.cam.h0.nc
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Attempting to open the dataset  ~/Desktop/ebooks/data/som_1850_2xCO2.cam.h0.nc
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">days_per_year</span> <span class="o">=</span> <span class="mi">365</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;cpl_control&#39;</span><span class="p">,</span> <span class="s1">&#39;cpl_CO2ramp&#39;</span><span class="p">]:</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">atm</span><span class="p">[</span><span class="n">name</span><span class="p">]</span><span class="o">.</span><span class="n">time</span><span class="o">/</span><span class="n">days_per_year</span><span class="p">,</span> <span class="n">atm</span><span class="p">[</span><span class="n">name</span><span class="p">]</span><span class="o">.</span><span class="n">co2vmr</span><span class="o">*</span><span class="mf">1E6</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">name</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;CO2 volume mixing ratio (CESM coupled simulations)&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Years&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;pCO2 (ppm)&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/dc7a9b591c17e95ae8c4a3b66b16d49cdf87aac85768e146b9818aad5b636889.png" src="../_images/dc7a9b591c17e95ae8c4a3b66b16d49cdf87aac85768e146b9818aad5b636889.png" />
+</div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The radiative forcing associated with CO2 increase is approximately logarithmic in CO2 amount. So a doubling of CO2 represents roughly the same radiative forcing regardless of the initial CO2 concentration.</p>
+</div>
+<p>Let’s calculate the time series for global-, annual-mean near-surface air temperature.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">atm</span><span class="p">[</span><span class="s1">&#39;cpl_control&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">TREFHT</span><span class="p">)</span>
+
+<span class="c1">#  The area weighting needed for global averaging</span>
+<span class="n">gw</span> <span class="o">=</span> <span class="n">atm</span><span class="p">[</span><span class="s1">&#39;som_control&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">gw</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">gw</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">global_mean</span><span class="p">(</span><span class="n">field</span><span class="p">,</span> <span class="n">weight</span><span class="o">=</span><span class="n">gw</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;Return the area-weighted global average of the input field&#39;&#39;&#39;</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">field</span><span class="o">*</span><span class="n">weight</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;lat&#39;</span><span class="p">,</span><span class="s1">&#39;lon&#39;</span><span class="p">))</span><span class="o">/</span><span class="n">weight</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="s1">&#39;lat&#39;</span><span class="p">)</span>
+
+<span class="c1">#  Loop through the four simulations and produce the global mean timeseries</span>
+<span class="n">TREFHT_global</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">casenames</span><span class="p">:</span>
+    <span class="n">TREFHT_global</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">global_mean</span><span class="p">(</span><span class="n">atm</span><span class="p">[</span><span class="n">name</span><span class="p">]</span><span class="o">.</span><span class="n">TREFHT</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">8</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">casenames</span><span class="p">:</span>
+    <span class="k">if</span> <span class="s1">&#39;cpl&#39;</span> <span class="ow">in</span> <span class="n">name</span><span class="p">:</span>
+        <span class="n">ax</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Fully coupled ocean&#39;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">ax</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Slab ocean&#39;</span><span class="p">)</span>
+    <span class="n">field</span> <span class="o">=</span> <span class="n">TREFHT_global</span><span class="p">[</span><span class="n">name</span><span class="p">]</span>
+    <span class="n">field_running</span> <span class="o">=</span> <span class="n">field</span><span class="o">.</span><span class="n">rolling</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">center</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+    <span class="n">line</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">field</span><span class="o">.</span><span class="n">time</span> <span class="o">/</span> <span class="n">days_per_year</span><span class="p">,</span> 
+                   <span class="n">field</span><span class="p">,</span> 
+                   <span class="n">label</span><span class="o">=</span><span class="n">name</span><span class="p">,</span>
+                   <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.75</span><span class="p">,</span>
+                   <span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">field_running</span><span class="o">.</span><span class="n">time</span> <span class="o">/</span> <span class="n">days_per_year</span><span class="p">,</span> 
+            <span class="n">field_running</span><span class="p">,</span> 
+            <span class="n">color</span><span class="o">=</span><span class="n">line</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">get_color</span><span class="p">(),</span>
+            <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+           <span class="p">)</span>
+<span class="k">for</span> <span class="n">ax</span> <span class="ow">in</span> <span class="n">axes</span><span class="p">:</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">();</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Years&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Temperature (K)&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">();</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s1">&#39;Global mean surface air temperature in CESM simulations&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;xarray.DataArray &#39;TREFHT&#39; (time: 240, lat: 96, lon: 144)&gt; Size: 13MB
+[3317760 values with dtype=float32]
+Coordinates:
+  * time     (time) float64 2kB 31.0 59.0 90.0 ... 7.239e+03 7.269e+03 7.3e+03
+  * lat      (lat) float64 768B -90.0 -88.11 -86.21 -84.32 ... 86.21 88.11 90.0
+  * lon      (lon) float64 1kB 0.0 2.5 5.0 7.5 10.0 ... 350.0 352.5 355.0 357.5
+Attributes:
+    units:         K
+    long_name:     Reference height temperature
+    cell_methods:  time: mean
+&lt;xarray.DataArray &#39;gw&#39; (lat: 96)&gt; Size: 768B
+[96 values with dtype=float64]
+Coordinates:
+  * lat      (lat) float64 768B -90.0 -88.11 -86.21 -84.32 ... 86.21 88.11 90.0
+Attributes:
+    long_name:  gauss weights
+</pre></div>
+</div>
+<img alt="../_images/60af5787a4064214c7cccab0015f5187ec5a8752c3e60c61f2ab16407a1792b0.png" src="../_images/60af5787a4064214c7cccab0015f5187ec5a8752c3e60c61f2ab16407a1792b0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># extract the last 10 years from the slab ocean control simulation</span>
+<span class="c1"># and the last 20 years from the coupled control</span>
+<span class="n">nyears_slab</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">nyears_cpl</span> <span class="o">=</span> <span class="mi">20</span>
+<span class="n">clim_slice_slab</span> <span class="o">=</span> <span class="nb">slice</span><span class="p">(</span><span class="o">-</span><span class="p">(</span><span class="n">nyears_slab</span><span class="o">*</span><span class="mi">12</span><span class="p">),</span><span class="kc">None</span><span class="p">)</span>
+<span class="n">clim_slice_cpl</span> <span class="o">=</span> <span class="nb">slice</span><span class="p">(</span><span class="o">-</span><span class="p">(</span><span class="n">nyears_cpl</span><span class="o">*</span><span class="mi">12</span><span class="p">),</span><span class="kc">None</span><span class="p">)</span>
+
+<span class="c1"># extract the last 10 years from the slab ocean control simulation</span>
+<span class="n">T0_slab</span> <span class="o">=</span> <span class="n">TREFHT_global</span><span class="p">[</span><span class="s1">&#39;som_control&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isel</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="n">clim_slice_slab</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="s1">&#39;time&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">T0_slab</span><span class="p">)</span>
+
+<span class="c1"># and the last 20 years from the coupled control</span>
+<span class="n">T0_cpl</span> <span class="o">=</span> <span class="n">TREFHT_global</span><span class="p">[</span><span class="s1">&#39;cpl_control&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isel</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="n">clim_slice_cpl</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="s1">&#39;time&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">T0_cpl</span><span class="p">)</span>
+
+<span class="c1"># extract the last 10 years from the slab 2xCO2 simulation</span>
+<span class="n">T2x_slab</span> <span class="o">=</span> <span class="n">TREFHT_global</span><span class="p">[</span><span class="s1">&#39;som_2xCO2&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isel</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="n">clim_slice_slab</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="s1">&#39;time&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">T2x_slab</span><span class="p">)</span>
+
+<span class="c1"># extract the last 20 years from the coupled CO2 ramp simulation</span>
+<span class="n">T2x_cpl</span> <span class="o">=</span> <span class="n">TREFHT_global</span><span class="p">[</span><span class="s1">&#39;cpl_CO2ramp&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isel</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="n">clim_slice_cpl</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="s1">&#39;time&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">T2x_cpl</span><span class="p">)</span>
+
+<span class="n">ECS</span> <span class="o">=</span> <span class="n">T2x_slab</span> <span class="o">-</span> <span class="n">T0_slab</span>
+<span class="n">TCR</span> <span class="o">=</span> <span class="n">T2x_cpl</span> <span class="o">-</span> <span class="n">T0_cpl</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The Equilibrium Climate Sensitivity is </span><span class="si">{:.3}</span><span class="s1"> K.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">ECS</span><span class="p">)))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The Transient Climate Response is </span><span class="si">{:.3}</span><span class="s1"> K.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">TCR</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;xarray.DataArray ()&gt; Size: 8B
+array(286.82486457)
+&lt;xarray.DataArray ()&gt; Size: 8B
+array(286.75125938)
+&lt;xarray.DataArray ()&gt; Size: 8B
+array(289.71521445)
+&lt;xarray.DataArray ()&gt; Size: 8B
+array(288.41935278)
+The Equilibrium Climate Sensitivity is 2.89 K.
+The Transient Climate Response is 1.67 K.
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s check the spaital patterns:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># The map projection capabilities come from the cartopy package. There are many possible projections</span>
+<span class="kn">import</span> <span class="nn">cartopy.crs</span> <span class="k">as</span> <span class="nn">ccrs</span>
+<span class="kn">from</span> <span class="nn">cartopy.util</span> <span class="kn">import</span> <span class="n">add_cyclic_point</span>
+
+<span class="k">def</span> <span class="nf">make_map</span><span class="p">(</span><span class="n">field</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">levels</span><span class="o">=</span><span class="mi">8</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;input field should be a 2D xarray.DataArray on a lat/lon grid.</span>
+<span class="sd">        Make a filled contour plot of the field, and a line plot of the zonal mean</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+    <span class="n">nrows</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span> <span class="n">ncols</span> <span class="o">=</span> <span class="mi">3</span>
+    <span class="n">mapax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot2grid</span><span class="p">((</span><span class="n">nrows</span><span class="p">,</span><span class="n">ncols</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span> <span class="n">colspan</span><span class="o">=</span><span class="n">ncols</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">rowspan</span><span class="o">=</span><span class="n">nrows</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">projection</span><span class="o">=</span><span class="n">ccrs</span><span class="o">.</span><span class="n">Robinson</span><span class="p">())</span>
+    <span class="n">barax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot2grid</span><span class="p">((</span><span class="n">nrows</span><span class="p">,</span><span class="n">ncols</span><span class="p">),</span> <span class="p">(</span><span class="n">nrows</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span> <span class="n">colspan</span><span class="o">=</span><span class="n">ncols</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">plotax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot2grid</span><span class="p">((</span><span class="n">nrows</span><span class="p">,</span><span class="n">ncols</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">ncols</span><span class="o">-</span><span class="mi">1</span><span class="p">),</span> <span class="n">rowspan</span><span class="o">=</span><span class="n">nrows</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+    <span class="c1"># add cyclic point so cartopy doesn&#39;t show a white strip at zero longitude</span>
+    <span class="n">wrap_data</span><span class="p">,</span> <span class="n">wrap_lon</span> <span class="o">=</span> <span class="n">add_cyclic_point</span><span class="p">(</span><span class="n">field</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">coord</span><span class="o">=</span><span class="n">field</span><span class="o">.</span><span class="n">lon</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="n">field</span><span class="o">.</span><span class="n">dims</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="s1">&#39;lon&#39;</span><span class="p">))</span>
+    <span class="n">cx</span> <span class="o">=</span> <span class="n">mapax</span><span class="o">.</span><span class="n">contourf</span><span class="p">(</span><span class="n">wrap_lon</span><span class="p">,</span> <span class="n">field</span><span class="o">.</span><span class="n">lat</span><span class="p">,</span> <span class="n">wrap_data</span><span class="p">,</span> <span class="n">levels</span><span class="o">=</span><span class="n">levels</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="n">ccrs</span><span class="o">.</span><span class="n">PlateCarree</span><span class="p">())</span>
+    <span class="n">mapax</span><span class="o">.</span><span class="n">set_global</span><span class="p">();</span> <span class="n">mapax</span><span class="o">.</span><span class="n">coastlines</span><span class="p">();</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">cx</span><span class="p">,</span> <span class="n">cax</span><span class="o">=</span><span class="n">barax</span><span class="p">,</span> <span class="n">orientation</span><span class="o">=</span><span class="s1">&#39;horizontal&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Surface air temperature (K)&#39;</span><span class="p">)</span>
+    <span class="n">plotax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">field</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="s1">&#39;lon&#39;</span><span class="p">),</span> <span class="n">field</span><span class="o">.</span><span class="n">lat</span><span class="p">)</span>
+    <span class="n">plotax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Zonal mean (K)&#39;</span><span class="p">)</span>
+    <span class="n">plotax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Latitude&#39;</span><span class="p">)</span>
+    <span class="n">plotax</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+    <span class="n">fig</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="n">title</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">fig</span><span class="p">,</span> <span class="p">(</span><span class="n">mapax</span><span class="p">,</span> <span class="n">plotax</span><span class="p">,</span> <span class="n">barax</span><span class="p">),</span> <span class="n">cx</span>
+
+<span class="c1"># Plot a single time slice of surface air temperature just as example</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span><span class="p">,</span> <span class="n">cx</span> <span class="o">=</span> <span class="n">make_map</span><span class="p">(</span><span class="n">atm</span><span class="p">[</span><span class="s1">&#39;cpl_control&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">TREFHT</span><span class="o">.</span><span class="n">isel</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="mi">0</span><span class="p">),</span> 
+                        <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Surface air temperature in the coupled control simulation&quot;</span><span class="p">)</span>
+
+<span class="n">Tmap_cpl_2x</span> <span class="o">=</span> <span class="n">atm</span><span class="p">[</span><span class="s1">&#39;cpl_CO2ramp&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">TREFHT</span><span class="o">.</span><span class="n">isel</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="n">clim_slice_cpl</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="s1">&#39;time&#39;</span><span class="p">)</span>
+<span class="n">Tmap_cpl_control</span> <span class="o">=</span> <span class="n">atm</span><span class="p">[</span><span class="s1">&#39;cpl_control&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">TREFHT</span><span class="o">.</span><span class="n">isel</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="n">clim_slice_cpl</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="s1">&#39;time&#39;</span><span class="p">)</span>
+<span class="n">DeltaT_cpl</span> <span class="o">=</span> <span class="n">Tmap_cpl_2x</span> <span class="o">-</span> <span class="n">Tmap_cpl_control</span>
+
+<span class="n">Tmap_som_2x</span> <span class="o">=</span> <span class="n">atm</span><span class="p">[</span><span class="s1">&#39;som_2xCO2&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">TREFHT</span><span class="o">.</span><span class="n">isel</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="n">clim_slice_slab</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="s1">&#39;time&#39;</span><span class="p">)</span>
+<span class="n">Tmap_som_control</span> <span class="o">=</span> <span class="n">atm</span><span class="p">[</span><span class="s1">&#39;som_control&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">TREFHT</span><span class="o">.</span><span class="n">isel</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="n">clim_slice_slab</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="s1">&#39;time&#39;</span><span class="p">)</span>
+<span class="n">DeltaT_som</span> <span class="o">=</span> <span class="n">Tmap_som_2x</span> <span class="o">-</span> <span class="n">Tmap_som_control</span>
+
+
+<span class="n">contours</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">8.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">)</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span><span class="p">,</span> <span class="n">cx</span> <span class="o">=</span> <span class="n">make_map</span><span class="p">(</span><span class="n">DeltaT_cpl</span><span class="p">,</span> <span class="n">levels</span><span class="o">=</span><span class="n">contours</span><span class="p">,</span>
+                        <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Surface air temperature anomaly (coupled transient)&quot;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">7</span><span class="p">)</span>  <span class="c1"># ensure the line plots have same axes</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span><span class="p">,</span><span class="n">cx</span>  <span class="o">=</span> <span class="n">make_map</span><span class="p">(</span><span class="n">DeltaT_som</span><span class="p">,</span> <span class="n">levels</span><span class="o">=</span><span class="n">contours</span><span class="p">,</span>
+                         <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Surface air temperature anomaly (equilibrium SOM)&quot;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">7</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(0.0, 7.0)
+</pre></div>
+</div>
+<img alt="../_images/85aa120f18a91ff4b68ed50e2f3b448cf93f867d2f910eadd9cbfdb3f4c8ac5b.png" src="../_images/85aa120f18a91ff4b68ed50e2f3b448cf93f867d2f910eadd9cbfdb3f4c8ac5b.png" />
+<img alt="../_images/30d5c21e3f5e353054e50b59e8621a68b306f17317742b57a8fbbc39984cf225.png" src="../_images/30d5c21e3f5e353054e50b59e8621a68b306f17317742b57a8fbbc39984cf225.png" />
+<img alt="../_images/55f5f8b1a0943bbfc6f0573f56ea8a086b8641daff9ab5a6bca17b5b4d831a9c.png" src="../_images/55f5f8b1a0943bbfc6f0573f56ea8a086b8641daff9ab5a6bca17b5b4d831a9c.png" />
+</div>
+</div>
+<ul class="simple">
+<li><p>Polar amplification</p></li>
+<li><p>Land-sea contrast</p></li>
+<li><p>North Atlantic warming hole</p></li>
+<li><p>Delayed warming of the Southern Ocean</p></li>
+</ul>
+</section>
+<section id="transient-response-in-simple-models">
+<h2>Transient response in simple models<a class="headerlink" href="#transient-response-in-simple-models" title="Permalink to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">xarray</span> <span class="k">as</span> <span class="nn">xr</span>
+<span class="kn">import</span> <span class="nn">climlab</span>
+
+<span class="c1"># Get the water vapor data from CESM output</span>
+<span class="n">cesm_data_path</span> <span class="o">=</span> <span class="s2">&quot;~/Desktop/ebooks/data/&quot;</span>
+<span class="n">atm_control</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_dataset</span><span class="p">(</span><span class="n">cesm_data_path</span> <span class="o">+</span> <span class="s2">&quot;cpl_1850_f19.cam.h0.nc&quot;</span><span class="p">)</span>
+<span class="c1"># Take global, annual average of the specific humidity</span>
+<span class="n">weight_factor</span> <span class="o">=</span> <span class="n">atm_control</span><span class="o">.</span><span class="n">gw</span> <span class="o">/</span> <span class="n">atm_control</span><span class="o">.</span><span class="n">gw</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="s1">&#39;lat&#39;</span><span class="p">)</span>
+<span class="n">Qglobal</span> <span class="o">=</span> <span class="p">(</span><span class="n">atm_control</span><span class="o">.</span><span class="n">Q</span> <span class="o">*</span> <span class="n">weight_factor</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;lat&#39;</span><span class="p">,</span><span class="s1">&#39;lon&#39;</span><span class="p">,</span><span class="s1">&#39;time&#39;</span><span class="p">))</span>
+
+<span class="c1">#  Make a model on same vertical domain as the GCM</span>
+<span class="n">state</span> <span class="o">=</span> <span class="n">climlab</span><span class="o">.</span><span class="n">column_state</span><span class="p">(</span><span class="n">lev</span><span class="o">=</span><span class="n">Qglobal</span><span class="o">.</span><span class="n">lev</span><span class="p">,</span> <span class="n">water_depth</span><span class="o">=</span><span class="mf">2.5</span><span class="p">)</span>
+<span class="n">steps_per_year</span> <span class="o">=</span> <span class="mi">90</span>
+<span class="n">deltat</span> <span class="o">=</span> <span class="n">climlab</span><span class="o">.</span><span class="n">constants</span><span class="o">.</span><span class="n">seconds_per_year</span><span class="o">/</span><span class="n">steps_per_year</span>
+<span class="n">rad</span> <span class="o">=</span> <span class="n">climlab</span><span class="o">.</span><span class="n">radiation</span><span class="o">.</span><span class="n">RRTMG</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;Radiation&#39;</span><span class="p">,</span>
+                              <span class="n">state</span><span class="o">=</span><span class="n">state</span><span class="p">,</span> 
+                              <span class="n">specific_humidity</span><span class="o">=</span><span class="n">Qglobal</span><span class="o">.</span><span class="n">values</span><span class="p">,</span>
+                              <span class="n">timestep</span> <span class="o">=</span> <span class="n">deltat</span><span class="p">,</span>
+                              <span class="n">albedo</span> <span class="o">=</span> <span class="mf">0.25</span><span class="p">,</span>  <span class="c1"># tuned to give reasonable ASR for reference cloud-free model</span>
+                             <span class="p">)</span>
+<span class="n">conv</span> <span class="o">=</span> <span class="n">climlab</span><span class="o">.</span><span class="n">convection</span><span class="o">.</span><span class="n">ConvectiveAdjustment</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;Convection&#39;</span><span class="p">,</span>
+                                               <span class="n">state</span><span class="o">=</span><span class="n">state</span><span class="p">,</span>
+                                               <span class="n">adj_lapse_rate</span><span class="o">=</span><span class="mf">6.5</span><span class="p">,</span>
+                                               <span class="n">timestep</span><span class="o">=</span><span class="n">rad</span><span class="o">.</span><span class="n">timestep</span><span class="p">,)</span>
+<span class="n">rcm_control</span> <span class="o">=</span> <span class="n">climlab</span><span class="o">.</span><span class="n">couple</span><span class="p">([</span><span class="n">rad</span><span class="p">,</span><span class="n">conv</span><span class="p">],</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;Radiative-Convective Model&#39;</span><span class="p">)</span>
+
+<span class="n">rcm_control</span><span class="o">.</span><span class="n">integrate_years</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">rcm_control</span><span class="o">.</span><span class="n">ASR</span> <span class="o">-</span> <span class="n">rcm_control</span><span class="o">.</span><span class="n">OLR</span>
+
+<span class="n">slab_control</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">slab_control</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">rcm_control</span><span class="p">)</span>
+<span class="n">slab_control</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">climlab</span><span class="o">.</span><span class="n">process_like</span><span class="p">(</span><span class="n">rcm_control</span><span class="p">))</span>
+
+<span class="n">slab_2x</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">slab_control</span><span class="p">)):</span>
+    <span class="n">rcm_2xCO2</span> <span class="o">=</span> <span class="n">climlab</span><span class="o">.</span><span class="n">process_like</span><span class="p">(</span><span class="n">rcm_control</span><span class="p">)</span>
+    <span class="n">rcm_2xCO2</span><span class="o">.</span><span class="n">subprocess</span><span class="p">[</span><span class="s1">&#39;Radiation&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">absorber_vmr</span><span class="p">[</span><span class="s1">&#39;CO2&#39;</span><span class="p">]</span> <span class="o">*=</span> <span class="mf">2.</span>
+    <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">rcm_2xCO2</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;High-sensitivity RCM&#39;</span>
+    <span class="k">elif</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">rcm_2xCO2</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;Low-sensitivity RCM&#39;</span>
+    <span class="n">slab_2x</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">rcm_2xCO2</span><span class="p">)</span>
+
+<span class="c1">#  actual specific humidity</span>
+<span class="n">q</span> <span class="o">=</span> <span class="n">rcm_control</span><span class="o">.</span><span class="n">subprocess</span><span class="p">[</span><span class="s1">&#39;Radiation&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">specific_humidity</span>
+<span class="c1">#  saturation specific humidity (a function of temperature and pressure)</span>
+<span class="n">qsat</span> <span class="o">=</span> <span class="n">climlab</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">thermo</span><span class="o">.</span><span class="n">qsat</span><span class="p">(</span><span class="n">rcm_control</span><span class="o">.</span><span class="n">Tatm</span><span class="p">,</span> <span class="n">rcm_control</span><span class="o">.</span><span class="n">lev</span><span class="p">)</span>
+<span class="c1">#  Relative humidity (stay fixed!)</span>
+<span class="n">rh</span> <span class="o">=</span> <span class="n">q</span><span class="o">/</span><span class="n">qsat</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Integrating for 450 steps, 1826.2110000000002 days, or 5 years.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Total elapsed time is 5.000000000000044 years.
+</pre></div>
+</div>
+</div>
+</div>
+<p>We change lapse rate:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">lapse_change_factor</span> <span class="o">=</span> <span class="p">[</span><span class="o">+</span><span class="mf">0.3</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.3</span><span class="p">]</span>
+
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">slab_2x</span><span class="p">)):</span>
+    <span class="n">rcm_2xCO2</span> <span class="o">=</span> <span class="n">slab_2x</span><span class="p">[</span><span class="n">n</span><span class="p">]</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Integrating &#39;</span> <span class="o">+</span> <span class="n">rcm_2xCO2</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span> <span class="o">*</span> <span class="n">steps_per_year</span><span class="p">):</span>
+        <span class="c1"># At every timestep</span>
+        <span class="c1"># we calculate the new saturation specific humidity for the new temperature</span>
+        <span class="c1">#  and change the water vapor in the radiation model</span>
+        <span class="c1">#  so that relative humidity is always the same</span>
+        <span class="n">qsat</span> <span class="o">=</span> <span class="n">climlab</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">thermo</span><span class="o">.</span><span class="n">qsat</span><span class="p">(</span><span class="n">rcm_2xCO2</span><span class="o">.</span><span class="n">Tatm</span><span class="p">,</span> <span class="n">rcm_2xCO2</span><span class="o">.</span><span class="n">lev</span><span class="p">)</span>
+        <span class="n">rcm_2xCO2</span><span class="o">.</span><span class="n">subprocess</span><span class="p">[</span><span class="s1">&#39;Radiation&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">specific_humidity</span><span class="p">[:]</span> <span class="o">=</span> <span class="n">rh</span> <span class="o">*</span> <span class="n">qsat</span>
+        <span class="c1">#  We also adjust the critical lapse rate in our convection model</span>
+        <span class="n">DeltaTs</span> <span class="o">=</span> <span class="n">rcm_2xCO2</span><span class="o">.</span><span class="n">Ts</span> <span class="o">-</span> <span class="n">rcm_control</span><span class="o">.</span><span class="n">Ts</span>
+        <span class="n">rcm_2xCO2</span><span class="o">.</span><span class="n">subprocess</span><span class="p">[</span><span class="s1">&#39;Convection&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">adj_lapse_rate</span> <span class="o">=</span> <span class="mf">6.5</span> <span class="o">+</span> <span class="n">lapse_change_factor</span><span class="p">[</span><span class="n">n</span><span class="p">]</span><span class="o">*</span><span class="n">DeltaTs</span>
+        <span class="n">rcm_2xCO2</span><span class="o">.</span><span class="n">step_forward</span><span class="p">()</span>
+    <span class="n">imbalance</span> <span class="o">=</span> <span class="p">(</span><span class="n">rcm_2xCO2</span><span class="o">.</span><span class="n">ASR</span> <span class="o">-</span> <span class="n">rcm_2xCO2</span><span class="o">.</span><span class="n">OLR</span><span class="p">)</span><span class="o">.</span><span class="n">squeeze</span><span class="p">()</span>  <span class="c1"># convert to a single scalar</span>
+    <span class="n">ecs</span> <span class="o">=</span> <span class="p">(</span><span class="n">rcm_2xCO2</span><span class="o">.</span><span class="n">Ts</span> <span class="o">-</span> <span class="n">rcm_control</span><span class="o">.</span><span class="n">Ts</span><span class="p">)</span><span class="o">.</span><span class="n">squeeze</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The TOA imbalance is </span><span class="si">{:.2e}</span><span class="s1"> W/m2&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">imbalance</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The ECS is </span><span class="si">{:.2f}</span><span class="s1"> K&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">ecs</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Integrating High-sensitivity RCM
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The TOA imbalance is 3.11e-05 W/m2
+The ECS is 3.57 K
+
+Integrating Low-sensitivity RCM
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The TOA imbalance is 2.22e-04 W/m2
+The ECS is 2.22 K
+</pre></div>
+</div>
+</div>
+</div>
+<p>Why the lapse rates affect the climate sensitivity?</p>
+<p>The current models have too shallow water depth, which means small heat capacity and reaching equilibrium very fast.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">slab_control</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">depth_bounds</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0.  2.5]
+</pre></div>
+</div>
+</div>
+</div>
+<p>We need deeper ocean for ocean heat uptake.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#  Create the domains</span>
+<span class="n">ocean_bounds</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">2010.</span><span class="p">,</span> <span class="mf">100.</span><span class="p">)</span>
+<span class="n">depthax</span> <span class="o">=</span> <span class="n">climlab</span><span class="o">.</span><span class="n">Axis</span><span class="p">(</span><span class="n">axis_type</span><span class="o">=</span><span class="s1">&#39;depth&#39;</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="n">ocean_bounds</span><span class="p">)</span>
+<span class="n">ocean</span> <span class="o">=</span> <span class="n">climlab</span><span class="o">.</span><span class="n">domain</span><span class="o">.</span><span class="n">domain</span><span class="o">.</span><span class="n">Ocean</span><span class="p">(</span><span class="n">axes</span><span class="o">=</span><span class="n">depthax</span><span class="p">)</span>
+<span class="n">atm</span> <span class="o">=</span> <span class="n">slab_control</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">Tatm</span><span class="o">.</span><span class="n">domain</span>
+
+<span class="c1">#  Model 0 has a higher ocean heat diffusion coefficient -- </span>
+<span class="c1">#  a more efficent deep ocean heat sink</span>
+<span class="n">ocean_diff</span> <span class="o">=</span> <span class="p">[</span><span class="mf">5.E-4</span><span class="p">,</span> <span class="mf">3.5E-4</span><span class="p">]</span>
+
+<span class="c1">#  List of deep ocean models</span>
+<span class="n">deep</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">slab_control</span><span class="p">)):</span>
+    <span class="n">rcm_control</span> <span class="o">=</span> <span class="n">slab_control</span><span class="p">[</span><span class="n">n</span><span class="p">]</span>
+    <span class="c1">#  Create the state variables</span>
+    <span class="n">Tinitial_ocean</span> <span class="o">=</span> <span class="n">rcm_control</span><span class="o">.</span><span class="n">Ts</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">ocean</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+    <span class="n">Tocean</span> <span class="o">=</span> <span class="n">climlab</span><span class="o">.</span><span class="n">Field</span><span class="p">(</span><span class="n">Tinitial_ocean</span><span class="o">.</span><span class="n">copy</span><span class="p">(),</span> <span class="n">domain</span><span class="o">=</span><span class="n">ocean</span><span class="p">)</span>
+    <span class="n">Tatm</span> <span class="o">=</span> <span class="n">climlab</span><span class="o">.</span><span class="n">Field</span><span class="p">(</span><span class="n">rcm_control</span><span class="o">.</span><span class="n">Tatm</span><span class="o">.</span><span class="n">copy</span><span class="p">(),</span> <span class="n">domain</span><span class="o">=</span><span class="n">atm</span><span class="p">)</span>
+
+    <span class="c1">#  Surface temperature Ts is the upper-most grid box of the ocean</span>
+    <span class="n">Ts</span> <span class="o">=</span> <span class="n">Tocean</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">atm_state</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;Tatm&#39;</span><span class="p">:</span> <span class="n">Tatm</span><span class="p">,</span> <span class="s1">&#39;Ts&#39;</span><span class="p">:</span> <span class="n">Ts</span><span class="p">}</span>
+    
+    <span class="n">rad</span> <span class="o">=</span> <span class="n">climlab</span><span class="o">.</span><span class="n">radiation</span><span class="o">.</span><span class="n">RRTMG</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;Radiation&#39;</span><span class="p">,</span>
+                                  <span class="n">state</span><span class="o">=</span><span class="n">atm_state</span><span class="p">,</span> 
+                                  <span class="n">specific_humidity</span><span class="o">=</span><span class="n">Qglobal</span><span class="o">.</span><span class="n">values</span><span class="p">,</span>
+                                  <span class="n">timestep</span> <span class="o">=</span> <span class="n">deltat</span><span class="p">,</span>
+                                  <span class="n">albedo</span> <span class="o">=</span> <span class="mf">0.25</span><span class="p">,</span>  
+                                 <span class="p">)</span>
+    <span class="n">conv</span> <span class="o">=</span> <span class="n">climlab</span><span class="o">.</span><span class="n">convection</span><span class="o">.</span><span class="n">ConvectiveAdjustment</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;Convection&#39;</span><span class="p">,</span>
+                                                   <span class="n">state</span><span class="o">=</span><span class="n">atm_state</span><span class="p">,</span>
+                                                   <span class="n">adj_lapse_rate</span><span class="o">=</span><span class="mf">6.5</span><span class="p">,</span>
+                                                   <span class="n">timestep</span><span class="o">=</span><span class="n">rad</span><span class="o">.</span><span class="n">timestep</span><span class="p">,)</span>
+
+    <span class="n">model</span> <span class="o">=</span> <span class="n">rad</span> <span class="o">+</span> <span class="n">conv</span>
+    <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">model</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;RCM with high sensitivity and efficient heat uptake&#39;</span>
+    <span class="k">elif</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">model</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;RCM with low sensitivity and inefficient heat uptake&#39;</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">set_state</span><span class="p">(</span><span class="s1">&#39;Tocean&#39;</span><span class="p">,</span> <span class="n">Tocean</span><span class="p">)</span>
+    <span class="n">diff</span> <span class="o">=</span> <span class="n">climlab</span><span class="o">.</span><span class="n">dynamics</span><span class="o">.</span><span class="n">Diffusion</span><span class="p">(</span><span class="n">state</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;Tocean&#39;</span><span class="p">:</span> <span class="n">model</span><span class="o">.</span><span class="n">Tocean</span><span class="p">},</span> 
+                                <span class="n">K</span><span class="o">=</span><span class="n">ocean_diff</span><span class="p">[</span><span class="n">n</span><span class="p">],</span> 
+                                <span class="n">diffusion_axis</span><span class="o">=</span><span class="s1">&#39;depth&#39;</span><span class="p">,</span> 
+                                <span class="n">timestep</span><span class="o">=</span><span class="n">deltat</span> <span class="o">*</span> <span class="mi">10</span><span class="p">,)</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">add_subprocess</span><span class="p">(</span><span class="s1">&#39;Ocean Heat Uptake&#39;</span><span class="p">,</span> <span class="n">diff</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+    <span class="n">deep</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>climlab Process of type &lt;class &#39;climlab.process.time_dependent_process.TimeDependentProcess&#39;&gt;. 
+State variables and domain shapes: 
+  Tatm: (26,) 
+  Ts: (1,) 
+  Tocean: (20,) 
+The subprocess tree: 
+RCM with high sensitivity and efficient heat uptake: &lt;class &#39;climlab.process.time_dependent_process.TimeDependentProcess&#39;&gt;
+   Radiation: &lt;class &#39;climlab.radiation.rrtm.rrtmg.RRTMG&#39;&gt;
+      SW: &lt;class &#39;climlab.radiation.rrtm.rrtmg_sw.RRTMG_SW&#39;&gt;
+      LW: &lt;class &#39;climlab.radiation.rrtm.rrtmg_lw.RRTMG_LW&#39;&gt;
+   Convection: &lt;class &#39;climlab.convection.convadj.ConvectiveAdjustment&#39;&gt;
+   Ocean Heat Uptake: &lt;class &#39;climlab.dynamics.advection_diffusion.Diffusion&#39;&gt;
+
+
+
+climlab Process of type &lt;class &#39;climlab.process.time_dependent_process.TimeDependentProcess&#39;&gt;. 
+State variables and domain shapes: 
+  Tatm: (26,) 
+  Ts: (1,) 
+  Tocean: (20,) 
+The subprocess tree: 
+RCM with low sensitivity and inefficient heat uptake: &lt;class &#39;climlab.process.time_dependent_process.TimeDependentProcess&#39;&gt;
+   Radiation: &lt;class &#39;climlab.radiation.rrtm.rrtmg.RRTMG&#39;&gt;
+      SW: &lt;class &#39;climlab.radiation.rrtm.rrtmg_sw.RRTMG_SW&#39;&gt;
+      LW: &lt;class &#39;climlab.radiation.rrtm.rrtmg_lw.RRTMG_LW&#39;&gt;
+   Convection: &lt;class &#39;climlab.convection.convadj.ConvectiveAdjustment&#39;&gt;
+   Ocean Heat Uptake: &lt;class &#39;climlab.dynamics.advection_diffusion.Diffusion&#39;&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>We now increase CO2 by 1% per year to doucling its concentration, which takes about 70 years.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">num_years</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">years</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">num_years</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">Tsarray</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">Tocean</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">netrad</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">deep</span><span class="p">)):</span>
+    <span class="n">thisTs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">num_years</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">thisnetrad</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">num_years</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">thisTocean</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">deep</span><span class="p">[</span><span class="n">n</span><span class="p">]</span><span class="o">.</span><span class="n">Tocean</span><span class="o">.</span><span class="n">size</span><span class="p">,</span> <span class="n">num_years</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
+    <span class="n">thisTs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">deep</span><span class="p">[</span><span class="n">n</span><span class="p">]</span><span class="o">.</span><span class="n">Ts</span><span class="o">.</span><span class="n">squeeze</span><span class="p">()</span>
+    <span class="n">thisnetrad</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">deep</span><span class="p">[</span><span class="n">n</span><span class="p">]</span><span class="o">.</span><span class="n">ASR</span> <span class="o">-</span> <span class="n">deep</span><span class="p">[</span><span class="n">n</span><span class="p">]</span><span class="o">.</span><span class="n">OLR</span><span class="p">)</span><span class="o">.</span><span class="n">squeeze</span><span class="p">()</span>
+    <span class="n">thisTocean</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">deep</span><span class="p">[</span><span class="n">n</span><span class="p">]</span><span class="o">.</span><span class="n">Tocean</span>
+    <span class="n">Tsarray</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">thisTs</span><span class="p">)</span>
+    <span class="n">Tocean</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">thisTocean</span><span class="p">)</span>
+    <span class="n">netrad</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">thisnetrad</span><span class="p">)</span>
+    
+<span class="n">CO2initial</span> <span class="o">=</span> <span class="n">deep</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">subprocess</span><span class="p">[</span><span class="s1">&#39;Radiation&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">absorber_vmr</span><span class="p">[</span><span class="s1">&#39;CO2&#39;</span><span class="p">]</span>
+<span class="n">CO2array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">num_years</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">CO2array</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">CO2initial</span> <span class="o">*</span> <span class="mf">1E6</span>
+
+<span class="c1">#  Increase CO2 by 1% / year for 70 years (until doubled), and then hold constant</span>
+<span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_years</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">deep</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">subprocess</span><span class="p">[</span><span class="s1">&#39;Radiation&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">absorber_vmr</span><span class="p">[</span><span class="s1">&#39;CO2&#39;</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">CO2initial</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">model</span> <span class="ow">in</span> <span class="n">deep</span><span class="p">:</span>
+            <span class="n">model</span><span class="o">.</span><span class="n">subprocess</span><span class="p">[</span><span class="s1">&#39;Radiation&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">absorber_vmr</span><span class="p">[</span><span class="s1">&#39;CO2&#39;</span><span class="p">]</span> <span class="o">*=</span> <span class="mf">1.01</span>
+    <span class="n">CO2array</span><span class="p">[</span><span class="n">y</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">deep</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">subprocess</span><span class="p">[</span><span class="s1">&#39;Radiation&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">absorber_vmr</span><span class="p">[</span><span class="s1">&#39;CO2&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="mf">1E6</span>
+    <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">mod</span><span class="p">(</span><span class="n">y</span><span class="p">,</span><span class="mi">10</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+       <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Year &#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;, CO2 mixing ratio is &#39;</span><span class="p">,</span> <span class="n">CO2array</span><span class="p">[</span><span class="n">y</span><span class="o">+</span><span class="mi">1</span><span class="p">],</span><span class="s1">&#39; ppm.&#39;</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">n</span><span class="p">,</span> <span class="n">model</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">deep</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">steps_per_year</span><span class="p">):</span>            
+            <span class="n">qsat</span> <span class="o">=</span> <span class="n">climlab</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">thermo</span><span class="o">.</span><span class="n">qsat</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">Tatm</span><span class="p">,</span> <span class="n">model</span><span class="o">.</span><span class="n">lev</span><span class="p">)</span>
+            <span class="n">model</span><span class="o">.</span><span class="n">subprocess</span><span class="p">[</span><span class="s1">&#39;Radiation&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">specific_humidity</span><span class="p">[:]</span> <span class="o">=</span> <span class="n">rh</span> <span class="o">*</span> <span class="n">qsat</span>
+            <span class="n">DeltaTs</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">Ts</span> <span class="o">-</span> <span class="n">slab_control</span><span class="p">[</span><span class="n">n</span><span class="p">]</span><span class="o">.</span><span class="n">Ts</span>
+            <span class="n">model</span><span class="o">.</span><span class="n">subprocess</span><span class="p">[</span><span class="s1">&#39;Convection&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">adj_lapse_rate</span> <span class="o">=</span> <span class="mf">6.5</span> <span class="o">+</span> <span class="n">lapse_change_factor</span><span class="p">[</span><span class="n">n</span><span class="p">]</span><span class="o">*</span><span class="n">DeltaTs</span>
+            <span class="n">model</span><span class="o">.</span><span class="n">step_forward</span><span class="p">()</span>
+            
+            <span class="n">Tsarray</span><span class="p">[</span><span class="n">n</span><span class="p">][</span><span class="n">y</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">Ts</span><span class="o">.</span><span class="n">squeeze</span><span class="p">()</span>
+            <span class="n">Tocean</span><span class="p">[</span><span class="n">n</span><span class="p">][:,</span> <span class="n">y</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">Tocean</span>
+            <span class="n">netrad</span><span class="p">[</span><span class="n">n</span><span class="p">][</span><span class="n">y</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">ASR</span> <span class="o">-</span> <span class="n">model</span><span class="o">.</span><span class="n">OLR</span><span class="p">)</span><span class="o">.</span><span class="n">squeeze</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Year  1 , CO2 mixing ratio is  351.47999999999996  ppm.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Year  11 , CO2 mixing ratio is  388.2525846395302  ppm.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Year  21 , CO2 mixing ratio is  428.87239524091143  ppm.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Year  31 , CO2 mixing ratio is  473.7419367612098  ppm.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Year  41 , CO2 mixing ratio is  523.3058250815881  ppm.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Year  51 , CO2 mixing ratio is  578.0551927416877  ppm.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Year  61 , CO2 mixing ratio is  638.5325556113066  ppm.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Year  71 , CO2 mixing ratio is  698.3536522015938  ppm.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Year  81 , CO2 mixing ratio is  698.3536522015938  ppm.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Year  91 , CO2 mixing ratio is  698.3536522015938  ppm.
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">colorlist</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">]</span>
+<span class="n">co2color</span> <span class="o">=</span> <span class="s1">&#39;k&#39;</span>
+
+<span class="n">num_axes</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">deep</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">num_axes</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">14</span><span class="p">))</span>
+
+<span class="c1"># Twin the x-axis twice to make independent y-axes.</span>
+<span class="n">topaxes</span> <span class="o">=</span> <span class="p">[</span><span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">twinx</span><span class="p">(),</span> <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">twinx</span><span class="p">()]</span>
+
+<span class="c1"># Make some space on the right side for the extra y-axis.</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">subplots_adjust</span><span class="p">(</span><span class="n">right</span><span class="o">=</span><span class="mf">0.85</span><span class="p">)</span>
+
+<span class="c1"># Move the last y-axis spine over to the right by 10% of the width of the axes</span>
+<span class="n">topaxes</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="s1">&#39;right&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">set_position</span><span class="p">((</span><span class="s1">&#39;axes&#39;</span><span class="p">,</span> <span class="mf">1.1</span><span class="p">))</span>
+
+<span class="c1"># To make the border of the right-most axis visible, we need to turn the frame</span>
+<span class="c1"># on. This hides the other plots, however, so we need to turn its fill off.</span>
+<span class="n">topaxes</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_frame_on</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">topaxes</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">patch</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">n</span><span class="p">,</span> <span class="n">model</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">slab_2x</span><span class="p">):</span>
+    <span class="n">topaxes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">Ts</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="n">Tsarray</span><span class="p">[</span><span class="n">n</span><span class="p">]),</span> <span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">colorlist</span><span class="p">[</span><span class="n">n</span><span class="p">])</span>
+<span class="n">topaxes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Surface temperature (K)&#39;</span><span class="p">)</span>
+<span class="n">topaxes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Years&#39;</span><span class="p">)</span>
+<span class="n">topaxes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Transient warming scenario: 1%/year CO2 increase to doubling, followed by CO2 stabilization&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+<span class="n">topaxes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">([</span><span class="s1">&#39;Model 0&#39;</span><span class="p">,</span> <span class="s1">&#39;Model 1&#39;</span><span class="p">],</span> <span class="n">loc</span><span class="o">=</span><span class="s1">&#39;lower right&#39;</span><span class="p">)</span>
+
+<span class="n">topaxes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">CO2array</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">co2color</span><span class="p">)</span>
+<span class="n">topaxes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;CO2 (ppm)&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">co2color</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">tl</span> <span class="ow">in</span> <span class="n">topaxes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">get_yticklabels</span><span class="p">():</span>
+    <span class="n">tl</span><span class="o">.</span><span class="n">set_color</span><span class="p">(</span><span class="n">co2color</span><span class="p">)</span>
+<span class="n">topaxes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mf">300.</span><span class="p">,</span> <span class="mf">1000.</span><span class="p">)</span>
+
+<span class="n">topaxes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;TOA imbalance (W/m2)&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">tl</span> <span class="ow">in</span> <span class="n">topaxes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">get_yticklabels</span><span class="p">():</span>
+    <span class="n">tl</span><span class="o">.</span><span class="n">set_color</span><span class="p">(</span><span class="s1">&#39;b&#39;</span><span class="p">)</span>
+<span class="n">topaxes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+
+
+<span class="n">contour_levels</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mf">0.25</span><span class="p">,</span> <span class="mf">3.25</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">deep</span><span class="p">)):</span>
+    <span class="n">cax</span> <span class="o">=</span> <span class="n">ax</span><span class="p">[</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">contourf</span><span class="p">(</span><span class="n">years</span><span class="p">,</span> <span class="n">deep</span><span class="p">[</span><span class="n">n</span><span class="p">]</span><span class="o">.</span><span class="n">depth</span><span class="p">,</span> <span class="n">Tocean</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">-</span> <span class="n">Tsarray</span><span class="p">[</span><span class="n">n</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">levels</span><span class="o">=</span><span class="n">contour_levels</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">invert_yaxis</span><span class="p">()</span>
+    <span class="n">ax</span><span class="p">[</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Depth (m)&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Years&#39;</span><span class="p">)</span>
+
+
+<span class="k">for</span> <span class="n">n</span><span class="p">,</span> <span class="n">model</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">deep</span><span class="p">):</span>
+    <span class="n">topaxes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">Tsarray</span><span class="p">[</span><span class="n">n</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="n">colorlist</span><span class="p">[</span><span class="n">n</span><span class="p">])</span>
+    <span class="n">topaxes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">netrad</span><span class="p">[</span><span class="n">n</span><span class="p">],</span> <span class="s1">&#39;:&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">colorlist</span><span class="p">[</span><span class="n">n</span><span class="p">])</span>
+    <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">deep</span><span class="p">)):</span>
+        <span class="n">cax</span> <span class="o">=</span> <span class="n">ax</span><span class="p">[</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">contourf</span><span class="p">(</span><span class="n">years</span><span class="p">,</span> <span class="n">deep</span><span class="p">[</span><span class="n">n</span><span class="p">]</span><span class="o">.</span><span class="n">depth</span><span class="p">,</span> <span class="n">Tocean</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">-</span> <span class="n">Tsarray</span><span class="p">[</span><span class="n">n</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">levels</span><span class="o">=</span><span class="n">contour_levels</span><span class="p">)</span>    
+<span class="n">topaxes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">CO2array</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">co2color</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="o">.</span><span class="n">subplots_adjust</span><span class="p">(</span><span class="n">bottom</span><span class="o">=</span><span class="mf">0.12</span><span class="p">)</span>
+<span class="n">cbar_ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_axes</span><span class="p">([</span><span class="mf">0.25</span><span class="p">,</span> <span class="mf">0.02</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.03</span><span class="p">])</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">cax</span><span class="p">,</span> <span class="n">cax</span><span class="o">=</span><span class="n">cbar_ax</span><span class="p">,</span> <span class="n">orientation</span><span class="o">=</span><span class="s1">&#39;horizontal&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/53c94f51ee002e7cbc08e7eb9f18e3266790ba55459b1c37539ce99bfd3e2323.png" src="../_images/53c94f51ee002e7cbc08e7eb9f18e3266790ba55459b1c37539ce99bfd3e2323.png" />
+</div>
+</div>
+</section>
 <section id="homework-assignment-x-due-xxx">
 <h2>Homework assignment X (due xxx)<a class="headerlink" href="#homework-assignment-x-due-xxx" title="Permalink to this heading">#</a></h2>
 <ol class="arabic simple">
@@ -990,6 +1645,8 @@ This is called the radiative kernel method.</p>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#climate-feedback">Climate feedback</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-physical-model-putting-together">The physical model - putting together</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#radiative-kernel-analysis">Radiative kernel analysis</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#transient-and-equilibrium-responses">Transient and equilibrium responses</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#transient-response-in-simple-models">Transient response in simple models</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#homework-assignment-x-due-xxx">Homework assignment X (due xxx)</a></li>
 </ul>
   </nav></div>

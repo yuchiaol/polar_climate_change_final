@@ -562,6 +562,485 @@ scale: 35%
 Comparison of TOA radiative feedbacks. TOA radiative feedbacks (Wm$^{-2}$ K$^{-1}$) averaged over 40 CESM large-ensemble simulations diagnosed with CAM5 radiative kernels, compared against those from CMIP3 model simulations diagnosed with three different kernels as reported by [Soden et al. (2008)](https://journals.ametsoc.org/view/journals/clim/21/14/2007jcli2110.1.xml), and MPI-ESM-LR control state kernels and years 21–150 of abrupt carbon dioxide quadrupling simulations from the same model (Block and Mauritsen, 2013). Table from [Pendergrass et al. (2018)](https://essd.copernicus.org/articles/10/317/2018/).
 ```
 
+## Transient and equilibrium responses
+Professor Brian E. J. Rose ran two sets of simulations:
+
+- Fully-coupled simulations 
+1. pre-industrial control simulation
+2. 1% per year CO2 ramp simulation
+
+- Slab ocean simulations
+1. pre-industrial control with prescribed q-flux
+2. 2xCO2 scenario run out to equilibrium
+
+Which one is the slab ocean model?
+
+```{figure} /_static/lecture_specific/lecture1_figures/slab_fully_coupled_demo.png
+---
+scale: 60%
+---
+Figure credit to Ya-Fan Chung.
+```
+
+
+We are going to calcualte ECS and transient climate response (TCR). TCR is always smaller than ECS due to the transient effects of ocean heat uptake (?).
+
+```{note}
+The transient climate response (TCR) is defined as the change in global and annual mean surface temperature from an experiment in which the CO2 concentration is increased by 1% yr, and calculated using the difference between the start of the experiment and a 20-year period centred on the time of CO2 doubling.
+
+```
+
+```{code-cell}ipython
+startingamount = 1.
+amount = startingamount
+for n in range(70):
+    amount *= 1.01
+print(amount)
+```
+
+What do you find?
+
+
+```{code-cell}ipython
+%matplotlib inline
+import numpy as np
+import matplotlib.pyplot as plt
+import xarray as xr
+
+casenames = {'cpl_control': 'cpl_1850_f19',
+             'cpl_CO2ramp': 'cpl_CO2ramp_f19',
+             'som_control': 'som_1850_f19',
+             'som_2xCO2':   'som_1850_2xCO2',
+            }
+# The path to the THREDDS server, should work from anywhere
+basepath = '~/Desktop/ebooks/data/'
+# For better performance if you can access the roselab_rit filesystem (e.g. from JupyterHub)
+# basepath = '/roselab_rit/cesm_archive/'
+casepaths = {}
+for name in casenames:
+    casepaths[name] = basepath
+
+# make a dictionary of all the CAM atmosphere output
+atm = {}
+for name in casenames:
+    path = casepaths[name] + casenames[name] + '.cam.h0.nc'
+    print('Attempting to open the dataset ', path)
+    atm[name] = xr.open_dataset(path, decode_times=False)
+
+```
+
+```{code-cell}ipython
+days_per_year = 365
+fig, ax = plt.subplots()
+for name in ['cpl_control', 'cpl_CO2ramp']:
+    ax.plot(atm[name].time/days_per_year, atm[name].co2vmr*1E6, label=name)
+ax.set_title('CO2 volume mixing ratio (CESM coupled simulations)')
+ax.set_xlabel('Years')
+ax.set_ylabel('pCO2 (ppm)')
+ax.grid()
+ax.legend();
+```
+
+```{note}
+The radiative forcing associated with CO2 increase is approximately logarithmic in CO2 amount. So a doubling of CO2 represents roughly the same radiative forcing regardless of the initial CO2 concentration.
+```
+
+Let's calculate the time series for global-, annual-mean near-surface air temperature.
+
+```{code-cell}ipython
+print(atm['cpl_control'].TREFHT)
+
+#  The area weighting needed for global averaging
+gw = atm['som_control'].gw
+print(gw)
+
+def global_mean(field, weight=gw):
+    '''Return the area-weighted global average of the input field'''
+    return (field*weight).mean(dim=('lat','lon'))/weight.mean(dim='lat')
+
+#  Loop through the four simulations and produce the global mean timeseries
+TREFHT_global = {}
+for name in casenames:
+    TREFHT_global[name] = global_mean(atm[name].TREFHT)
+
+fig, axes = plt.subplots(2,1,figsize=(10,8))
+for name in casenames:
+    if 'cpl' in name:
+        ax = axes[0]
+        ax.set_title('Fully coupled ocean')
+    else:
+        ax = axes[1]
+        ax.set_title('Slab ocean')
+    field = TREFHT_global[name]
+    field_running = field.rolling(time=12, center=True).mean()
+    line = ax.plot(field.time / days_per_year, 
+                   field, 
+                   label=name,
+                   linewidth=0.75,
+                   )
+    ax.plot(field_running.time / days_per_year, 
+            field_running, 
+            color=line[0].get_color(),
+            linewidth=2,
+           )
+for ax in axes:
+    ax.legend();
+    ax.set_xlabel('Years')
+    ax.set_ylabel('Temperature (K)')
+    ax.grid();
+    ax.set_xlim(0,100)
+
+fig.suptitle('Global mean surface air temperature in CESM simulations', fontsize=16);
+
+
+```
+
+```{code-cell}ipython
+# extract the last 10 years from the slab ocean control simulation
+# and the last 20 years from the coupled control
+nyears_slab = 10
+nyears_cpl = 20
+clim_slice_slab = slice(-(nyears_slab*12),None)
+clim_slice_cpl = slice(-(nyears_cpl*12),None)
+
+# extract the last 10 years from the slab ocean control simulation
+T0_slab = TREFHT_global['som_control'].isel(time=clim_slice_slab).mean(dim='time')
+print(T0_slab)
+
+# and the last 20 years from the coupled control
+T0_cpl = TREFHT_global['cpl_control'].isel(time=clim_slice_cpl).mean(dim='time')
+print(T0_cpl)
+
+# extract the last 10 years from the slab 2xCO2 simulation
+T2x_slab = TREFHT_global['som_2xCO2'].isel(time=clim_slice_slab).mean(dim='time')
+print(T2x_slab)
+
+# extract the last 20 years from the coupled CO2 ramp simulation
+T2x_cpl = TREFHT_global['cpl_CO2ramp'].isel(time=clim_slice_cpl).mean(dim='time')
+print(T2x_cpl)
+
+ECS = T2x_slab - T0_slab
+TCR = T2x_cpl - T0_cpl
+print('The Equilibrium Climate Sensitivity is {:.3} K.'.format(float(ECS)))
+print('The Transient Climate Response is {:.3} K.'.format(float(TCR)))
+
+
+```
+
+Let's check the spaital patterns:
+
+```{code-cell}ipython
+# The map projection capabilities come from the cartopy package. There are many possible projections
+import cartopy.crs as ccrs
+from cartopy.util import add_cyclic_point
+
+def make_map(field, title="", levels=8):
+    '''input field should be a 2D xarray.DataArray on a lat/lon grid.
+        Make a filled contour plot of the field, and a line plot of the zonal mean
+    '''
+    fig = plt.figure(figsize=(14,6))
+    nrows = 10; ncols = 3
+    mapax = plt.subplot2grid((nrows,ncols), (0,0), colspan=ncols-1, rowspan=nrows-1, projection=ccrs.Robinson())
+    barax = plt.subplot2grid((nrows,ncols), (nrows-1,0), colspan=ncols-1)
+    plotax = plt.subplot2grid((nrows,ncols), (0,ncols-1), rowspan=nrows-1)
+    # add cyclic point so cartopy doesn't show a white strip at zero longitude
+    wrap_data, wrap_lon = add_cyclic_point(field.values, coord=field.lon, axis=field.dims.index('lon'))
+    cx = mapax.contourf(wrap_lon, field.lat, wrap_data, levels=levels, transform=ccrs.PlateCarree())
+    mapax.set_global(); mapax.coastlines();
+    plt.colorbar(cx, cax=barax, orientation='horizontal', label='Surface air temperature (K)')
+    plotax.plot(field.mean(dim='lon'), field.lat)
+    plotax.set_xlabel('Zonal mean (K)')
+    plotax.set_ylabel('Latitude')
+    plotax.grid()
+    fig.suptitle(title, fontsize=16)
+    return fig, (mapax, plotax, barax), cx
+
+# Plot a single time slice of surface air temperature just as example
+fig, axes, cx = make_map(atm['cpl_control'].TREFHT.isel(time=0), 
+                        title="Surface air temperature in the coupled control simulation")
+
+Tmap_cpl_2x = atm['cpl_CO2ramp'].TREFHT.isel(time=clim_slice_cpl).mean(dim='time')
+Tmap_cpl_control = atm['cpl_control'].TREFHT.isel(time=clim_slice_cpl).mean(dim='time')
+DeltaT_cpl = Tmap_cpl_2x - Tmap_cpl_control
+
+Tmap_som_2x = atm['som_2xCO2'].TREFHT.isel(time=clim_slice_slab).mean(dim='time')
+Tmap_som_control = atm['som_control'].TREFHT.isel(time=clim_slice_slab).mean(dim='time')
+DeltaT_som = Tmap_som_2x - Tmap_som_control
+
+
+contours = np.arange(0., 8.5, 0.5)
+fig, axes, cx = make_map(DeltaT_cpl, levels=contours,
+                        title="Surface air temperature anomaly (coupled transient)")
+axes[1].set_xlim(0,7)  # ensure the line plots have same axes
+
+fig, axes,cx  = make_map(DeltaT_som, levels=contours,
+                         title="Surface air temperature anomaly (equilibrium SOM)")
+axes[1].set_xlim(0,7)
+
+```
+
+- Polar amplification 
+- Land-sea contrast
+- North Atlantic warming hole 
+- Delayed warming of the Southern Ocean
+
+## Transient response in simple models
+
+```{code-cell}ipython
+%matplotlib inline
+import numpy as np
+import matplotlib.pyplot as plt
+import xarray as xr
+import climlab
+
+# Get the water vapor data from CESM output
+cesm_data_path = "~/Desktop/ebooks/data/"
+atm_control = xr.open_dataset(cesm_data_path + "cpl_1850_f19.cam.h0.nc")
+# Take global, annual average of the specific humidity
+weight_factor = atm_control.gw / atm_control.gw.mean(dim='lat')
+Qglobal = (atm_control.Q * weight_factor).mean(dim=('lat','lon','time'))
+
+#  Make a model on same vertical domain as the GCM
+state = climlab.column_state(lev=Qglobal.lev, water_depth=2.5)
+steps_per_year = 90
+deltat = climlab.constants.seconds_per_year/steps_per_year
+rad = climlab.radiation.RRTMG(name='Radiation',
+                              state=state, 
+                              specific_humidity=Qglobal.values,
+                              timestep = deltat,
+                              albedo = 0.25,  # tuned to give reasonable ASR for reference cloud-free model
+                             )
+conv = climlab.convection.ConvectiveAdjustment(name='Convection',
+                                               state=state,
+                                               adj_lapse_rate=6.5,
+                                               timestep=rad.timestep,)
+rcm_control = climlab.couple([rad,conv], name='Radiative-Convective Model')
+
+rcm_control.integrate_years(5)
+rcm_control.ASR - rcm_control.OLR
+
+slab_control = []
+slab_control.append(rcm_control)
+slab_control.append(climlab.process_like(rcm_control))
+
+slab_2x = []
+for n in range(len(slab_control)):
+    rcm_2xCO2 = climlab.process_like(rcm_control)
+    rcm_2xCO2.subprocess['Radiation'].absorber_vmr['CO2'] *= 2.
+    if n == 0:
+        rcm_2xCO2.name = 'High-sensitivity RCM'
+    elif n == 1:
+        rcm_2xCO2.name = 'Low-sensitivity RCM'
+    slab_2x.append(rcm_2xCO2)
+
+#  actual specific humidity
+q = rcm_control.subprocess['Radiation'].specific_humidity
+#  saturation specific humidity (a function of temperature and pressure)
+qsat = climlab.utils.thermo.qsat(rcm_control.Tatm, rcm_control.lev)
+#  Relative humidity (stay fixed!)
+rh = q/qsat
+
+```
+
+We change lapse rate:
+
+```{code-cell}ipython
+lapse_change_factor = [+0.3, -0.3]
+
+for n in range(len(slab_2x)):
+    rcm_2xCO2 = slab_2x[n]
+    print('Integrating ' + rcm_2xCO2.name)
+    for m in range(5 * steps_per_year):
+        # At every timestep
+        # we calculate the new saturation specific humidity for the new temperature
+        #  and change the water vapor in the radiation model
+        #  so that relative humidity is always the same
+        qsat = climlab.utils.thermo.qsat(rcm_2xCO2.Tatm, rcm_2xCO2.lev)
+        rcm_2xCO2.subprocess['Radiation'].specific_humidity[:] = rh * qsat
+        #  We also adjust the critical lapse rate in our convection model
+        DeltaTs = rcm_2xCO2.Ts - rcm_control.Ts
+        rcm_2xCO2.subprocess['Convection'].adj_lapse_rate = 6.5 + lapse_change_factor[n]*DeltaTs
+        rcm_2xCO2.step_forward()
+    imbalance = (rcm_2xCO2.ASR - rcm_2xCO2.OLR).squeeze()  # convert to a single scalar
+    ecs = (rcm_2xCO2.Ts - rcm_control.Ts).squeeze()
+    print('The TOA imbalance is {:.2e} W/m2'.format(imbalance))
+    print('The ECS is {:.2f} K'.format(ecs))
+    print('')
+
+```
+
+Why the lapse rates affect the climate sensitivity?
+
+The current models have too shallow water depth, which means small heat capacity and reaching equilibrium very fast.
+
+```{code-cell}ipython
+print(slab_control[0].depth_bounds)
+```
+
+We need deeper ocean for ocean heat uptake.
+
+```{code-cell}ipython
+#  Create the domains
+ocean_bounds = np.arange(0., 2010., 100.)
+depthax = climlab.Axis(axis_type='depth', bounds=ocean_bounds)
+ocean = climlab.domain.domain.Ocean(axes=depthax)
+atm = slab_control[0].Tatm.domain
+
+#  Model 0 has a higher ocean heat diffusion coefficient -- 
+#  a more efficent deep ocean heat sink
+ocean_diff = [5.E-4, 3.5E-4]
+
+#  List of deep ocean models
+deep = []
+for n in range(len(slab_control)):
+    rcm_control = slab_control[n]
+    #  Create the state variables
+    Tinitial_ocean = rcm_control.Ts * np.ones(ocean.shape)
+    Tocean = climlab.Field(Tinitial_ocean.copy(), domain=ocean)
+    Tatm = climlab.Field(rcm_control.Tatm.copy(), domain=atm)
+
+    #  Surface temperature Ts is the upper-most grid box of the ocean
+    Ts = Tocean[0:1]
+    atm_state = {'Tatm': Tatm, 'Ts': Ts}
+    
+    rad = climlab.radiation.RRTMG(name='Radiation',
+                                  state=atm_state, 
+                                  specific_humidity=Qglobal.values,
+                                  timestep = deltat,
+                                  albedo = 0.25,  
+                                 )
+    conv = climlab.convection.ConvectiveAdjustment(name='Convection',
+                                                   state=atm_state,
+                                                   adj_lapse_rate=6.5,
+                                                   timestep=rad.timestep,)
+
+    model = rad + conv
+    if n == 0:
+        model.name = 'RCM with high sensitivity and efficient heat uptake'
+    elif n == 1:
+        model.name = 'RCM with low sensitivity and inefficient heat uptake'
+    model.set_state('Tocean', Tocean)
+    diff = climlab.dynamics.Diffusion(state={'Tocean': model.Tocean}, 
+                                K=ocean_diff[n], 
+                                diffusion_axis='depth', 
+                                timestep=deltat * 10,)
+    model.add_subprocess('Ocean Heat Uptake', diff)
+    print('')
+    print(model)
+    print('')
+    deep.append(model)
+```
+
+We now increase CO2 by 1% per year to doucling its concentration, which takes about 70 years.
+
+```{code-cell}ipython
+num_years = 100
+years = np.arange(num_years+1)
+
+Tsarray = []
+Tocean = []
+netrad = []
+for n in range(len(deep)):
+    thisTs = np.nan * np.zeros(num_years+1)
+    thisnetrad = np.nan * np.zeros(num_years+1)
+    thisTocean = np.nan * np.zeros((deep[n].Tocean.size, num_years+1))
+    thisTs[0] = deep[n].Ts.squeeze()
+    thisnetrad[0] = (deep[n].ASR - deep[n].OLR).squeeze()
+    thisTocean[:, 0] = deep[n].Tocean
+    Tsarray.append(thisTs)
+    Tocean.append(thisTocean)
+    netrad.append(thisnetrad)
+    
+CO2initial = deep[0].subprocess['Radiation'].absorber_vmr['CO2']
+CO2array = np.nan * np.zeros(num_years+1)
+CO2array[0] = CO2initial * 1E6
+
+#  Increase CO2 by 1% / year for 70 years (until doubled), and then hold constant
+for y in range(num_years):
+    if deep[0].subprocess['Radiation'].absorber_vmr['CO2'] < 2 * CO2initial:
+        for model in deep:
+            model.subprocess['Radiation'].absorber_vmr['CO2'] *= 1.01
+    CO2array[y+1] = deep[0].subprocess['Radiation'].absorber_vmr['CO2'] * 1E6
+    if np.mod(y,10) == 0:
+       print('Year ', y+1, ', CO2 mixing ratio is ', CO2array[y+1],' ppm.')
+
+    for n, model in enumerate(deep):
+        for m in range(steps_per_year):            
+            qsat = climlab.utils.thermo.qsat(model.Tatm, model.lev)
+            model.subprocess['Radiation'].specific_humidity[:] = rh * qsat
+            DeltaTs = model.Ts - slab_control[n].Ts
+            model.subprocess['Convection'].adj_lapse_rate = 6.5 + lapse_change_factor[n]*DeltaTs
+            model.step_forward()
+            
+            Tsarray[n][y+1] = model.Ts.squeeze()
+            Tocean[n][:, y+1] = model.Tocean
+            netrad[n][y+1] = (model.ASR - model.OLR).squeeze()
+
+```
+
+```{code-cell}ipython
+colorlist = ['b', 'r']
+co2color = 'k'
+
+num_axes = len(deep) + 1
+fig, ax = plt.subplots(num_axes, figsize=(12,14))
+
+# Twin the x-axis twice to make independent y-axes.
+topaxes = [ax[0], ax[0].twinx(), ax[0].twinx()]
+
+# Make some space on the right side for the extra y-axis.
+fig.subplots_adjust(right=0.85)
+
+# Move the last y-axis spine over to the right by 10% of the width of the axes
+topaxes[-1].spines['right'].set_position(('axes', 1.1))
+
+# To make the border of the right-most axis visible, we need to turn the frame
+# on. This hides the other plots, however, so we need to turn its fill off.
+topaxes[-1].set_frame_on(True)
+topaxes[-1].patch.set_visible(False)
+
+for n, model in enumerate(slab_2x):
+    topaxes[0].plot(model.Ts*np.ones_like(Tsarray[n]), '--', color=colorlist[n])
+topaxes[0].set_ylabel('Surface temperature (K)')
+topaxes[0].set_xlabel('Years')
+topaxes[0].set_title('Transient warming scenario: 1%/year CO2 increase to doubling, followed by CO2 stabilization', fontsize=14)
+topaxes[0].legend(['Model 0', 'Model 1'], loc='lower right')
+
+topaxes[1].plot(CO2array, color=co2color)
+topaxes[1].set_ylabel('CO2 (ppm)', color=co2color)
+for tl in topaxes[1].get_yticklabels():
+    tl.set_color(co2color)
+topaxes[1].set_ylim(300., 1000.)
+
+topaxes[2].set_ylabel('TOA imbalance (W/m2)', color='b')
+for tl in topaxes[2].get_yticklabels():
+    tl.set_color('b')
+topaxes[2].set_ylim(0, 3)
+
+
+contour_levels = np.arange(-0.25, 3.25, 0.25)
+for n in range(len(deep)):
+    cax = ax[n+1].contourf(years, deep[n].depth, Tocean[n] - Tsarray[n][0], levels=contour_levels)
+    ax[n+1].invert_yaxis()
+    ax[n+1].set_ylabel('Depth (m)')
+    ax[n+1].set_xlabel('Years')
+
+
+for n, model in enumerate(deep):
+    topaxes[0].plot(Tsarray[n], color=colorlist[n])
+    topaxes[2].plot(netrad[n], ':', color=colorlist[n])
+    for n in range(len(deep)):
+        cax = ax[n+1].contourf(years, deep[n].depth, Tocean[n] - Tsarray[n][0], levels=contour_levels)    
+topaxes[1].plot(CO2array, color=co2color)
+
+fig.subplots_adjust(bottom=0.12)
+cbar_ax = fig.add_axes([0.25, 0.02, 0.5, 0.03])
+fig.colorbar(cax, cax=cbar_ax, orientation='horizontal');
+
+```
+
+
+
 ## Homework assignment X (due xxx)
 1. Please change adj_lapse_rate = 9.8. This is the dry adiabatic lapse rate. Calculate the water feedback parameter in this scenario.
 
