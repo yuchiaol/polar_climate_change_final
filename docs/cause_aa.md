@@ -125,5 +125,7 @@ Partial surface temperature change for the Arctic (60–90°N) compared to the t
 scale: 30%
 ---
 The response of the annual-mean (a) Arctic SAT, (b) Arctic SIE, (c) turbulent (latent plus sensible) heat fluxes, and (d) AAF, averaged over the last 30 years of the n×CO2 simulations. Error bars in each panel denote 95% confidence intervals calculated using Student's t-distribution. Spurce: [Zhou et al. (2024)](https://iopscience.iop.org/article/10.1088/2752-5295/aceea2)
+```
 
+## Internal variability
 
