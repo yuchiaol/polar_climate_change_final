@@ -152,6 +152,14 @@ This is a cool interactive webiste to illustrate sea-ice conditions: [Charctic I
 - September Arctic sea ice
   - Arctic sea ice melt and freeze day
   - Riverine impact on Arctic sea ice
+
+```{figure} /_static/lecture_specific/lecture1_figures/septarcticseaice_regime_shift.png
+---
+scale: 20%
+---
+These two graphs show September monthly average sea ice extent. The left graphs shows the overall trend of sea ice loss, while the right graph shows the trend derived from statical analysis, adapted from Stern, 2025. For the entire 1978 to 2024 record, the trend shown is −0.78 × 106 km2 per decade. The right graphs shows the linear fit for 1979 to 2006 as −0.55 × 106 km2 per decade, followed by a flat trend for 2007 to 2024 with an value 4.63 × 106 km2. — Credit: Stern, H. L. et al., 2025
+```
+
 - February Antarctica Sea Ice
   - Increase rather than decrease under global warming before around 2016
   - abrupt decrease after 2016
