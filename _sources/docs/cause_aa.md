@@ -100,6 +100,15 @@ scale: 35%
 A schematic of some important radiative and non-radiative feedbacks in polar regions involving the atmosphere, the ocean, sea ice and ice sheets. Source: [Goosse et al. 2018](https://www.nature.com/articles/s41467-018-04173-0).
 ```
 
+```{figure} /_static/lecture_specific/lecture1_figures/cloud_feedback_tmp1.png
+---
+scale: 45%
+---
+Schematic diagram illustrating the time-dependent behavior of LW cloud emissivity feedback and associated variations in cloud properties. An up arrow and a down arrow from the cloud illustrate the transmissive LW radiation without being absorbed and the absorbed and re-emitted LW radiation by the cloud, respectively, out of the incident LW radiation upon the cloud from the surface (an up arrow from the surface). NetCRE increases because of the increased LPR, LWP, and thus LW cloud emissivity in response to Arctic warming. This contributes to positive feedback. The cloud emissivity-induced increment of NetCRE becomes almost zero in the future climate when attains the asymptotic value of one (i.e., a blackbody), although LPR and LWP continue to increase. Source: [Nakanishi and Michibata (2025)](https://spj.science.org/doi/10.34133/olar.0089)
+
+```
+
+
 ## Poleward energy transport
 
 - Atmospheric transport:
