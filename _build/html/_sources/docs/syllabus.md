@@ -13,7 +13,9 @@ kernelspec:
 
 # 1. Syllabus
 
-2021/22 Semester; Credit: 3; Class Number: AtmSci7098
+2025 fall semester; 
+Credit: 4; 
+Class Number: AtmScixxxx
 
 ## Instructor
 Professor Yu-Chiao Liang (梁禹喬)<br>
@@ -26,7 +28,7 @@ Office phone: 02-3366-3907<br>
 xxx and xxx, by appointment
 
 ### Location and Time
-Monday 1:20-3:10 pm and Wednesday 10:20 am-12:10
+Monday 3:30-5:10 pm and Wednesday 10:20 am-12:10
 
 ### Course website
 [https://yuchiaol.github.io/polar_climate_change_final/docs/index.html](https://yuchiaol.github.io/polar_climate_change_final/docs/index.html)
