@@ -537,10 +537,6 @@ Multimodel ensemble-mean maps of the temperature, water vapor, albedo, and cloud
 
 We use CESM1-CAM5 kernel for demonstration: see [Pendergrass et al. (2018)](https://essd.copernicus.org/articles/10/317/2018/).
 
-```{note}
-CESM1-CAM5 kernel can be found on Professor Angeline G. Pendergrass' [GitHub](https://github.com/apendergrass/cam5-kernels)
-```
-
 ```{figure} /_static/lecture_specific/lecture1_figures/radiative_kernel_tmp1.png
 ---
 scale: 35%
@@ -560,6 +556,30 @@ CESM large-ensemble kernels. Feedback calculation for the CESM 40-member large e
 scale: 35%
 ---
 Comparison of TOA radiative feedbacks. TOA radiative feedbacks (Wm$^{-2}$ K$^{-1}$) averaged over 40 CESM large-ensemble simulations diagnosed with CAM5 radiative kernels, compared against those from CMIP3 model simulations diagnosed with three different kernels as reported by [Soden et al. (2008)](https://journals.ametsoc.org/view/journals/clim/21/14/2007jcli2110.1.xml), and MPI-ESM-LR control state kernels and years 21–150 of abrupt carbon dioxide quadrupling simulations from the same model (Block and Mauritsen, 2013). Table from [Pendergrass et al. (2018)](https://essd.copernicus.org/articles/10/317/2018/).
+```
+
+
+Now let's try to calculate the feedback parameters and the contributions to temperature responses using CESM1-CAM5 kernel and the data provided.
+
+```{note}
+CESM1-CAM5 kernel can be found on Professor Angeline G. Pendergrass' [GitHub](https://github.com/apendergrass/cam5-kernels).
+
+Data simulated by CESM1-CAM5 can be found [here](https://zenodo.org/records/997902).
+
+```
+
+```{figure} /_static/lecture_specific/lecture1_figures/parameter_tmp1.png
+---
+scale: 45%
+---
+Feedback parameters to demonstrate Arctic amplification. Credit to 孫翊麒
+```
+
+```{figure} /_static/lecture_specific/lecture1_figures/deltat_tmp1.png
+---
+scale: 45%
+---
+Temperature responses contributed from Feedbacks to demonstrate Arctic amplification. Credit to 孫翊麒
 ```
 
 ## Transient and equilibrium responses

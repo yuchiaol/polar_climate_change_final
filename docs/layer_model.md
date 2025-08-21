@@ -51,6 +51,22 @@ T_{e}\times \lambda_{peak} = b \Rightarrow 6000\times 0.6 = 255\times \lambda_{p
 :scale: 40%
 ```
 
+- [K2-18b](https://science.nasa.gov/exoplanet-catalog/k2-18-b/)
+
+```{figure} /_static/lecture_specific/lecture1_figures/K2_18b_pic1.jpg
+---
+scale: 65%
+---
+K2-18b James Webb Space Telescope spectra from 2023. Credit: NASA, CSA, ESA, J. Olmstead, N. Madhusudhan 2023. Source: Wikipedia
+```
+
+```{figure} /_static/lecture_specific/lecture1_figures/K2_18b_pic2.png
+---
+scale: 40%
+---
+The infrared transmission spectrum of the exoplanet K2-18 b taken by JWST MIRI. Credit: Madhusudhan et al. 2025. Source: Wikipedia
+```
+
 
 ## Model with one-layer atmosphere and one-layer surface (one-layer model)
 
