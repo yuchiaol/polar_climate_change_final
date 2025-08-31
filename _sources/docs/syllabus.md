@@ -23,9 +23,12 @@ Contacting email: yuchiaoliang@ntu.edu.tw<br>
 Office phone: 02-3366-3907<br>
 
 ### Teaching Assistants
+Ya-Fan Chung (鍾雅帆) <br>
+b10209012@ntu.edu.tw
+
 
 ### Office Hours
-xxx and xxx, by appointment
+by appointment
 
 ### Location and Time
 Monday 3:30-5:10 pm and Wednesday 10:20 am-12:10
@@ -35,13 +38,16 @@ Monday 3:30-5:10 pm and Wednesday 10:20 am-12:10
 
 
 ### Grading
-- Leading discussion:
-  - IPCC AR6 WGI Report (group presentation 0%)
-  - Literature review 1 (group presentation 15%)
-  - Literature review 2 (group presentation 15%)
-- Individual homework assignment (5% x 10)
-- Final project (group presentation 15%)
-- Additional credit (5%)
+- Homework assignments (60%)
+- Mid-term presentation (15%) <br>
+-- review one key paper <br>
+-- describe your final project topic and your hypothesis <br>
+-- design numerical experiments or analysis approach <br>
+-- you should be able to run your model! <br>
+- Final presentation (15%+5% report)<br>
+-- test your hypothesis<br>
+-- present your findings based on your experiments<br>
+- Class interaction (5%)<br>
 
 ### Course Description
 
@@ -81,37 +87,22 @@ Willingness to lead discussion for reading materials and participate in group co
   - Stratosphere-troposphere coupling
 
 ### Tentative Schedule
-- Week1, 9/23 (四4): Introduction
-- Week1, 9/27 (一67): Overview of Arctic
-- Week2, 9/30 (四4): LBM introduction; machine location and account
-- Week2, 10/4 (一67): Permafrost + IPCC
-- Week3, 10/7 (四4): IPCC; LBM paper review
-- Week3, 10/11 (一67): 國慶日/雙十節彈性放假
-- Week4, 10/14 (四4): LBM paper review
-- Week4, 10/18 (一67): Snow + IPCC
-- Week5, 10/21 (四4): IPCC; LBM paper review
-- Week5, 10/25 (一67): Glacier + IPCC
-- Week6, 10/28 (四4): IPCC; LBM paper review
-- Week6, 11/1 (一67): Sea ice + IPCC
-- Week7, 11/4 (四4): IPCC; LBM paper review
-- Week7, 11/8 (一67): Sea ice + IPCC
-- Week8, 11/11 (四4): IPCC; LBM paper review
-- Week8, 11/15 (一67): LBM technical (校慶停課不停班)
-- Week9, 11/18 (四4): LBM technical; group discussion
-- Week9, 11/22 (一67): Cause of Arctic amplification + IPCC
-- Week10,11/25 (四4): Cause of Arctic amplification + IPCC
-- Week10,11/29 (一67): Cause of Arctic amplification + paper discussion
-- Week11,12/2 (四4): Cause of Arctic amplification + paper discussion
-- Week11,12/6 (一67): Cause of Arctic amplification + paper discussion
-- Week12,12/9 (四4): Cause of Arctic amplification + paper discussion
-- Week12,12/13 (一67): Effect of Arctic amplification + paper discussion
-- Week13,12/16 (四4): Effect of Arctic amplification + paper discussion
-- Week13,12/20 (一67): Effect of Arctic amplification + paper discussion
-- Week14,12/23 (四4): Effect of Arctic amplification + paper discussion
-- Week14,12/27 (一67): Final project presentation
-- Week15,12/30 (四4): Final project presentation
-- Week15,1/3 (一67): Final project presentation
-- Week16,1/6 (四4): Wrap-up
+- Week1 (9/1; 9/3)      – introduction; visitors
+- Week2 (9/8; 9/10)     – overview of polar climate change
+- Week3 (9/15; 9/17)    – zero-dim energy balance model
+- Week4 (9/22; 9/24)    – layered model
+- Week5 (10/1)          – RCE
+- Week6 (10/8)          – climate sensitivity and feedback
+- Week7 (10/13; 10/15)  – midterm presentation
+- Week8 (10/20; 10/22)  - RAE
+- Week9 (10/27; 10/29)  - one-dim EBM
+- Week10 (11/3; 11/5)   – seasonal cycle
+- Week11 (11/10; 11/12) – ice-albedo feedback in EBM
+- Week12 (10/17; 10/19) – diffusive response; snowball earth
+- Week13 (11/24; 11/26) - causes of polar amplification
+- Week14 (12/1; 12/3)   – Arctic-midlatitude linkage
+- Week15 (12/8; 12/10)  – final presentation
+- Week16 (12/15; 12/17) – AGU week
 
 ### Relevant Texts and References
 - [IPCC AR6 WG1 Report](https://www.ipcc.ch/report/ar6/wg1/#FullReport)
